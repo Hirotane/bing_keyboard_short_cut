@@ -1,0 +1,16 @@
+{
+    "name": "bing_short_cut",
+    "version": "1.0.0",
+    "manifest_version": 2,
+    "description": "Keyboard Shortcut for Bing",
+    "permissions": [
+        "storage"
+    ],
+    "content_scripts": [{
+      "matches": ["*://*.bing.com/search?*"],
+      "js": [
+        "utils.js",
+        "shortcuts.js"
+      ]
+    }]
+  }
