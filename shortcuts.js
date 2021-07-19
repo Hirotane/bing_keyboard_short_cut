@@ -17,7 +17,7 @@
                 console.log(e.keyCode);
                 e.preventDefault();
                 e.stopPropagation();
-                // shortcuts.focusResult(shouldNavigateNext ? 1 : -1);
+                shortcuts.focusResult(shouldNavigateNext ? 1 : -1);
             }
         });
     });
