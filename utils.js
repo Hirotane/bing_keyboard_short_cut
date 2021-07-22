@@ -1,7 +1,11 @@
 // Globals
 var shortcuts = {
     defaultOptions: {
-        navigateWithJK: true
+        // Next = J; Previous = K [WARNING: Conflicts with activateSearch. This takes precedence.]
+        // navigateWithJK: false
+        navigateWithJK: true,
+        navigateWithHL: true
+
     },
     focusIndex: -1,
 
@@ -22,6 +26,15 @@ var shortcuts = {
         console.log(target);
         console.log(target_txt);
         target_txt.focus();
+    },
+    movePage: function(offset) {
+        if (offset == 1){
+            var nextpage = document.querySelector(".sb_pagN").getAttribute('href');
+            window.location.href = nextpage;
+        } else {
+            var previouspage = document.querySelector(".sb_pagP").getAttribute('href');
+            window.location.href = previouspage;
+        }
     }
 
 };
