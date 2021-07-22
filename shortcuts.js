@@ -7,14 +7,14 @@
         K: 75,
         H: 72,
         L: 76,
-        SLASH:191,
+        SLASH: 191,
+        ESC: 27
     };
 
     var searchbox = document.querySelector(".b_searchbox");
 
     shortcuts.loadOptions(function(options) {
         window.addEventListener('keydown', function(e) {
-            console.log(shortcuts.isInputActive());
  
             var shouldNavigateNext = options.navigateWithJK && e.keyCode == KEYS.J && !shortcuts.isInputActive(),
                 shouldNavigateBack = options.navigateWithJK && e.keyCode == KEYS.K && !shortcuts.isInputActive(),
@@ -29,8 +29,6 @@
             }
 
             if (shouldNavigateNextPage || shouldNavigateBackPage) {
-                console.log(e.keyCode);
-                console.log("H or L is turned on")
                 e.preventDefault();
                 e.stopPropagation();
                 shortcuts.movePage(shouldNavigateNextPage ? 1 : -1);
@@ -38,11 +36,15 @@
         });
         window.addEventListener('keyup', function(e) {
             // e = e || window.event;
+            // When the button '/' is pressed, the search box is focused.
             // if (!shortcuts.isInputActive() && !shortcuts.hasModifierKey(e) && options.navigateWithJK && e.keyCode == KEYS.SLASH) {
             if (e.keyCode == KEYS.SLASH && !shortcuts.isInputActive()) {
-                console.log("slash put on");
                 searchbox.value = searchbox.value + " ";
                 searchbox.focus();
+            }
+            // When the button 'esc' is pressed, the search box is unfocused.
+            if (e.keyCode == KEYS.ESC && shortcuts.isInputActive()) {
+                searchbox.blur();
             }
         });
     });
