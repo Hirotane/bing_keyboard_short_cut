@@ -6,8 +6,11 @@
         J: 74,
         K: 75,
         H: 72,
-        L: 76
+        L: 76,
+        SLASH:191,
     };
+
+    var searchbox = document.querySelector(".b_searchbox");
 
     shortcuts.loadOptions(function(options) {
         window.addEventListener('keydown', function(e) {
@@ -30,6 +33,15 @@
                 e.preventDefault();
                 e.stopPropagation();
                 shortcuts.movePage(shouldNavigateNextPage ? 1 : -1);
+            }
+        });
+        window.addEventListener('keyup', function(e) {
+            // e = e || window.event;
+            // if (!shortcuts.isInputActive() && !shortcuts.hasModifierKey(e) && options.navigateWithJK && e.keyCode == KEYS.SLASH) {
+            if (e.keyCode == KEYS.SLASH) {
+                console.log("slash put on");
+                searchbox.value = searchbox.value + " ";
+                searchbox.focus();
             }
         });
     });

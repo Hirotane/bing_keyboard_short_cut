@@ -35,6 +35,12 @@ var shortcuts = {
             var previouspage = document.querySelector(".sb_pagP").getAttribute('href');
             window.location.href = previouspage;
         }
-    }
+    },
+    isInputActive: function () {
+        var activeElement = document.activeElement;
+        return activeElement != null && (activeElement.nodeName == 'INPUT'
+            || this.inputElementTypes.includes(activeElement.type)
+            || this.inputElementIds.includes(activeElement.id));
+    },
 
 };
