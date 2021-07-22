@@ -14,11 +14,12 @@
 
     shortcuts.loadOptions(function(options) {
         window.addEventListener('keydown', function(e) {
+            console.log(shortcuts.isInputActive());
  
-            var shouldNavigateNext = options.navigateWithJK && e.keyCode == KEYS.J,
-                shouldNavigateBack = options.navigateWithJK && e.keyCode == KEYS.K,
-                shouldNavigateNextPage = options.navigateWithHL && e.keyCode == KEYS.L,
-                shouldNavigateBackPage = options.navigateWithHL && e.keyCode == KEYS.H;
+            var shouldNavigateNext = options.navigateWithJK && e.keyCode == KEYS.J && !shortcuts.isInputActive(),
+                shouldNavigateBack = options.navigateWithJK && e.keyCode == KEYS.K && !shortcuts.isInputActive(),
+                shouldNavigateBackPage = options.navigateWithHL && e.keyCode == KEYS.H && !shortcuts.isInputActive(),
+                shouldNavigateNextPage = options.navigateWithHL && e.keyCode == KEYS.L && !shortcuts.isInputActive();
             
             if (shouldNavigateNext || shouldNavigateBack) {
                 console.log(e.keyCode);
@@ -38,7 +39,7 @@
         window.addEventListener('keyup', function(e) {
             // e = e || window.event;
             // if (!shortcuts.isInputActive() && !shortcuts.hasModifierKey(e) && options.navigateWithJK && e.keyCode == KEYS.SLASH) {
-            if (e.keyCode == KEYS.SLASH) {
+            if (e.keyCode == KEYS.SLASH && !shortcuts.isInputActive()) {
                 console.log("slash put on");
                 searchbox.value = searchbox.value + " ";
                 searchbox.focus();

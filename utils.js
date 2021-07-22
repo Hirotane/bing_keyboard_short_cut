@@ -38,9 +38,11 @@ var shortcuts = {
     },
     isInputActive: function () {
         var activeElement = document.activeElement;
-        return activeElement != null && (activeElement.nodeName == 'INPUT'
-            || this.inputElementTypes.includes(activeElement.type)
-            || this.inputElementIds.includes(activeElement.id));
+        // return activeElement != null && (activeElement.nodeName == 'INPUT'
+        //     || this.inputElementTypes.includes(activeElement.type)
+        //     || this.inputElementIds.includes(activeElement.id));
+        return activeElement.nodeName == 'INPUT';
+        // return activeElement.getAttribute("class") === 'b_searchbox';
     },
 
 };
