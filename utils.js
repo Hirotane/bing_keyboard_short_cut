@@ -4,8 +4,8 @@ var shortcuts = {
         // Next = J; Previous = K [WARNING: Conflicts with activateSearch. This takes precedence.]
         // navigateWithJK: false
         navigateWithJK: true,
-        navigateWithHL: true
-
+        navigateWithHL: true,
+        navigateWithShiftHL: true
     },
     focusIndex: -1,
 
@@ -27,13 +27,21 @@ var shortcuts = {
         console.log(target_txt);
         target_txt.focus();
     },
-    movePage: function(offset) {
+    moveSearchPage: function(offset) {
         if (offset == 1){
             var nextpage = document.querySelector(".sb_pagN").getAttribute('href');
             window.location.href = nextpage;
         } else {
             var previouspage = document.querySelector(".sb_pagP").getAttribute('href');
             window.location.href = previouspage;
+        }
+    },
+    movePage: function(offset) {
+        if (offset == 1){
+            console.log("forward");
+            window.history.forward();
+        } else {
+            window.history.back();
         }
     },
     isInputActive: function () {

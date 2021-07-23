@@ -7,7 +7,7 @@
         "storage"
     ],
     "content_scripts": [{
-      "matches": ["*://*.bing.com/search?*"],
+      "matches": ["<all_urls>"],
       "js": [
         "utils.js",
         "shortcuts.js"
