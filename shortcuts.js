@@ -3,10 +3,12 @@
 
     // Globals
     var KEYS = {
-        J: 'j',
-        K: 'k',
-        H: 'h',
-        L: 'l',
+        j: 'j',
+        k: 'k',
+        h: 'h',
+        H: 'H',
+        l: 'l',
+        L: 'L',
         SLASH: '/',
         ESC: 'Escape',
         BRACKETLEFT: '['
@@ -18,21 +20,23 @@
         window.addEventListener('keydown', function(e) {
             // console.log(e.key);
  
-            var shouldNavigateNext = options.navigateWithJK && e.key == KEYS.J && !shortcuts.isInputActive(),
-                shouldNavigateBack = options.navigateWithJK && e.key == KEYS.K && !shortcuts.isInputActive(),
-                movePreviousSearchPage= options.navigateWithHL && e.key == KEYS.H && !e.shiftKey && !shortcuts.isInputActive(),
-                moveNextSearchPage = options.navigateWithHL && e.key == KEYS.L && !e.shiftKey && !shortcuts.isInputActive(),
+            var shouldNavigateNext = options.navigateWithJK && e.key == KEYS.j && !shortcuts.isInputActive(),
+                shouldNavigateBack = options.navigateWithJK && e.key == KEYS.k && !shortcuts.isInputActive(),
+                movePreviousSearchPage= options.navigateWithHL && e.key == KEYS.h && !e.shiftKey && !shortcuts.isInputActive(),
+                moveNextSearchPage = options.navigateWithHL && e.key == KEYS.l && !e.shiftKey && !shortcuts.isInputActive(),
                 goToPreviousPage = options.navigateWithShiftHL && e.key == KEYS.H && e.shiftKey && !shortcuts.isInputActive(),
                 goToNextPage = options.navigateWithShiftHL && e.key == KEYS.L && e.shiftKey && !shortcuts.isInputActive();
             
             if (shouldNavigateNext || shouldNavigateBack) {
-                // console.log(e.key);
+                console.log("j or k");
                 e.preventDefault();
                 e.stopPropagation();
                 shortcuts.focusResult(shouldNavigateNext ? 1 : -1);
             }
             // search page transition
             if (moveNextSearchPage || movePreviousSearchPage) {
+                console.log("h or l");
+                e.preventDefault();
                 e.preventDefault();
                 e.stopPropagation();
                 shortcuts.moveSearchPage(moveNextSearchPage ? 1 : -1);
