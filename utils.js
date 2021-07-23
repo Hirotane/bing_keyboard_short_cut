@@ -12,6 +12,10 @@ var shortcuts = {
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
     },
+    isInputActive: function () {
+        var activeElement = document.activeElement;
+        return activeElement.nodeName == 'INPUT';
+    },
     getVisibleResults: function() {
         var containers = Array.from(document.querySelectorAll(".b_algo"));
         return containers;
@@ -44,9 +48,4 @@ var shortcuts = {
             window.history.back();
         }
     },
-    isInputActive: function () {
-        var activeElement = document.activeElement;
-        return activeElement.nodeName == 'INPUT';
-    },
-
 };
