@@ -5,7 +5,8 @@ var shortcuts = {
         // navigateWithJK: false
         navigateWithJK: true,
         navigateWithHL: true,
-        navigateWithShiftHL: true
+        navigateWithShiftHL: true,
+        searchType: true
     },
     focusIndex: -1,
 
@@ -48,4 +49,36 @@ var shortcuts = {
             window.history.back();
         }
     },
+    changeSearchType: function(type) {
+        switch (type){
+            case 'all':
+                var ref = document.querySelector("#b-scopeListItem-web").firstElementChild.getAttribute('href');
+                window.location.href = ref;
+                break;
+            case 'work':
+                var ref = document.querySelector("#b-scopeListItem-bingatwork").firstElementChild.getAttribute('href');
+                window.location.href = ref;
+                break;
+            case 'image':
+                var ref = document.querySelector("#b-scopeListItem-images").firstElementChild.getAttribute('href');
+                window.location.href = ref;
+                break;
+            case 'video':
+                var ref = document.querySelector("#b-scopeListItem-video").firstElementChild.getAttribute('href');
+                window.location.href = ref;
+                break;
+            case 'map':
+                var ref = document.querySelector("#b-scopeListItem-local").firstElementChild.getAttribute('href');
+                window.location.href = ref;
+                break;
+            case 'news':
+                var ref = document.querySelector("#b-scopeListItem-news").firstElementChild.getAttribute('href');
+                window.location.href = ref;
+                break;
+            case 'shop':
+                var ref = document.querySelector("#b-scopeListItem-shop").firstElementChild.getAttribute('href');
+                window.location.href = ref;
+                break;
+        }
+    }
 };
