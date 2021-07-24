@@ -5,7 +5,7 @@
 
     shortcuts.loadOptions(function(options) {
         window.addEventListener('keydown', function(e) {
-            console.log(e.key);
+            // console.log(e.key);
  
             var shouldNavigateNext = (options.navigateWithJKHL && e.key == 'j' && !shortcuts.isInputActive()) ||
                     (options.navigateWithArrows && e.key == 'ArrowDown' && !shortcuts.isInputActive()),
@@ -26,7 +26,6 @@
                 searchTypeV = options.searchType && e.key == 'V' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeM = options.searchType && e.key == 'M' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeS = options.searchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive();
-
 
             // select search type
             if (searchTypeA) {
