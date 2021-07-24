@@ -3,9 +3,10 @@ var shortcuts = {
     defaultOptions: {
         // Next = J; Previous = K [WARNING: Conflicts with activateSearch. This takes precedence.]
         // navigateWithJK: false
-        navigateWithJK: true,
-        navigateWithHL: true,
+        navigateWithJKHL: true,
         navigateWithShiftHL: true,
+        navigateWithArrows: true,
+        navigateWithShiftArrows: true,
         searchType: true
     },
     focusIndex: -1,
@@ -47,6 +48,7 @@ var shortcuts = {
             window.history.forward();
         } else {
             window.history.back();
+            console.log("back");
         }
     },
     changeSearchType: function(type) {

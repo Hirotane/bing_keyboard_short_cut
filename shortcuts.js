@@ -5,14 +5,20 @@
 
     shortcuts.loadOptions(function(options) {
         window.addEventListener('keydown', function(e) {
-            // console.log(e.key);
+            console.log(e.key);
  
-            var shouldNavigateNext = options.navigateWithJK && e.key == 'j' && !shortcuts.isInputActive(),
-                shouldNavigateBack = options.navigateWithJK && e.key == 'k' && !shortcuts.isInputActive(),
-                movePreviousSearchPage= options.navigateWithHL && e.key == 'h' && !e.shiftKey && !shortcuts.isInputActive(),
-                moveNextSearchPage = options.navigateWithHL && e.key == 'l' && !e.shiftKey && !shortcuts.isInputActive(),
-                goToPreviousPage = options.navigateWithShiftHL && e.key == 'H' && e.shiftKey && !shortcuts.isInputActive(),
-                goToNextPage = options.navigateWithShiftHL && e.key == 'L' && e.shiftKey && !shortcuts.isInputActive(),
+            var shouldNavigateNext = (options.navigateWithJKHL && e.key == 'j' && !shortcuts.isInputActive()) ||
+                    (options.navigateWithArrows && e.key == 'ArrowDown' && !shortcuts.isInputActive()),
+                shouldNavigateBack = (options.navigateWithJKHL && e.key == 'k' && !shortcuts.isInputActive()) ||
+                    (options.navigateWithArrows && e.key == 'ArrowUp' && !shortcuts.isInputActive()),
+                movePreviousSearchPage = (options.navigateWithJKHL && e.key == 'h' && !e.shiftKey && !shortcuts.isInputActive()) ||
+                    (options.navigateWithArrows && e.key == 'ArrowLeft' && !e.shiftKey && !shortcuts.isInputActive()),
+                moveNextSearchPage = (options.navigateWithJKHL && e.key == 'l' && !e.shiftKey && !shortcuts.isInputActive()) ||
+                    (options.navigateWithArrows && e.key == 'ArrowRight' && !e.shiftKey && !shortcuts.isInputActive()),
+                goToPreviousPage = options.navigateWithShiftHL && e.key == 'H' && e.shiftKey && !shortcuts.isInputActive() ||
+                    (options.navigateWithShiftArrows && e.key == 'ArrowLeft' && e.shiftKey && !shortcuts.isInputActive()),
+                goToNextPage = options.navigateWithShiftHL && e.key == 'L' && e.shiftKey && !shortcuts.isInputActive() ||
+                    (options.navigateWithShiftArrows && e.key == 'ArrowRight' && e.shiftKey && !shortcuts.isInputActive()),
                 searchTypeA = options.searchType && e.key == 'A' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeW = options.searchType && e.key == 'W' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeI = options.searchType && e.key == 'I' && e.shiftKey && !shortcuts.isInputActive(),
@@ -20,7 +26,7 @@
                 searchTypeV = options.searchType && e.key == 'V' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeM = options.searchType && e.key == 'M' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeS = options.searchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive();
-            
+
 
             // select search type
             if (searchTypeA) {
@@ -72,7 +78,6 @@
         window.addEventListener('keyup', function(e) {
             // e = e || window.event;
             // When the button '/' is pressed, the search box is focused.
-            // if (!shortcuts.isInputActive() && !shortcuts.hasModifierKey(e) && options.navigateWithJK && e.keyCode == KEYS.SLASH) {
             if (e.key == '/' && !shortcuts.isInputActive()) {
                 searchbox.value = searchbox.value + " ";
                 searchbox.focus();
