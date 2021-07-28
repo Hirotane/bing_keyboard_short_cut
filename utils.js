@@ -59,6 +59,22 @@ var shortcuts = {
             console.log("back");
         }
     },
+    scrollPageOneLine: function(offset) {
+        console.log(offset);
+        if (offset == 1){
+            window.scrollBy(0, -50)
+        } else {
+            window.scrollBy(0, 50)
+        }
+    },
+    scrollHalfPage: function(offset) {
+        console.log(offset);
+        if (offset == 1){
+            window.scrollBy(0, -0.5*window.innerHeight)
+        } else {
+            window.scrollBy(0, 0.5*window.innerHeight)
+        }
+    },
     changeSearchType: function(type) {
         switch (type){
             case 'all':
@@ -90,5 +106,9 @@ var shortcuts = {
                 window.location.href = ref;
                 break;
         }
+    },
+    focusOnSearchBox: function() {
+        var searchbox = document.querySelector("#search-input, #textfield");
+        searchbox.focus();
     }
 };
