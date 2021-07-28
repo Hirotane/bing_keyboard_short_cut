@@ -22,6 +22,13 @@ var shortcuts = {
         var containers = Array.from(document.querySelectorAll(".b_algo"));
         return containers;
     },
+    underLine: function(target_txt) {
+        target_txt.style.outline = 'none';
+        target_txt.style.textDecoration = 'underline';
+        target_txt.addEventListener('blur', (event) => {
+            event.target.style.textDecoration = '';
+        });
+    },
     focusResult: function(offset) {
         var results = this.getVisibleResults();
         this.focusIndex += offset;
@@ -30,8 +37,9 @@ var shortcuts = {
         var target = results[this.focusIndex];
         var target_txt = target.querySelector("h2 > a");
         console.log(target);
-        console.log(target_txt);
+        console.log(target_txt.style);
         target_txt.focus();
+        this.underLine(target_txt);
     },
     moveSearchPage: function(offset) {
         if (offset == 1){
