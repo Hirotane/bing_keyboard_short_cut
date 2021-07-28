@@ -54,7 +54,6 @@
             if (moveNextSearchPage || movePreviousSearchPage) {
                 // console.log("h or l");
                 e.preventDefault();
-                e.preventDefault();
                 e.stopPropagation();
                 shortcuts.moveSearchPage(moveNextSearchPage ? 1 : -1);
             }
