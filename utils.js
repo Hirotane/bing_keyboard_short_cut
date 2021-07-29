@@ -19,7 +19,7 @@ var shortcuts = {
         return activeElement.nodeName == 'INPUT';
     },
     getVisibleResults: function() {
-        var containers = Array.from(document.querySelectorAll(".b_algo"));
+        var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2, .b_rs > ul > li"));
         return containers;
     },
     underLine: function(target_txt) {
@@ -35,7 +35,7 @@ var shortcuts = {
         this.focusIndex = Math.min(this.focusIndex, results.length - 1);
         this.focusIndex = Math.max(this.focusIndex, 0);
         var target = results[this.focusIndex];
-        var target_txt = target.querySelector("h2 > a");
+        var target_txt = target.querySelector("a");
         console.log(target);
         console.log(target_txt.style);
         target_txt.focus();
