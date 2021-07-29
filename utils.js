@@ -19,7 +19,7 @@ var shortcuts = {
         return activeElement.nodeName == 'INPUT';
     },
     getVisibleResults: function() {
-        var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line"));
+        var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a"));
         return containers;
     },
     underLine: function(target_txt) {
