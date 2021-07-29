@@ -19,7 +19,7 @@ var shortcuts = {
         return activeElement.nodeName == 'INPUT';
     },
     getVisibleResults: function() {
-        var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2, .b_rs > ul > li"));
+        var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line"));
         return containers;
     },
     underLine: function(target_txt) {
@@ -35,11 +35,10 @@ var shortcuts = {
         this.focusIndex = Math.min(this.focusIndex, results.length - 1);
         this.focusIndex = Math.max(this.focusIndex, 0);
         var target = results[this.focusIndex];
-        var target_txt = target.querySelector("a");
         console.log(target);
-        console.log(target_txt.style);
-        target_txt.focus();
-        this.underLine(target_txt);
+        console.log(target.style);
+        target.focus();
+        this.underLine(target);
     },
     moveSearchPage: function(offset) {
         if (offset == 1){
