@@ -6,6 +6,7 @@
     shortcuts.loadOptions(function(options) {
         window.addEventListener('keydown', function(e) {
             // console.log(e.key);
+            console.log(options.navigateWithJKHL);
  
             var shouldNavigateNext = (options.navigateWithJKHL && e.key == 'j' && !shortcuts.isInputActive()) ||
                     (options.navigateWithArrows && e.key == 'ArrowDown' && !shortcuts.isInputActive()),

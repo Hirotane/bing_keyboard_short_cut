@@ -3,7 +3,8 @@ var shortcuts = {
     defaultOptions: {
         // Next = J; Previous = K [WARNING: Conflicts with activateSearch. This takes precedence.]
         // navigateWithJK: false
-        navigateWithJKHL: true,
+        // navigateWithJKHL: true,
+        navigateWithJKHL,
         navigateWithShiftHL: true,
         navigateWithArrows: true,
         navigateWithShiftArrows: true,
