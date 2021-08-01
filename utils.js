@@ -2,13 +2,13 @@
 var shortcuts = {
     defaultOptions: {
         // Next = J; Previous = K [WARNING: Conflicts with activateSearch. This takes precedence.]
-        // navigateWithJK: false
-        // navigateWithJKHL: true,
-        navigateWithJKHL,
-        navigateWithShiftHL: true,
-        navigateWithArrows: true,
-        navigateWithShiftArrows: true,
-        searchType: true
+        navigateSearchResultsWithJKHL: true,
+        navigateSearchResultsWithArrows: true,
+        movePagesWithHL: true,
+        movePagesWithArrows: true,
+        scrollInSiteWithJKDU: true,
+        scrollInSiteWithArrows: true,
+        selectSearchType: true
     },
     focusIndex: -1,
 
@@ -31,6 +31,8 @@ var shortcuts = {
         });
     },
     focusResult: function(offset) {
+        var ref = document.referrer;
+        console.log(ref);
         var results = this.getVisibleResults();
         this.focusIndex += offset;
         this.focusIndex = Math.min(this.focusIndex, results.length - 1);

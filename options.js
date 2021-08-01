@@ -1,12 +1,20 @@
 // Saves options to chrome.storage
 function save_options() {
-    var color = document.getElementById('color').value;
-    var likesColor = document.getElementById('like').checked;
-    var activateJKHL = document.getElementById('activateJKHL').checked;
+    var navigateSearchResultsWithJKHL = document.getElementById('navigate-search-results-with-jkhl').checked;
+    var navigateSearchResultsWithArrows = document.getElementById('navigate-search-results-with-arrows').checked;
+    var movePagesWithHL = document.getElementById('move-pages-with-hl').checked;
+    var movePagesWithArrows = document.getElementById('move-pages-with-arrows').checked;
+    var scrollInSiteWithJKDU = document.getElementById('scroll-in-site-with-jkdu').checked;
+    var scrollInSiteWithArrows = document.getElementById('scroll-in-site-with-arrows').checked;
+    var selectSearchType = document.getElementById('select-search-type').checked;
     chrome.storage.sync.set({
-        favoriteColor: color,
-        likesColor: likesColor,
-        navigateWithJKHL: activateJKHL
+        navigateSearchResultsWithJKHL = navigateSearchResultsWithJKHL,
+        navigateSearchResultsWithArrows = navigateSearchResultsWithArrows, 
+        movePagesWithHL = movePagesWithHL,
+        movePagesWithArrows = movePagesWithArrows,
+        scrollInSiteWithJKDU = scrollInSiteWithJKDU,
+        scrollInSiteWithArrows = scrollInSiteWithArrows,
+        selectSearchType = selectSearchType
     }, function () {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
@@ -21,15 +29,24 @@ function save_options() {
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restore_options() {
-    // Use default value color = 'red' and likesColor = true.
+    // Use default value.
     chrome.storage.sync.get({
-        favoriteColor: 'red',
-        likesColor: true
+        navigateSearchResultsWithJKHL: true,
+        navigateSearchResultsWithArrows: true,
+        movePagesWithHL: true,
+        movePagesWithArrows: true,
+        scrollInSiteWithJKDU: true,
+        scrollInSiteWithArrows: true,
+        selectSearchType: true
     }, function (items) {
-        document.getElementById('color').value = items.favoriteColor;
-        document.getElementById('like').checked = items.likesColor;
+        document.getElementById('navigate-search-results-with-jkhl').checked = items.navigateSearchResultsWithJKHL;
+        document.getElementById('navigate-search-results-with-arrows').checked = items.navigateSearchResultsWithArrows;
+        document.getElementById('move-pages-with-hl').checked = items.movePagesWithHL;
+        document.getElementById('move-pages-with-arrows').checked = items.movePagesWithArrows;
+        document.getElementById('scroll-in-site-with-jkdu').checked = items.scrollInSiteWithJKDU;
+        document.getElementById('scroll-in-site-with-arrows').checked = items.scrollInSiteWithArrows;
+        document.getElementById('select-search-type').checked = items.selectSearchType;
     });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click',
-    save_options);
+document.getElementById('save').addEventListener('click', save_options);
