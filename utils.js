@@ -9,10 +9,16 @@ var shortcuts = {
         navigateWithShiftArrows: true,
         searchType: true
     },
-    focusIndex: -1,
-
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
+        var ref = document.referrer;
+        if (sessionStorage.getItem('focusIndex') == null || ref.indexOf( "https://www.bing.com" ) != -1){
+            sessionStorage.setItem('focusIndex', 0);
+        }
+        var results = this.getVisibleResults();
+        var target = results[sessionStorage.getItem('focusIndex')];
+        target.focus();
+        this.underLine(target);
     },
     isInputActive: function () {
         var activeElement = document.activeElement;
@@ -31,10 +37,11 @@ var shortcuts = {
     },
     focusResult: function(offset) {
         var results = this.getVisibleResults();
-        this.focusIndex += offset;
-        this.focusIndex = Math.min(this.focusIndex, results.length - 1);
-        this.focusIndex = Math.max(this.focusIndex, 0);
-        var target = results[this.focusIndex];
+        var focusIndex = Number(sessionStorage.getItem('focusIndex')) + offset;
+        focusIndex = Math.min(focusIndex, results.length - 1);
+        focusIndex = Math.max(focusIndex, 0);
+        sessionStorage.setItem('focusIndex', focusIndex);
+        var target = results[focusIndex];
         console.log(target);
         console.log(target.style);
         target.focus();
@@ -55,6 +62,7 @@ var shortcuts = {
             window.history.forward();
         } else {
             window.history.back();
+            
             console.log("back");
         }
     },
