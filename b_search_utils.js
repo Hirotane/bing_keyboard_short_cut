@@ -38,15 +38,15 @@ var shortcuts = {
     },
     focusResult: function(offset) {
         var ref = document.referrer;
-        console.log(ref);
+        // console.log(ref);
         var results = this.getVisibleResults();
         var focusIndex = Number(sessionStorage.getItem('focusIndex')) + offset;
         focusIndex = Math.min(focusIndex, results.length - 1);
         focusIndex = Math.max(focusIndex, 0);
         sessionStorage.setItem('focusIndex', focusIndex);
         var target = results[focusIndex];
-        console.log(target);
-        console.log(target.style);
+        // console.log(target);
+        // console.log(target.style);
         target.focus();
         this.underLine(target);
     },
@@ -61,28 +61,9 @@ var shortcuts = {
     },
     movePage: function(offset) {
         if (offset == 1){
-            console.log("forward");
             window.history.forward();
         } else {
             window.history.back();
-            
-            console.log("back");
-        }
-    },
-    scrollPageOneLine: function(offset) {
-        console.log(offset);
-        if (offset == 1){
-            window.scrollBy(0, -50)
-        } else {
-            window.scrollBy(0, 50)
-        }
-    },
-    scrollHalfPage: function(offset) {
-        console.log(offset);
-        if (offset == 1){
-            window.scrollBy(0, -0.5*window.innerHeight)
-        } else {
-            window.scrollBy(0, 0.5*window.innerHeight)
         }
     },
     changeSearchType: function(type) {
@@ -116,9 +97,5 @@ var shortcuts = {
                 window.location.href = ref;
                 break;
         }
-    },
-    focusOnSearchBox: function() {
-        var searchbox = document.querySelector("#search-input, #textfield");
-        searchbox.focus();
     }
 };

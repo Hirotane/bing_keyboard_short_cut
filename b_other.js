@@ -18,7 +18,6 @@
             }
             // When the button 'ctrl + [' is pressed, the search box is unfocused.
             if (e.key == '[' && e.ctrlKey && shortcuts.isInputActive()) {
-                console.log("[ is pressed")
                 var focusedElement = document.activeElement;
                 focusedElement.blur();
                 }
@@ -47,13 +46,11 @@
 
             // scroll page with 'j', 'k'
             if (scrollUp || scrollDown) {
-                console.log("j or k");
                 e.preventDefault();
                 e.stopPropagation();
                 shortcuts.scrollPageOneLine(scrollUp ? 1 : -1);
             }
             if (scrollPageUp || scrollPageDown) {
-                console.log("u or d");
                 e.preventDefault();
                 e.stopPropagation();
                 shortcuts.scrollHalfPage(scrollPageUp ? 1 : -1);

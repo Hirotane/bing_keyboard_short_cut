@@ -65,7 +65,7 @@
             }
             // When the button 'ctrl + [' is pressed, the search box is unfocused.
             if (e.key == '[' && e.ctrlKey && shortcuts.isInputActive()) {
-                console.log("bracket");
+                // console.log("bracket");
                 // eliminate shadows whitch appears when search box is focused.
                 let elements = document.getElementsByClassName("b_lbShow");
                 elements[0].classList.remove("b_lbShow");

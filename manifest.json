@@ -20,16 +20,17 @@
     "content_scripts": [{
       "matches": ["*://www.bing.com/search*"],
       "js": [
-        "utils.js",
-        "shortcuts.js"
+        "options.js",
+        "b_search_utils.js",
+        "b_search.js"
       ]
     },{
       "exclude_matches": ["*://www.bing.com/search*"],
       "matches": ["<all_urls>"],
       "js": [
         "options.js",
-        "utils.js",
-        "outside_search_pages.js"
+        "b_other_utils.js",
+        "b_other.js"
       ]
     }]
   }
