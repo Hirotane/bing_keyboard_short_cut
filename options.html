@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Test Extension Options</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section>
+        <h1>Navigation in search pages</h1>
+        <div class="line-space">
+            <input type="checkbox" id="navigate-search-results-with-jkhl">
+            <label>
+                <kbd class="keyboard-key">j</kbd>&ensp;<kbd class="keyboard-key">k</kbd>&ensp;<kbd
+                    class="keyboard-key">h</kbd>&ensp;<kbd class="keyboard-key">l</kbd>
+            </label>
+        </div>
+        <div class="line-space">
+            <input type="checkbox" id="navigate-search-results-with-arrows">
+            <label>
+                <kbd class="keyboard-key">&darr;</kbd>&ensp;<kbd class="keyboard-key">&uarr;</kbd>&ensp;<kbd
+                    class="keyboard-key">&larr;</kbd>&ensp;<kbd class="keyboard-key">&rarr;</kbd>
+            </label>
+        </div>
+    </section>
+    <section>
+        <h1>Page transition</h1>
+        <div class="line-space">
+            <input type="checkbox" id="move-pages-with-hl">
+            <label>
+                <kbd class="keyboard-key">Shift</kbd> + <kbd class="keyboard-key">h</kbd>&ensp;<kbd
+                    class="keyboard-key">Shift</kbd> + <kbd class="keyboard-key">l</kbd>
+            </label>
+        </div>
+        <div class="line-space">
+            <input type="checkbox" id="move-pages-with-arrows">
+            <label>
+                <kbd class="keyboard-key">Shift</kbd> + <kbd class="keyboard-key">&larr;</kbd>&ensp;<kbd
+                    class="keyboard-key">Shift</kbd> + <kbd class="keyboard-key">&rarr;</kbd>
+            </label>
+        </div>
+    </section>
+    <section>
+        <h1>Scroll in websites</h1>
+        <div class="line-space">
+            <input type="checkbox" id="scroll-in-site-with-jkdu">
+            <label>
+                <kbd class="keyboard-key">j</kbd>&ensp;<kbd class="keyboard-key">k</kbd>&ensp;<kbd
+                    class="keyboard-key">d</kbd>&ensp;<kbd class="keyboard-key">u</kbd>
+            </label>
+        </div>
+        <div class="line-space">
+            <input type="checkbox" id="scroll-in-site-with-arrows">
+            <label>
+                <kbd class="keyboard-key">&darr;</kbd>&ensp;<kbd class="keyboard-key">&uarr;</kbd>
+            </label>
+        </div>
+    </section>
+    <section>
+        <h1>Select serch type</h1>
+        <div class="line-space">
+            <input type="checkbox" id="select-search-type">
+            <label>
+                <kbd class="keyboard-key">a</kbd>&ensp;<kbd class="keyboard-key">w</kbd>&ensp;<kbd
+                    class="keyboard-key">i</kbd>&ensp;<kbd class="keyboard-key">v</kbd>&ensp;<kbd
+                    class="keyboard-key">m</kbd>&ensp;<kbd class="keyboard-key">s</kbd>
+            </label>
+    </section>
+
+    <div id="status"></div>
+    <button id="save">Save</button>
+
+    <script src="options.js"></script>
+</body>
+</html>

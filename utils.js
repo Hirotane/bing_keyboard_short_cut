@@ -2,12 +2,13 @@
 var shortcuts = {
     defaultOptions: {
         // Next = J; Previous = K [WARNING: Conflicts with activateSearch. This takes precedence.]
-        // navigateWithJK: false
-        navigateWithJKHL: true,
-        navigateWithShiftHL: true,
-        navigateWithArrows: true,
-        navigateWithShiftArrows: true,
-        searchType: true
+        navigateSearchResultsWithJKHL: true,
+        navigateSearchResultsWithArrows: true,
+        movePagesWithHL: true,
+        movePagesWithArrows: true,
+        scrollInSiteWithJKDU: true,
+        scrollInSiteWithArrows: true,
+        selectSearchType: true
     },
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
@@ -36,6 +37,8 @@ var shortcuts = {
         });
     },
     focusResult: function(offset) {
+        var ref = document.referrer;
+        console.log(ref);
         var results = this.getVisibleResults();
         var focusIndex = Number(sessionStorage.getItem('focusIndex')) + offset;
         focusIndex = Math.min(focusIndex, results.length - 1);
