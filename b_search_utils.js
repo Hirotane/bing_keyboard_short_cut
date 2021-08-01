@@ -6,8 +6,6 @@ var shortcuts = {
         navigateSearchResultsWithArrows: true,
         movePagesWithHL: true,
         movePagesWithArrows: true,
-        scrollInSiteWithJKDU: true,
-        scrollInSiteWithArrows: true,
         selectSearchType: true
     },
     loadOptions: function(callback) {
