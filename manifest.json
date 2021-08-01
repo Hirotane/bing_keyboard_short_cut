@@ -14,6 +14,9 @@
       "48": "icons/Bing_shortcut_48x48.png",
       "128": "icons/Bing_shortcut_128x128.png"
     },
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
     "permissions": [
         "storage"
     ],
