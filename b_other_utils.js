@@ -2,13 +2,9 @@
 var shortcuts = {
     defaultOptions: {
         // Next = J; Previous = K [WARNING: Conflicts with activateSearch. This takes precedence.]
-        navigateSearchResultsWithJKHL: true,
-        navigateSearchResultsWithArrows: true,
         movePagesWithHL: true,
         movePagesWithArrows: true,
-        scrollInSiteWithJKDU: true,
-        scrollInSiteWithArrows: true,
-        selectSearchType: true
+        scrollInSiteWithJKDU: true
     },
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);

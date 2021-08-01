@@ -37,10 +37,8 @@
         window.addEventListener('keypress', function(e) {
             // console.log(e.key);
  
-            var scrollDown = (options.scrollInSiteWithJKDU && e.key == 'j' && !shortcuts.isInputActive()) ||
-                    (options.scrollInSiteWithArrows && e.key == 'ArrowDown' && !shortcuts.isInputActive()),
-                scrollUp = (options.scrollInSiteWithJKDU && e.key == 'k' && !shortcuts.isInputActive()) ||
-                    (options.scrollInSiteWithArrows && e.key == 'ArrowUp' && !shortcuts.isInputActive()),
+            var scrollDown = (options.scrollInSiteWithJKDU && e.key == 'j' && !shortcuts.isInputActive()),
+                scrollUp = (options.scrollInSiteWithJKDU && e.key == 'k' && !shortcuts.isInputActive()),
                 scrollPageUp = (options.scrollInSiteWithJKDU && e.key == 'u' && !shortcuts.isInputActive()),
                 scrollPageDown = (options.scrollInSiteWithJKDU && e.key == 'd' && !shortcuts.isInputActive());
 
