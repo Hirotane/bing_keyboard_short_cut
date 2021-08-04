@@ -42,7 +42,7 @@ var shortcuts = {
         }
     },
     focusOnSearchBox: function() {
-        var searchbox = document.querySelector("#search-input, #textfield");
+        var searchbox = document.querySelector("input[type='text']");
         searchbox.focus();
     }
 };
