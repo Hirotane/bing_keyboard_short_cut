@@ -1,5 +1,23 @@
+body{
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    margin: 0;
+    width: 380px;
+}
+section{
+    width: 90%;
+    margin: 0px auto;
+    border-bottom: 1px solid #777;
+}
+h1{
+    font-size: 15px;
+    margin: 10px 0;
+}
+p{
+    margin: 10px 0;
+}
 table{
     width: 340px;
+    margin: 20px 0;
 }
 td{
     border: 0;
@@ -8,14 +26,11 @@ td{
     width: 25%;
     color: #777;
     text-align: right;
-    /* background-color: aqua; */
 }
 .right{
     width: 75%;
     text-align: left;
     font-weight: lighter;
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-    /* background-color: aquamarine; */
 }
 .key{
     display: inline-block;
