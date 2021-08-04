@@ -1,3 +1,8 @@
+header {
+    width: 100%;
+    background-color: #337079;
+    color: white;
+}
 table{
     width: 340px;
 }
@@ -8,14 +13,12 @@ td{
     width: 25%;
     color: #777;
     text-align: right;
-    /* background-color: aqua; */
 }
 .right{
     width: 75%;
     text-align: left;
     font-weight: lighter;
     font-family: Verdana, Helvetica, Arial, sans-serif;
-    /* background-color: aquamarine; */
 }
 .key{
     display: inline-block;
