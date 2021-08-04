@@ -23,7 +23,6 @@
     "content_scripts": [{
       "matches": ["*://www.bing.com/search*"],
       "js": [
-        "options.js",
         "b_search_utils.js",
         "b_search.js"
       ]
@@ -31,7 +30,6 @@
       "exclude_matches": ["*://www.bing.com/search*"],
       "matches": ["<all_urls>"],
       "js": [
-        "options.js",
         "b_other_utils.js",
         "b_other.js"
       ]
