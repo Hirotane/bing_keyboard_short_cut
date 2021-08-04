@@ -11,7 +11,7 @@ var shortcuts = {
     },
     isInputActive: function () {
         var activeElement = document.activeElement;
-        return activeElement.nodeName == 'INPUT' || 'TEXTAREA';
+        return activeElement.nodeName == 'INPUT';
     },
     getVisibleResults: function() {
         var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a"));
