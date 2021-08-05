@@ -3,6 +3,6 @@
         "message": "Bing shortcut"
     },
     "Description": {
-        "message": "You can use below keyboad shortcuts in any bing pages. //nYou can enable or disable of these shortcuts from the option page. //nj : down //nk : up //nh : previous search page //nl : next search page //nshift-h : go back //nshift-l : go forward //n/ : focus on search box //nshift-a/w/i/v/m/s/ : select search type from all/work/image/video/map/shopping"
+        "message": "You can use below keyboad shortcuts in any bing pages. You can enable or disable shortcuts from the option page."
     }
 }
