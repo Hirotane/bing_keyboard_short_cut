@@ -6,7 +6,10 @@ var shortcuts = {
         navigateSearchResultsWithArrows: true,
         movePagesWithHL: true,
         movePagesWithArrows: true,
-        selectSearchType: true
+        selectSearchType: true,
+        focusOnInput: true,
+        unfocusWithESC: true,
+        unfocusWithBracket: true
     },
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
