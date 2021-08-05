@@ -24,7 +24,8 @@
                 searchTypeN = options.selectSearchType && e.key == 'N' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeV = options.selectSearchType && e.key == 'V' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeM = options.selectSearchType && e.key == 'M' && e.shiftKey && !shortcuts.isInputActive(),
-                searchTypeS = options.selectSearchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive();
+                searchTypeS = options.selectSearchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive(),
+                unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive();
 
             // select search type
             if (searchTypeA) {
@@ -66,8 +67,7 @@
                 shortcuts.movePage(goToNextPage ? 1 : -1);
             }
             // When the button 'ctrl + [' is pressed, the search box is unfocused.
-            if (e.key == '[' && e.ctrlKey && shortcuts.isInputActive()) {
-                // console.log("bracket");
+            if (unfocusWithBracket) {
                 // eliminate shadows whitch appears when search box is focused.
                 let elements = document.getElementsByClassName("b_lbShow");
                 elements[0].classList.remove("b_lbShow");
@@ -75,14 +75,16 @@
                 }
         });
         window.addEventListener('keyup', function(e) {
+            var focusOnInput = options.focusOnInput && e.key == '/' && !shortcuts.isInputActive(),
+                unfocusWithESC = options.unfocusWithESC && e.key == 'Escape' && shortcuts.isInputActive();
             // e = e || window.event;
             // When the button '/' is pressed, the search box is focused.
-            if (e.key == '/' && !shortcuts.isInputActive()) {
+            if (focusOnInput) {
                 searchbox.value = searchbox.value + " ";
                 searchbox.focus();
             }
             // When the button 'esc' is pressed, the search box is unfocused.
-            if (e.key == 'Escape' && shortcuts.isInputActive()) {
+            if (unfocusWithESC) {
                 searchbox.blur();
             }
         });

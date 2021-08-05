@@ -4,7 +4,10 @@ var shortcuts = {
         // Next = J; Previous = K [WARNING: Conflicts with activateSearch. This takes precedence.]
         movePagesWithHL: true,
         movePagesWithArrows: true,
-        scrollInSiteWithJKDU: true
+        scrollInSiteWithJKDU: true,
+        focusOnInput: true,
+        unfocusWithESC: true,
+        unfocusWithBracket: true
     },
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);

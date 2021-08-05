@@ -3,12 +3,12 @@
 
     shortcuts.loadOptions(function(options) {
         window.addEventListener('keydown', function(e) {
-            // console.log(e.key);
  
-            var goToPreviousPage = options.movePagesWithHL && e.key == 'H' && e.shiftKey && !shortcuts.isInputActive() ||
+            var goToPreviousPage = (options.movePagesWithHL && e.key == 'H' && e.shiftKey && !shortcuts.isInputActive()) ||
                     (options.movePagesWithArrows && e.key == 'ArrowLeft' && e.shiftKey && !shortcuts.isInputActive()),
-                goToNextPage = options.movePagesWithHL && e.key == 'L' && e.shiftKey && !shortcuts.isInputActive() ||
-                    (options.movePagesWithArrows && e.key == 'ArrowRight' && e.shiftKey && !shortcuts.isInputActive());
+                goToNextPage = (options.movePagesWithHL && e.key == 'L' && e.shiftKey && !shortcuts.isInputActive()) ||
+                    (options.movePagesWithArrows && e.key == 'ArrowRight' && e.shiftKey && !shortcuts.isInputActive()),
+                unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive();
 
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
@@ -18,19 +18,23 @@
                 shortcuts.movePage(goToNextPage ? 1 : -1);
             }
             // When the button 'ctrl + [' is pressed, the search box is unfocused.
-            if (e.key == '[' && e.ctrlKey && shortcuts.isInputActive()) {
+            if (unfocusWithBracket) {
                 var focusedElement = document.activeElement;
                 focusedElement.blur();
                 }
         });
         window.addEventListener('keyup', function(e) {
+
+            var focusOnInput = (options.focusOnInput && e.key == '/' && !shortcuts.isInputActive()),
+                unfocusWithESC = options.unfocusWithESC && e.key == 'Escape' && shortcuts.isInputActive();
             // e = e || window.event;
             // When the button '/' is pressed, the search box is focused.
-            if (e.key == '/' && !shortcuts.isInputActive()) {
+            if (focusOnInput) {
                 searchbox = shortcuts.focusOnSearchBox();
+                searchbox.focus();
             }
             // When the button 'esc' is pressed, the search box is unfocused.
-            if (e.key == 'Escape' && shortcuts.isInputActive()) {
+            if (unfocusWithESC) {
                 var focusedElement = document.activeElement;
                 focusedElement.blur();
             }
