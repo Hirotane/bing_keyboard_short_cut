@@ -28,7 +28,7 @@ var shortcuts = {
         return activeElement.nodeName == 'INPUT';
     },
     getVisibleResults: function() {
-        var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a"));
+        var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a"));
         return containers;
     },
     underLine: function(target_txt) {
@@ -44,6 +44,7 @@ var shortcuts = {
         focusIndex = Math.min(focusIndex, results.length - 1);
         focusIndex = Math.max(focusIndex, 0);
         sessionStorage.setItem('focusIndex', focusIndex);
+        console.log(focusIndex)
         var target = results[focusIndex];
         if (target.parentElement.localName == 'li'){
             sessionStorage.setItem('moveFromBing', 1);
