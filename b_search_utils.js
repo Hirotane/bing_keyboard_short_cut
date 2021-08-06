@@ -50,6 +50,22 @@ var shortcuts = {
         focusIndex = Math.max(focusIndex, 0);
         sessionStorage.setItem('focusIndex', focusIndex);
         var target = results[focusIndex];
+
+        if (offset == 1){
+            var rect = target.closest('li').getBoundingClientRect();
+            var offsetY = rect.bottom - window.innerHeight;
+            if (offsetY > 0) {
+                window.scrollBy(0, offsetY+300);
+            }
+        }
+        else {
+            var rect = target.getBoundingClientRect();
+            var offsetY = rect.top + 300;
+            if (focusIndex != 0) {
+            window.scrollBy(0, offsetY+300);
+            }
+        }
+
         target.focus();
         this.underLine(target);
     },
