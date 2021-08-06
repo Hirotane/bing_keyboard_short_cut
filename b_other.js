@@ -14,7 +14,6 @@
             if (goToPreviousPage || goToNextPage) {
                 e.preventDefault();
                 e.stopPropagation();
-                sessionStorage.setItem('moveFromBing', 0);
                 shortcuts.movePage(goToNextPage ? 1 : -1);
             }
             // When the button 'ctrl + [' is pressed, the search box is unfocused.

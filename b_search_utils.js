@@ -13,16 +13,18 @@ var shortcuts = {
     },
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
-        console.log(sessionStorage.getItem('moveFromBing'));
-        if (sessionStorage.getItem('moveFromBing') == null){
-            sessionStorage.setItem('moveFromBing', 0);
-        }
-        if (sessionStorage.getItem('focusIndex') == null || sessionStorage.getItem('moveFromBing') == 1){
-            sessionStorage.setItem('focusIndex', 0);
-            sessionStorage.setItem('moveFromBing', 0);
-        }
+        var ref = document.referrer;
         var results = this.getVisibleResults();
-        var target = results[sessionStorage.getItem('focusIndex')];
+        var focusIndex = sessionStorage.getItem('focusIndex');
+        var reg_str = '^https://www.bing.com/search/*';
+        var reg_exp = new RegExp(reg_str);
+        var isFromBing = ref.match(reg_exp);
+        console.log(ref);
+        if (isFromBing || focusIndex == null) {
+            focusIndex = 0;
+            sessionStorage.setItem('focusIndex', focusIndex);
+        }
+        var target = results[focusIndex];
         target.focus();
         this.underLine(target);
     },
@@ -47,14 +49,7 @@ var shortcuts = {
         focusIndex = Math.min(focusIndex, results.length - 1);
         focusIndex = Math.max(focusIndex, 0);
         sessionStorage.setItem('focusIndex', focusIndex);
-        console.log(focusIndex)
         var target = results[focusIndex];
-        if (target.parentElement.localName == 'li'){
-            sessionStorage.setItem('moveFromBing', 1);
-        }
-        else {
-            sessionStorage.setItem('moveFromBing', 0);
-        }
         target.focus();
         this.underLine(target);
     },
