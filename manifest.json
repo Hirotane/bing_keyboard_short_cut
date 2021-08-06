@@ -21,7 +21,9 @@
         "storage"
     ],
     "content_scripts": [{
-      "matches": ["*://www.bing.com/search*"],
+      "matches": [
+        "*://www.bing.com/search*"
+      ],
       "js": [
         "b_search_utils.js",
         "b_search.js"
