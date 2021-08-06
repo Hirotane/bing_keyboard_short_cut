@@ -29,8 +29,10 @@
             // e = e || window.event;
             // When the button '/' is pressed, the search box is focused.
             if (focusOnInput) {
-                searchbox = shortcuts.focusOnSearchBox();
+                var searchbox = shortcuts.focusOnSearchBox();
+                var pos = searchbox.value.length;
                 searchbox.focus();
+                searchbox.setSelectionRange(pos, pos);
             }
             // When the button 'esc' is pressed, the search box is unfocused.
             if (unfocusWithESC) {

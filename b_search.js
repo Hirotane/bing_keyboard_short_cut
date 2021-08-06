@@ -78,8 +78,13 @@
             // e = e || window.event;
             // When the button '/' is pressed, the search box is focused.
             if (focusOnInput) {
+<<<<<<< HEAD
                 // searchbox.value = searchbox.value + " ";
+=======
+                var pos = searchbox.value.length;
+>>>>>>> 9cc1725a16e945a465d55b20f5394bc3d8cce8db
                 searchbox.focus();
+                searchbox.setSelectionRange(pos, pos);
             }
             // When the button 'esc' is pressed, the search box is unfocused.
             if (unfocusWithESC) {

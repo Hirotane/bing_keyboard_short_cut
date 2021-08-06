@@ -42,6 +42,6 @@ var shortcuts = {
     },
     focusOnSearchBox: function() {
         var searchbox = document.querySelector("input[type='text'], input[type='search']");
-        searchbox.focus();
+        return searchbox;
     }
 };
