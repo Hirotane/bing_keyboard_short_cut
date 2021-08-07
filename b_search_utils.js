@@ -16,7 +16,7 @@ var shortcuts = {
 
         // back to the position in focus when returnd to search page from web-sites
         var focusIndex = sessionStorage.getItem('focusIndex');
-        // set the focus index to 0 when transition of search pages is occured of page is reloaded
+        // set the focus index to 0 when transition of search pages is occured or page is reloaded
         if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
             window.performance.getEntriesByType('navigation')[0].type == 'reload') {
             focusIndex = 0;
@@ -46,7 +46,6 @@ var shortcuts = {
     focusResult: function(offset) {
         var results = this.getVisibleResults();
         var focusIndex = Number(sessionStorage.getItem('focusIndex')) + offset;
-        // console.log("offset: "+offset)
         focusIndex = Math.min(focusIndex, results.length - 1);
         focusIndex = Math.max(focusIndex, 0);
         sessionStorage.setItem('focusIndex', focusIndex);
