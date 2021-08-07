@@ -72,6 +72,9 @@ var shortcuts = {
         target.focus();
         this.underLine(target);
     },
+    verticalImageMove: function(offset) {
+
+    },
     moveSearchPage: function(offset) {
         if (offset == 1){
             var nextpage = document.querySelector(".sb_pagN").getAttribute('href');
