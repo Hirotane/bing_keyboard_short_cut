@@ -57,15 +57,17 @@ var shortcuts = {
         if (offset == 1){
             var rect = target.closest('li').getBoundingClientRect();
             var offsetY = rect.bottom - window.innerHeight;
+            var scroll_width = rect.top;
             if (offsetY > 0) {
-                window.scrollBy(0, offsetY+300);
+                window.scrollBy(0, scroll_width);
             }
         }
         else {
-            var rect = target.getBoundingClientRect();
-            var offsetY = rect.top + 300;
-            if (focusIndex != 0) {
-            window.scrollBy(0, offsetY+300);
+            var rect = target.closest('li').getBoundingClientRect();
+            var offsetY = rect.top;
+            var scroll_width = window.innerHeight-rect.bottom;
+            if (offsetY < 0) {
+            window.scrollBy(0, -scroll_width);
             }
         }
 
