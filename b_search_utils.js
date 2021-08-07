@@ -54,8 +54,11 @@ var shortcuts = {
         if (offset == 1){
             var rect = target.closest('li').getBoundingClientRect();
             var offsetY = rect.bottom - window.innerHeight;
+            console.log(rect.bottom);
+            console.log(window.innerHeight);
+            console.log(offsetY);
             if (offsetY > 0) {
-                window.scrollBy(0, offsetY+300);
+                window.scrollBy(0, offsetY);
             }
         }
         else {
