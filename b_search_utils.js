@@ -81,7 +81,7 @@ var shortcuts = {
     },
     verticalImageMove: function(offset) {
         console.log(this.getVisibleVerticalImageResults(2))
-        var results = this.getVisibleVerticalImageResults(sessionStorage.getItem('imageColumn'));
+        var results = this.getVisibleVerticalImageResults(sessionStorage.getItem('imageColumnIndex'));
         var focusIndex = Number(sessionStorage.getItem('focusIndexImgVtcl')) + offset;
         focusIndex = Math.min(focusIndex, results.length - 1);
         focusIndex = Math.max(focusIndex, 0);
@@ -96,6 +96,11 @@ var shortcuts = {
         focusIndex = Math.min(focusIndex, results.length - 1);
         focusIndex = Math.max(focusIndex, 0);
         var target = results[focusIndex];
+        var imageRows = Array.from(target.parentNode.parentNode.parentNode.parentNode.childNodes);
+        console.log(imageRows)
+        var index = imageRows.findIndex(list => list.contains(target));
+        sessionStorage.setItem('imageColumnIndex', index+1);
+        console.log(index);
         console.log(target);
         sessionStorage.setItem('focusIndexImgHrzn', focusIndex);
         target.focus();
