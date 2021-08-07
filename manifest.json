@@ -23,7 +23,7 @@
     "content_scripts": [{
       "matches": [
         "*://www.bing.com/search*",
-        "*://www.bing.com/image/search*"
+        "*://www.bing.com/images/search*"
       ],
       "js": [
         "b_search_utils.js",
@@ -32,7 +32,7 @@
     },{
       "exclude_matches": [
         "*://www.bing.com/search*",
-        "*://www.bing.com/image/search*"
+        "*://www.bing.com/images/search*"
       ],
       "matches": ["<all_urls>"],
       "js": [

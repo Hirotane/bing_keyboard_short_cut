@@ -30,7 +30,7 @@
 
             var here = window.location.href;
             var regExpAll = new RegExp('^https://www.bing.com/search/*');
-            var regExpImg = new RegExp('^https://www.bing.com/image/search/*');
+            var regExpImage = new RegExp('^https://www.bing.com/images/search/*');
             if (here.match(regExpAll)) {
                 var searchType = "all";
             } else if (here.match(regExpImage)) {

@@ -71,8 +71,12 @@ var shortcuts = {
         target.focus();
         this.underLine(target);
     },
+    getVisibleImageResults: function() {
+        var containers = Array.from(document.querySelectorAll(".dgControl_list > "));
+        return containers;
+    },
     verticalImageMove: function(offset) {
-
+        console.log(this.getVisibleImageResults())
     },
     moveSearchPage: function(offset) {
         if (offset == 1){
