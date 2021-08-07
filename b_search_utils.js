@@ -13,17 +13,17 @@ var shortcuts = {
     },
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
-        var ref = document.referrer;
-        var results = this.getVisibleResults();
+
+        // back to the position in focus when returnd to search page from web-sites
         var focusIndex = sessionStorage.getItem('focusIndex');
-        var reg_str = '^https://www.bing.com/search/*';
-        var reg_exp = new RegExp(reg_str);
-        var isFromBing = ref.match(reg_exp);
-        console.log(ref);
-        if (isFromBing || focusIndex == null) {
+        // set the focus index to 0 when transition of search pages is occured of page is reloaded
+        if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
+            window.performance.getEntriesByType('navigation')[0].type == 'reload') {
             focusIndex = 0;
             sessionStorage.setItem('focusIndex', focusIndex);
         }
+
+        var results = this.getVisibleResults();
         var target = results[focusIndex];
         target.focus();
         this.underLine(target);
@@ -46,9 +46,12 @@ var shortcuts = {
     focusResult: function(offset) {
         var results = this.getVisibleResults();
         var focusIndex = Number(sessionStorage.getItem('focusIndex')) + offset;
+        // console.log("offset: "+offset)
         focusIndex = Math.min(focusIndex, results.length - 1);
         focusIndex = Math.max(focusIndex, 0);
         sessionStorage.setItem('focusIndex', focusIndex);
+        var ref = window.location.href;
+        sessionStorage.setItem('lastQueryUrl', ref);
         var target = results[focusIndex];
 
         if (offset == 1){
