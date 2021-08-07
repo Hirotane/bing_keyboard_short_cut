@@ -72,11 +72,33 @@ var shortcuts = {
         this.underLine(target);
     },
     getVisibleImageResults: function() {
-        var containers = Array.from(document.querySelectorAll(".dgControl_list > "));
+        var containers = Array.from(document.querySelectorAll(".dgControl_list > li > div > div > a"));
+        return containers;
+    },
+    getVisibleVerticalImageResults: function(col) {
+        var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > ul li:nth-child(${col}) > div > div > a`));
         return containers;
     },
     verticalImageMove: function(offset) {
-        console.log(this.getVisibleImageResults())
+        console.log(this.getVisibleVerticalImageResults(2))
+        var results = this.getVisibleVerticalImageResults(sessionStorage.getItem('imageColumn'));
+        var focusIndex = Number(sessionStorage.getItem('focusIndexImgVtcl')) + offset;
+        focusIndex = Math.min(focusIndex, results.length - 1);
+        focusIndex = Math.max(focusIndex, 0);
+        var target = results[focusIndex];
+        console.log(target);
+        sessionStorage.setItem('focusIndexImgVtcl', focusIndex);
+        target.focus();
+    },
+    horizontalImageMove: function(offset) {
+        var results = this.getVisibleImageResults();
+        var focusIndex = Number(sessionStorage.getItem('focusIndexImgHrzn')) + offset;
+        focusIndex = Math.min(focusIndex, results.length - 1);
+        focusIndex = Math.max(focusIndex, 0);
+        var target = results[focusIndex];
+        console.log(target);
+        sessionStorage.setItem('focusIndexImgHrzn', focusIndex);
+        target.focus();
     },
     moveSearchPage: function(offset) {
         if (offset == 1){

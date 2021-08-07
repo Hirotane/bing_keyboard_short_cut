@@ -71,8 +71,8 @@
                 e.stopPropagation();
                 if (searchType == "all") {
                     shortcuts.moveSearchPage(moveNextSearchPage ? 1 : -1);
-                } if (searchType == "img") {
-                    shortcuts.horizontalImageMove(shouldNavigateNext ? 1 : -1);
+                } if (searchType == "image") {
+                    shortcuts.horizontalImageMove(moveNextSearchPage ? 1 : -1);
                 }
             }
             // page transition for all url
