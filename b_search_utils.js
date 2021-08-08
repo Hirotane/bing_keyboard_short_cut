@@ -1,7 +1,6 @@
 // Globals
 var shortcuts = {
     defaultOptions: {
-        // Next = J; Previous = K [WARNING: Conflicts with activateSearch. This takes precedence.]
         navigateSearchResultsWithJKHL: true,
         navigateSearchResultsWithArrows: true,
         movePagesWithHL: true,
@@ -32,27 +31,12 @@ var shortcuts = {
         var activeElement = document.activeElement;
         return activeElement.nodeName == 'INPUT';
     },
-    getVisibleResults: function() {
-        var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a"));
-        return containers;
+    defineRangeOfIndex: function(index, length){
+        index = Math.min(index, length - 1);
+        index = Math.max(index, 0);
+        return index;
     },
-    underLine: function(target_txt) {
-        target_txt.style.outline = 'none';
-        target_txt.style.textDecoration = 'underline';
-        target_txt.addEventListener('blur', (event) => {
-            event.target.style.textDecoration = '';
-        });
-    },
-    focusResult: function(offset) {
-        var results = this.getVisibleResults();
-        var focusIndex = Number(sessionStorage.getItem('focusIndex')) + offset;
-        focusIndex = Math.min(focusIndex, results.length - 1);
-        focusIndex = Math.max(focusIndex, 0);
-        sessionStorage.setItem('focusIndex', focusIndex);
-        var ref = window.location.href;
-        sessionStorage.setItem('lastQueryUrl', ref);
-        var target = results[focusIndex];
-
+    scrollSearchResults: function(target, offset) {
         if (offset == 1){
             var rect = target.closest('li').getBoundingClientRect();
             var offsetY = rect.bottom - window.innerHeight;
@@ -69,38 +53,51 @@ var shortcuts = {
             window.scrollBy(0, -scroll_width);
             }
         }
+    },
+    getVisibleResults: function() {
+        var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a"));
+        return containers;
+    },
+    underLine: function(target_txt) {
+        target_txt.style.outline = 'none';
+        target_txt.style.textDecoration = 'underline';
+        target_txt.addEventListener('blur', (event) => {
+            event.target.style.textDecoration = '';
+        });
+    },
+    focusResult: function(offset) {
+        var results = this.getVisibleResults();
+        var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndex')) + offset, results.length);
+        sessionStorage.setItem('focusIndex', focusIndex);
+        var ref = window.location.href;
+        sessionStorage.setItem('lastQueryUrl', ref);
+        var target = results[focusIndex];
 
+        this.scrollSearchResults(target, offset);
         target.focus();
         this.underLine(target);
     },
-    getVisibleImageResults: function(row) {
-        // var containers = Array.from(document.querySelectorAll(".dgControl_list > li > div > div > a"));
-        var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > [data-row="${row}"] > li > div > div > a`));
+    getImageRowResults: function(row) {
+        var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > [data-row="${row}"] > li > .iuscp > .imgpt > a`));
         return containers;
     },
-    getVisibleVerticalImageResults: function(col) {
-        var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > ul li:nth-child(${col}) > div > div > a`));
+    getImageColumnResults: function(col) {
+        var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > ul li:nth-child(${col}) > .iuscp > .imgpt > a`));
         return containers;
     },
     verticalImageMove: function(offset) {
-        console.log(this.getVisibleVerticalImageResults(2))
-        var results = this.getVisibleVerticalImageResults(sessionStorage.getItem('imageColumnIndex'));
-        var focusIndex = Number(sessionStorage.getItem('focusIndexImgVtcl')) + offset;
-        focusIndex = Math.min(focusIndex, results.length - 1);
-        focusIndex = Math.max(focusIndex, 0);
+        // when sessionStorage returns 'null', set 0. (??: Nullish coalescing operator)
+        var results = this.getImageColumnResults(sessionStorage.getItem('imageColumnIndex') ?? 0);
+        var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndexImgVtcl')) + offset, results.length);
         var target = results[focusIndex];
-        var imageRowHeading = Number(target.closest(".dgControl_list").getAttribute("data-row"));
-        sessionStorage.setItem('imageRowHeading', imageRowHeading);
-        console.log(target);
+        sessionStorage.setItem('imageRowHeading', Number(target.closest(".dgControl_list").getAttribute("data-row")));
         sessionStorage.setItem('focusIndexImgVtcl', focusIndex);
+        this.scrollSearchResults(target, offset);
         target.focus();
     },
     horizontalImageMove: function(offset) {
-        var results = this.getVisibleImageResults(sessionStorage.getItem('imageRowHeading'));
-        console.log(results);
-        var focusIndex = Number(sessionStorage.getItem('focusIndexImgHrzn')) + offset;
-        focusIndex = Math.min(focusIndex, results.length - 1);
-        focusIndex = Math.max(focusIndex, 0);
+        var results = this.getImageRowResults(sessionStorage.getItem('imageRowHeading') ?? 1);
+        var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndexImgHrzn')) + offset, results.length);
         var target = results[focusIndex];
         var imageRows = Array.from(target.closest(".dgControl_list").childNodes);
         var index = imageRows.findIndex(list => list.contains(target));
