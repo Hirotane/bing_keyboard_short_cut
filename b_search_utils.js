@@ -10,22 +10,34 @@ var shortcuts = {
         unfocusWithESC: true,
         unfocusWithBracket: true
     },
+    searchType: "all",
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
 
-        // back to the position in focus when returnd to search page from web-sites
-        var focusIndex = sessionStorage.getItem('focusIndex');
-        // set the focus index to 0 when transition of search pages is occured or page is reloaded
-        if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
-            window.performance.getEntriesByType('navigation')[0].type == 'reload') {
-            focusIndex = 0;
-            sessionStorage.setItem('focusIndex', focusIndex);
+        // retain search type of this page in property "searchType"
+        // and initial setting is excuted here
+        var here = window.location.href;
+        var regExpAll = new RegExp('^https://www.bing.com/search/*');
+        var regExpImage = new RegExp('^https://www.bing.com/images/search/*');
+        if (here.match(regExpAll)) {
+            this.searchType = "all";
+            console.log("this.searchType: "+this.searchType);
+            // back to the position in focus when returnd to search page from web-sites
+            var focusIndex = sessionStorage.getItem('focusIndex');
+            // set the focus index to 0 when transition of search pages is occured or page is reloaded
+            if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
+                window.performance.getEntriesByType('navigation')[0].type == 'reload') {
+                focusIndex = 0;
+                sessionStorage.setItem('focusIndex', focusIndex);
+            }
+            var results = this.getVisibleResults();
+            var target = results[focusIndex];
+            target.focus();
+            this.underLine(target);
+        } else if (here.match(regExpImage)) {
+            this.searchType = "image";
+            console.log("this.searchType: "+this.searchType);
         }
-
-        var results = this.getVisibleResults();
-        var target = results[focusIndex];
-        target.focus();
-        this.underLine(target);
     },
     isInputActive: function () {
         var activeElement = document.activeElement;
@@ -65,6 +77,10 @@ var shortcuts = {
             event.target.style.textDecoration = '';
         });
     },
+    emphasizeFocus: function(elt) {
+        elt.style.outlineWidth = 'medium';
+        elt.style.outlineColor = '#1e90ff';
+    },
     focusResult: function(offset) {
         var results = this.getVisibleResults();
         var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndex')) + offset, results.length);
@@ -85,25 +101,34 @@ var shortcuts = {
         var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > ul li:nth-child(${col}) > .iuscp > .imgpt > a`));
         return containers;
     },
+    focusIndexImgVtcl: 0,
     verticalImageMove: function(offset) {
         // when sessionStorage returns 'null', set 0. (??: Nullish coalescing operator)
         var results = this.getImageColumnResults(sessionStorage.getItem('imageColumnIndex') ?? 0);
+        console.log(results)
+        // this.focusIndexImgVtcl = this.focusIndexImgVtcl + offset; 
         var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndexImgVtcl')) + offset, results.length);
+        // var focusIndex = this.defineRangeOfIndex(this.focusIndexImgVtcl, results.length);
         var target = results[focusIndex];
         sessionStorage.setItem('imageRowHeading', Number(target.closest(".dgControl_list").getAttribute("data-row")));
         sessionStorage.setItem('focusIndexImgVtcl', focusIndex);
         this.scrollSearchResults(target, offset);
         target.focus();
+        this.emphasizeFocus(target);
     },
+    focusIndexImgHrzn: 0, 
     horizontalImageMove: function(offset) {
         var results = this.getImageRowResults(sessionStorage.getItem('imageRowHeading') ?? 1);
+        // this.focusIndexImgHrzn = this.focusIndexImgHrzn + offset; 
         var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndexImgHrzn')) + offset, results.length);
+        // var focusIndex = this.defineRangeOfIndex(this.focusIndexImgHrzn, results.length);
         var target = results[focusIndex];
         var imageRows = Array.from(target.closest(".dgControl_list").childNodes);
         var index = imageRows.findIndex(list => list.contains(target));
         sessionStorage.setItem('imageColumnIndex', index+1);
         sessionStorage.setItem('focusIndexImgHrzn', focusIndex);
         target.focus();
+        this.emphasizeFocus(target);
     },
     moveSearchPage: function(offset) {
         if (offset == 1){
