@@ -22,14 +22,18 @@
     ],
     "content_scripts": [{
       "matches": [
-        "*://www.bing.com/search*"
+        "*://www.bing.com/search*",
+        "*://www.bing.com/images/search*"
       ],
       "js": [
         "b_search_utils.js",
         "b_search.js"
       ]
     },{
-      "exclude_matches": ["*://www.bing.com/search*"],
+      "exclude_matches": [
+        "*://www.bing.com/search*",
+        "*://www.bing.com/images/search*"
+      ],
       "matches": ["<all_urls>"],
       "js": [
         "b_other_utils.js",

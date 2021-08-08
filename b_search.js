@@ -28,6 +28,15 @@
                 searchTypeS = options.selectSearchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive(),
                 unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive();
 
+            var here = window.location.href;
+            var regExpAll = new RegExp('^https://www.bing.com/search/*');
+            var regExpImage = new RegExp('^https://www.bing.com/images/search/*');
+            if (here.match(regExpAll)) {
+                var searchType = "all";
+            } else if (here.match(regExpImage)) {
+                var searchType = "image";
+            }
+
             // select search type
             if (searchTypeA) {
                 shortcuts.changeSearchType('all');
@@ -49,14 +58,22 @@
                 // console.log("j or k");
                 e.preventDefault();
                 e.stopPropagation();
-                shortcuts.focusResult(shouldNavigateNext ? 1 : -1);
+                if (searchType == "all") {
+                    shortcuts.focusResult(shouldNavigateNext ? 1 : -1);
+                } if (searchType == "image") {
+                    shortcuts.verticalImageMove(shouldNavigateNext ? 1 : -1);
+                }
             }
             // search page transition
             if (moveNextSearchPage || movePreviousSearchPage) {
                 // console.log("h or l");
                 e.preventDefault();
                 e.stopPropagation();
-                shortcuts.moveSearchPage(moveNextSearchPage ? 1 : -1);
+                if (searchType == "all") {
+                    shortcuts.moveSearchPage(moveNextSearchPage ? 1 : -1);
+                } if (searchType == "image") {
+                    shortcuts.horizontalImageMove(moveNextSearchPage ? 1 : -1);
+                }
             }
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
