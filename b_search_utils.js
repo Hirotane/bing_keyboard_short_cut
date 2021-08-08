@@ -10,22 +10,33 @@ var shortcuts = {
         unfocusWithESC: true,
         unfocusWithBracket: true
     },
+    searchType: "all",
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
 
-        // back to the position in focus when returnd to search page from web-sites
-        var focusIndex = sessionStorage.getItem('focusIndex');
-        // set the focus index to 0 when transition of search pages is occured or page is reloaded
-        if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
-            window.performance.getEntriesByType('navigation')[0].type == 'reload') {
-            focusIndex = 0;
-            sessionStorage.setItem('focusIndex', focusIndex);
-        }
+        var here = window.location.href;
+        var regExpAll = new RegExp('^https://www.bing.com/search/*');
+        var regExpImage = new RegExp('^https://www.bing.com/images/search/*');
+        if (here.match(regExpAll)) {
+            this.searchType = "all";
+            console.log("this.searchType: "+this.searchType);
+            // back to the position in focus when returnd to search page from web-sites
+            var focusIndex = sessionStorage.getItem('focusIndex');
+            // set the focus index to 0 when transition of search pages is occured or page is reloaded
+            if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
+                window.performance.getEntriesByType('navigation')[0].type == 'reload') {
+                focusIndex = 0;
+                sessionStorage.setItem('focusIndex', focusIndex);
+            }
 
-        var results = this.getVisibleResults();
-        var target = results[focusIndex];
-        target.focus();
-        this.underLine(target);
+            var results = this.getVisibleResults();
+            var target = results[focusIndex];
+            target.focus();
+            this.underLine(target);
+        } else if (here.match(regExpImage)) {
+            this.searchType = "image";
+            console.log("this.searchType: "+this.searchType);
+        }
     },
     isInputActive: function () {
         var activeElement = document.activeElement;
@@ -65,6 +76,10 @@ var shortcuts = {
             event.target.style.textDecoration = '';
         });
     },
+    emphasizeFocus: function(elt) {
+        elt.style.outlineWidth = 'medium';
+        elt.style.outlineColor = '#1e90ff';
+    },
     focusResult: function(offset) {
         var results = this.getVisibleResults();
         var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndex')) + offset, results.length);
@@ -94,6 +109,7 @@ var shortcuts = {
         sessionStorage.setItem('focusIndexImgVtcl', focusIndex);
         this.scrollSearchResults(target, offset);
         target.focus();
+        this.emphasizeFocus(target);
     },
     horizontalImageMove: function(offset) {
         var results = this.getImageRowResults(sessionStorage.getItem('imageRowHeading') ?? 1);
@@ -104,6 +120,7 @@ var shortcuts = {
         sessionStorage.setItem('imageColumnIndex', index+1);
         sessionStorage.setItem('focusIndexImgHrzn', focusIndex);
         target.focus();
+        this.emphasizeFocus(target);
     },
     moveSearchPage: function(offset) {
         if (offset == 1){
