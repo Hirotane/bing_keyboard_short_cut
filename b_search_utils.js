@@ -14,6 +14,8 @@ var shortcuts = {
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
 
+        // retain search type of this page in property "searchType"
+        // and initial setting is excuted here
         var here = window.location.href;
         var regExpAll = new RegExp('^https://www.bing.com/search/*');
         var regExpImage = new RegExp('^https://www.bing.com/images/search/*');
@@ -28,7 +30,6 @@ var shortcuts = {
                 focusIndex = 0;
                 sessionStorage.setItem('focusIndex', focusIndex);
             }
-
             var results = this.getVisibleResults();
             var target = results[focusIndex];
             target.focus();
@@ -100,10 +101,14 @@ var shortcuts = {
         var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > ul li:nth-child(${col}) > .iuscp > .imgpt > a`));
         return containers;
     },
+    focusIndexImgVtcl: 0,
     verticalImageMove: function(offset) {
         // when sessionStorage returns 'null', set 0. (??: Nullish coalescing operator)
         var results = this.getImageColumnResults(sessionStorage.getItem('imageColumnIndex') ?? 0);
+        console.log(results)
+        // this.focusIndexImgVtcl = this.focusIndexImgVtcl + offset; 
         var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndexImgVtcl')) + offset, results.length);
+        // var focusIndex = this.defineRangeOfIndex(this.focusIndexImgVtcl, results.length);
         var target = results[focusIndex];
         sessionStorage.setItem('imageRowHeading', Number(target.closest(".dgControl_list").getAttribute("data-row")));
         sessionStorage.setItem('focusIndexImgVtcl', focusIndex);
@@ -111,9 +116,12 @@ var shortcuts = {
         target.focus();
         this.emphasizeFocus(target);
     },
+    focusIndexImgHrzn: 0, 
     horizontalImageMove: function(offset) {
         var results = this.getImageRowResults(sessionStorage.getItem('imageRowHeading') ?? 1);
+        // this.focusIndexImgHrzn = this.focusIndexImgHrzn + offset; 
         var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndexImgHrzn')) + offset, results.length);
+        // var focusIndex = this.defineRangeOfIndex(this.focusIndexImgHrzn, results.length);
         var target = results[focusIndex];
         var imageRows = Array.from(target.closest(".dgControl_list").childNodes);
         var index = imageRows.findIndex(list => list.contains(target));
