@@ -32,6 +32,24 @@ var shortcuts = {
         var activeElement = document.activeElement;
         return activeElement.nodeName == 'INPUT';
     },
+    scrollSearchResults: function(target, offset) {
+        if (offset == 1){
+            var rect = target.closest('li').getBoundingClientRect();
+            var offsetY = rect.bottom - window.innerHeight;
+            var scroll_width = rect.top;
+            if (offsetY > 0) {
+                window.scrollBy(0, scroll_width);
+            }
+        }
+        else {
+            var rect = target.closest('li').getBoundingClientRect();
+            var offsetY = rect.top;
+            var scroll_width = window.innerHeight-rect.bottom;
+            if (offsetY < 0) {
+            window.scrollBy(0, -scroll_width);
+            }
+        }
+    },
     getVisibleResults: function() {
         var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a"));
         return containers;
@@ -53,38 +71,24 @@ var shortcuts = {
         sessionStorage.setItem('lastQueryUrl', ref);
         var target = results[focusIndex];
 
-        if (offset == 1){
-            var rect = target.closest('li').getBoundingClientRect();
-            var offsetY = rect.bottom - window.innerHeight;
-            var scroll_width = rect.top;
-            if (offsetY > 0) {
-                window.scrollBy(0, scroll_width);
-            }
-        }
-        else {
-            var rect = target.closest('li').getBoundingClientRect();
-            var offsetY = rect.top;
-            var scroll_width = window.innerHeight-rect.bottom;
-            if (offsetY < 0) {
-            window.scrollBy(0, -scroll_width);
-            }
-        }
-
+        this.scrollSearchResults(target, offset);
         target.focus();
         this.underLine(target);
     },
     getVisibleImageResults: function(row) {
         // var containers = Array.from(document.querySelectorAll(".dgControl_list > li > div > div > a"));
-        var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > [data-row="${row}"] > li > div > div > a`));
+        var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > [data-row="${row}"] > li > .iuscp > .imgpt > a`));
         return containers;
     },
     getVisibleVerticalImageResults: function(col) {
-        var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > ul li:nth-child(${col}) > div > div > a`));
+        var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > ul li:nth-child(${col}) > .iuscp > .imgpt > a`));
         return containers;
     },
     verticalImageMove: function(offset) {
         console.log(this.getVisibleVerticalImageResults(2))
-        var results = this.getVisibleVerticalImageResults(sessionStorage.getItem('imageColumnIndex'));
+        console.log(sessionStorage.getItem('imageColumnIndex'))
+        // when sessionStorage returns 'null', set 0. (??: Nullish coalescing operator)
+        var results = this.getVisibleVerticalImageResults(sessionStorage.getItem('imageColumnIndex') ?? 0);
         var focusIndex = Number(sessionStorage.getItem('focusIndexImgVtcl')) + offset;
         focusIndex = Math.min(focusIndex, results.length - 1);
         focusIndex = Math.max(focusIndex, 0);
@@ -93,10 +97,11 @@ var shortcuts = {
         sessionStorage.setItem('imageRowHeading', imageRowHeading);
         console.log(target);
         sessionStorage.setItem('focusIndexImgVtcl', focusIndex);
+        this.scrollSearchResults(target, offset);
         target.focus();
     },
     horizontalImageMove: function(offset) {
-        var results = this.getVisibleImageResults(sessionStorage.getItem('imageRowHeading'));
+        var results = this.getVisibleImageResults(sessionStorage.getItem('imageRowHeading') ?? 1);
         console.log(results);
         var focusIndex = Number(sessionStorage.getItem('focusIndexImgHrzn')) + offset;
         focusIndex = Math.min(focusIndex, results.length - 1);
