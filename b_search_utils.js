@@ -71,8 +71,9 @@ var shortcuts = {
         target.focus();
         this.underLine(target);
     },
-    getVisibleImageResults: function() {
-        var containers = Array.from(document.querySelectorAll(".dgControl_list > li > div > div > a"));
+    getVisibleImageResults: function(row) {
+        // var containers = Array.from(document.querySelectorAll(".dgControl_list > li > div > div > a"));
+        var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > [data-row="${row}"] > li > div > div > a`));
         return containers;
     },
     getVisibleVerticalImageResults: function(col) {
@@ -86,22 +87,22 @@ var shortcuts = {
         focusIndex = Math.min(focusIndex, results.length - 1);
         focusIndex = Math.max(focusIndex, 0);
         var target = results[focusIndex];
+        var imageRowHeading = Number(target.closest(".dgControl_list").getAttribute("data-row"));
+        sessionStorage.setItem('imageRowHeading', imageRowHeading);
         console.log(target);
         sessionStorage.setItem('focusIndexImgVtcl', focusIndex);
         target.focus();
     },
     horizontalImageMove: function(offset) {
-        var results = this.getVisibleImageResults();
+        var results = this.getVisibleImageResults(sessionStorage.getItem('imageRowHeading'));
+        console.log(results);
         var focusIndex = Number(sessionStorage.getItem('focusIndexImgHrzn')) + offset;
         focusIndex = Math.min(focusIndex, results.length - 1);
         focusIndex = Math.max(focusIndex, 0);
         var target = results[focusIndex];
-        var imageRows = Array.from(target.parentNode.parentNode.parentNode.parentNode.childNodes);
-        console.log(imageRows)
+        var imageRows = Array.from(target.closest(".dgControl_list").childNodes);
         var index = imageRows.findIndex(list => list.contains(target));
         sessionStorage.setItem('imageColumnIndex', index+1);
-        console.log(index);
-        console.log(target);
         sessionStorage.setItem('focusIndexImgHrzn', focusIndex);
         target.focus();
     },
