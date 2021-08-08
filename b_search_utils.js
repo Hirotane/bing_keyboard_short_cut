@@ -32,6 +32,12 @@ var shortcuts = {
         var activeElement = document.activeElement;
         return activeElement.nodeName == 'INPUT';
     },
+    defineRangeOfIndex: function(index, length){
+        console.log(length);
+        focusIndex = Math.min(index, length - 1);
+        focusIndex = Math.max(index, 0);
+        return focusIndex;
+    },
     scrollSearchResults: function(target, offset) {
         if (offset == 1){
             var rect = target.closest('li').getBoundingClientRect();
@@ -63,9 +69,7 @@ var shortcuts = {
     },
     focusResult: function(offset) {
         var results = this.getVisibleResults();
-        var focusIndex = Number(sessionStorage.getItem('focusIndex')) + offset;
-        focusIndex = Math.min(focusIndex, results.length - 1);
-        focusIndex = Math.max(focusIndex, 0);
+        var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndex')) + offset, results.length);
         sessionStorage.setItem('focusIndex', focusIndex);
         var ref = window.location.href;
         sessionStorage.setItem('lastQueryUrl', ref);
@@ -85,8 +89,6 @@ var shortcuts = {
         return containers;
     },
     verticalImageMove: function(offset) {
-        console.log(this.getVisibleVerticalImageResults(2))
-        console.log(sessionStorage.getItem('imageColumnIndex'))
         // when sessionStorage returns 'null', set 0. (??: Nullish coalescing operator)
         var results = this.getVisibleVerticalImageResults(sessionStorage.getItem('imageColumnIndex') ?? 0);
         var focusIndex = Number(sessionStorage.getItem('focusIndexImgVtcl')) + offset;
@@ -95,14 +97,12 @@ var shortcuts = {
         var target = results[focusIndex];
         var imageRowHeading = Number(target.closest(".dgControl_list").getAttribute("data-row"));
         sessionStorage.setItem('imageRowHeading', imageRowHeading);
-        console.log(target);
         sessionStorage.setItem('focusIndexImgVtcl', focusIndex);
         this.scrollSearchResults(target, offset);
         target.focus();
     },
     horizontalImageMove: function(offset) {
         var results = this.getVisibleImageResults(sessionStorage.getItem('imageRowHeading') ?? 1);
-        console.log(results);
         var focusIndex = Number(sessionStorage.getItem('focusIndexImgHrzn')) + offset;
         focusIndex = Math.min(focusIndex, results.length - 1);
         focusIndex = Math.max(focusIndex, 0);
