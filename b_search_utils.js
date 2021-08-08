@@ -37,6 +37,10 @@ var shortcuts = {
         } else if (here.match(regExpImage)) {
             this.searchType = "image";
             console.log("this.searchType: "+this.searchType);
+            this.focusIndexImgVtcl = this.focusIndexImgHrzn = 0;
+            var target = this.getImageRowResults(0)[0];
+            target.focus();
+            this.emphasizeFocus(target);
         }
     },
     isInputActive: function () {
@@ -99,34 +103,30 @@ var shortcuts = {
     },
     getImageColumnResults: function(col) {
         var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > ul li:nth-child(${col}) > .iuscp > .imgpt > a`));
+        // var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > ul li:nth-child(1) > .iuscp > .imgpt > a`));
         return containers;
     },
-    focusIndexImgVtcl: 0,
+    focusIndexImgvtcl: 0, // index of row to move to designated line 
+    nextIndexImgHrzn: 0, // index of row to get the collection of row in the next step
     verticalImageMove: function(offset) {
-        // when sessionStorage returns 'null', set 0. (??: Nullish coalescing operator)
-        var results = this.getImageColumnResults(sessionStorage.getItem('imageColumnIndex') ?? 0);
-        console.log(results)
-        // this.focusIndexImgVtcl = this.focusIndexImgVtcl + offset; 
-        var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndexImgVtcl')) + offset, results.length);
-        // var focusIndex = this.defineRangeOfIndex(this.focusIndexImgVtcl, results.length);
+        var results = this.getImageColumnResults(this.nextIndexImgVtcl+1);
+        var focusIndex = this.defineRangeOfIndex(this.focusIndexImgVtcl+offset, results.length);
+        this.focusIndexImgVtcl = focusIndex;
         var target = results[focusIndex];
-        sessionStorage.setItem('imageRowHeading', Number(target.closest(".dgControl_list").getAttribute("data-row")));
-        sessionStorage.setItem('focusIndexImgVtcl', focusIndex);
+        this.nextIndexImgHrzn= Number(target.closest(".dgControl_list").getAttribute("data-row"))
         this.scrollSearchResults(target, offset);
         target.focus();
         this.emphasizeFocus(target);
     },
-    focusIndexImgHrzn: 0, 
+    focusIndexImgHrzn: 0,  // index of column to move to designated line
+    nextIndexImgVtcl: 0, // index of column to get the collection of column in the next step
     horizontalImageMove: function(offset) {
-        var results = this.getImageRowResults(sessionStorage.getItem('imageRowHeading') ?? 1);
-        // this.focusIndexImgHrzn = this.focusIndexImgHrzn + offset; 
-        var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndexImgHrzn')) + offset, results.length);
-        // var focusIndex = this.defineRangeOfIndex(this.focusIndexImgHrzn, results.length);
+        var results = this.getImageRowResults(this.nextIndexImgHrzn);
+        var focusIndex = this.defineRangeOfIndex(this.focusIndexImgHrzn + offset, results.length);
+        this.focusIndexImgHrzn = focusIndex;
         var target = results[focusIndex];
         var imageRows = Array.from(target.closest(".dgControl_list").childNodes);
-        var index = imageRows.findIndex(list => list.contains(target));
-        sessionStorage.setItem('imageColumnIndex', index+1);
-        sessionStorage.setItem('focusIndexImgHrzn', focusIndex);
+        this.nextIndexImgVtcl = imageRows.findIndex(list => list.contains(target));
         target.focus();
         this.emphasizeFocus(target);
     },
