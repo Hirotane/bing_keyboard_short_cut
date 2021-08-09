@@ -53,18 +53,24 @@ var shortcuts = {
         return index;
     },
     scrollSearchResults: function(target, offset) {
+        if (this.searchType == 'image') {
+            var miniHeaderHeight = 1.1 * target.closest('#b_content').querySelector('#miniheader').offsetHeight;
+        } else {
+            var miniHeaderHeight = 0;
+        }
+
         if (offset == 1){
             var rect = target.closest('li').getBoundingClientRect();
             var offsetY = rect.bottom - window.innerHeight;
-            var scroll_width = rect.top;
+            var scroll_width = rect.top - miniHeaderHeight;
             if (offsetY > 0) {
                 window.scrollBy(0, scroll_width);
             }
         }
         else {
             var rect = target.closest('li').getBoundingClientRect();
-            var offsetY = rect.top;
-            var scroll_width = window.innerHeight-rect.bottom;
+            var offsetY = rect.top - miniHeaderHeight;
+            var scroll_width = window.innerHeight - rect.bottom;
             if (offsetY < 0) {
             window.scrollBy(0, -scroll_width);
             }
@@ -103,7 +109,6 @@ var shortcuts = {
     },
     getImageColumnResults: function(col) {
         var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > ul li:nth-child(${col}) > .iuscp > .imgpt > a`));
-        // var containers = Array.from(document.querySelectorAll(`#mmComponent_images_2 > ul li:nth-child(1) > .iuscp > .imgpt > a`));
         return containers;
     },
     focusIndexImgvtcl: 0, // index of row to move to designated line 
