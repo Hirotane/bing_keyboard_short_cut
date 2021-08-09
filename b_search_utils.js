@@ -93,7 +93,18 @@ var shortcuts = {
     },
     focusResult: function(offset) {
         var results = this.getVisibleResults();
-        var focusIndex = this.defineRangeOfIndex(Number(sessionStorage.getItem('focusIndex')) + offset, results.length);
+        var storageFocusIndex = Number(sessionStorage.getItem('focusIndex'));
+        var focusElemTop = results[storageFocusIndex].closest('li').getBoundingClientRect().top;
+        if (storageFocusIndex==0 && offset==-1){
+            window.scroll({top: 0, behavior: 'smooth'});
+            return;
+        }
+        else if (window.innerHeight < focusElemTop){
+            window.scroll({top: focusElemTop, behavior: 'smooth'});
+            offset = 0;
+        }
+
+        var focusIndex = this.defineRangeOfIndex(storageFocusIndex + offset, results.length);
         sessionStorage.setItem('focusIndex', focusIndex);
         var ref = window.location.href;
         sessionStorage.setItem('lastQueryUrl', ref);
