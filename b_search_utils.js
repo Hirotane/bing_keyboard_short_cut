@@ -34,6 +34,7 @@ var shortcuts = {
             var target = results[focusIndex];
             target.focus();
             this.underLine(target);
+            scrollTo(0, 0);
         } else if (here.match(regExpImage)) {
             this.searchType = "image";
             console.log("this.searchType: "+this.searchType);
