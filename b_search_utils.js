@@ -94,13 +94,24 @@ var shortcuts = {
         elt.style.outlineColor = '#1e90ff';
     },
     grayoutAdds: function() {
-        var adds = Array.from(document.querySelectorAll(".sb_add"));   
+        var adds = Array.from(document.querySelectorAll(".sb_add")); 
+        var txtColor = "#aaa";
         for (let i = 0; i < adds.length; i++) {
-            var addsA = adds[i].querySelectorAll("a")
-            var addsCite = adds[i].querySelector("cite");
+            var addsA = adds[i].querySelectorAll("a");
+            var addsCite = adds[i].querySelectorAll("cite");
+            var addsDiv = adds[i].querySelectorAll("div");
+            var addsStrong = adds[i].querySelectorAll("strong");
             for (let j = 0; j < addsA.length; j++){
-                addsA[j].style.color = "#999";
-                addsCite.style.color = "#999";
+                addsA[j].style.color = txtColor;
+            }
+            for (let j = 0; j < addsCite.length; j++){
+                addsCite[j].style.color = txtColor;
+            }
+            for (let j = 0; j < addsDiv.length; j++){
+                addsDiv[j].style.color = txtColor;
+            }
+            for (let j = 0; j < addsStrong.length; j++){
+                addsStrong[j].style.color = txtColor;
             }
         }
     },
