@@ -35,6 +35,7 @@ var shortcuts = {
             target.focus();
             this.underLine(target);
             scrollTo(0, 0);
+            this.grayoutAdds();
         } else if (here.match(regExpImage)) {
             this.searchType = "image";
             console.log("this.searchType: "+this.searchType);
@@ -91,6 +92,17 @@ var shortcuts = {
     emphasizeFocus: function(elt) {
         elt.style.outlineWidth = 'medium';
         elt.style.outlineColor = '#1e90ff';
+    },
+    grayoutAdds: function() {
+        var adds = Array.from(document.querySelectorAll(".sb_add"));   
+        for (let i = 0; i < adds.length; i++) {
+            var addsA = adds[i].querySelectorAll("a")
+            var addsCite = adds[i].querySelector("cite");
+            for (let j = 0; j < addsA.length; j++){
+                addsA[j].style.color = "#999";
+                addsCite.style.color = "#999";
+            }
+        }
     },
     focusResult: function(offset) {
         var results = this.getVisibleResults();
