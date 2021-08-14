@@ -87,6 +87,7 @@
             if (unfocusWithESC) {
                 searchbox.blur();
             }
+            sessionStorage.setItem('keypress', 0);
         });
     });
 
