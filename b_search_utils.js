@@ -11,32 +11,33 @@ var shortcuts = {
         unfocusWithBracket: true
     },
     searchType: "all",
-    loadOptions: function(callback) {
+    all_selector: ".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
+    work_selector: ".ms-search-result-list-item-border > div > div > a, .ac-textBlock > p > a",
+    initAll: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
 
-        // retain search type of this page in property "searchType"
-        // and initial setting is excuted here
-        var here = window.location.href;
-        var regExpAll = new RegExp('^https://www.bing.com/search/*');
-        var regExpImage = new RegExp('^https://www.bing.com/images/search/*');
-        if (here.match(regExpAll)) {
-            this.searchType = "all";
-            console.log("this.searchType: "+this.searchType);
-            // back to the position in focus when returnd to search page from web-sites
-            var focusIndex = sessionStorage.getItem('focusIndex');
-            // set the focus index to 0 when transition of search pages is occured or page is reloaded
-            if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
-                window.performance.getEntriesByType('navigation')[0].type == 'reload') {
-                focusIndex = 0;
-                sessionStorage.setItem('focusIndex', focusIndex);
-            }
-            var results = this.getVisibleResults();
-            var target = results[focusIndex];
-            target.focus();
-            this.underLine(target);
-            scrollTo(0, 0);
-            this.grayoutAdds();
-        } 
+        this.searchType = "all";
+        console.log("this.searchType: "+this.searchType);
+        // back to the position in focus when returnd to search page from web-sites
+        var focusIndex = sessionStorage.getItem('focusIndex');
+        // set the focus index to 0 when transition of search pages is occured or page is reloaded
+        if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
+            window.performance.getEntriesByType('navigation')[0].type == 'reload') {
+            focusIndex = 0;
+            sessionStorage.setItem('focusIndex', focusIndex);
+        }
+        var results = this.getVisibleResults(this.all_selector);
+        var target = results[focusIndex];
+        target.focus();
+        this.underLine(target);
+        scrollTo(0, 0);
+        this.grayoutAdds();
+    },
+    initWork: function(callback) {
+        chrome.storage.sync.get(this.defaultOptions, callback);
+
+        this.searchType = "work";
+        console.log("this.searchType: "+this.searchType);
     },
     initImage: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
@@ -81,8 +82,8 @@ var shortcuts = {
             }
         }
     },
-    getVisibleResults: function() {
-        var containers = Array.from(document.querySelectorAll(".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a"));
+    getVisibleResults: function(selector) {
+        var containers = Array.from(document.querySelectorAll(selector));
         return containers;
     },
     underLine: function(target_txt) {
@@ -118,8 +119,8 @@ var shortcuts = {
             }
         }
     },
-    focusResult: function(offset) {
-        var results = this.getVisibleResults();
+    focusResult: function(offset, selector) {
+        var results = this.getVisibleResults(selector);
         var storageFocusIndex = Number(sessionStorage.getItem('focusIndex'));
         var focusElemTop = results[storageFocusIndex].closest('li').getBoundingClientRect().top;
         if (storageFocusIndex==0 && offset==-1){

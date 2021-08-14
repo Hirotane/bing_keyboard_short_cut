@@ -3,7 +3,7 @@
 
     var searchbox = document.querySelector(".b_searchbox");
 
-    shortcuts.initImage(function(options) {
+    shortcuts.initWork(function(options) {
         window.addEventListener('keydown', function(e) {
             // console.log(e.key);
             // console.log(location.href);
@@ -27,7 +27,7 @@
                 searchTypeM = options.selectSearchType && e.key == 'M' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeS = options.selectSearchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive(),
                 unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive();
-
+            
             // select search type
             if (searchTypeA) {
                 shortcuts.changeSearchType('all');

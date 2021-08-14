@@ -3,7 +3,7 @@
 
     var searchbox = document.querySelector(".b_searchbox");
 
-    shortcuts.loadOptions(function(options) {
+    shortcuts.initAll(function(options) {
         window.addEventListener('keydown', function(e) {
             // console.log(e.key);
             // console.log(location.href);
@@ -49,22 +49,14 @@
                 // console.log("j or k");
                 e.preventDefault();
                 e.stopPropagation();
-                if (shortcuts.searchType == "all") {
-                    shortcuts.focusResult(shouldNavigateNext ? 1 : -1);
-                } if (shortcuts.searchType == "image") {
-                    shortcuts.verticalImageMove(shouldNavigateNext ? 1 : -1);
-                }
+                shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.all_selector);
             }
             // search page transition
             if (moveNextSearchPage || movePreviousSearchPage) {
                 // console.log("h or l");
                 e.preventDefault();
                 e.stopPropagation();
-                if (shortcuts.searchType == "all") {
-                    shortcuts.moveSearchPage(moveNextSearchPage ? 1 : -1);
-                } if (shortcuts.searchType == "image") {
-                    shortcuts.horizontalImageMove(moveNextSearchPage ? 1 : -1);
-                }
+                shortcuts.moveSearchPage(moveNextSearchPage ? 1 : -1);
             }
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
