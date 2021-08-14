@@ -1,8 +1,8 @@
 {
     "Name": {
-        "message": "Bing shortcut"
+        "message": "Bing shortcuts"
     },
     "Description": {
-        "message": "You can use below keyboad shortcuts in any bing pages. You can enable or disable shortcuts from the option page."
+        "message": "“Bing shortcuts” provides keyboard shortcut for Microsoft's search engine “Bing”. You will be able to search and browse without mouse."
     }
 }
