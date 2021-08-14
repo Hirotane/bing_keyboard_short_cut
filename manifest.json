@@ -22,17 +22,33 @@
     ],
     "content_scripts": [{
       "matches": [
-        "*://www.bing.com/search*",
-        "*://www.bing.com/images/search*"
+        "*://www.bing.com/search*"
       ],
       "js": [
         "b_search_utils.js",
         "b_search.js"
       ]
     },{
+      "matches": [
+        "*://www.bing.com/work/search*"
+      ],
+      "js": [
+        "b_search_utils.js",
+        "b_work.js"
+      ]
+    },{
+      "matches": [
+        "*://www.bing.com/images/search*"
+      ],
+      "js": [
+        "b_search_utils.js",
+        "b_image.js"
+      ]
+    },{
       "exclude_matches": [
         "*://www.bing.com/search*",
-        "*://www.bing.com/images/search*"
+        "*://www.bing.com/images/search*",
+        "*://www.bing.com/work/search*"
       ],
       "matches": ["<all_urls>"],
       "js": [

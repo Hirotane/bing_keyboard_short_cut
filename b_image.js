@@ -3,7 +3,7 @@
 
     var searchbox = document.querySelector(".b_searchbox");
 
-    shortcuts.initAll(function(options) {
+    shortcuts.initImage(function(options) {
         window.addEventListener('keydown', function(e) {
             // console.log(e.key);
             // console.log(location.href);
@@ -27,7 +27,7 @@
                 searchTypeM = options.selectSearchType && e.key == 'M' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeS = options.selectSearchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive(),
                 unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive();
-            
+
             // select search type
             if (searchTypeA) {
                 shortcuts.changeSearchType('all');
@@ -46,21 +46,17 @@
             }
             
             if (shouldNavigateNext || shouldNavigateBack) {
-                // console.log("j or k");
                 e.preventDefault();
                 e.stopPropagation();
-                shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.all_selector);
+                shortcuts.verticalImageMove(shouldNavigateNext ? 1 : -1);
             }
-            // search page transition
             if (moveNextSearchPage || movePreviousSearchPage) {
-                // console.log("h or l");
                 e.preventDefault();
                 e.stopPropagation();
-                shortcuts.moveSearchPage(moveNextSearchPage ? 1 : -1);
+                shortcuts.horizontalImageMove(moveNextSearchPage ? 1 : -1);
             }
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
-                // console.log("shift key & H, L");
                 e.preventDefault();
                 e.stopPropagation();
                 shortcuts.movePage(goToNextPage ? 1 : -1);
@@ -87,7 +83,6 @@
             if (unfocusWithESC) {
                 searchbox.blur();
             }
-            sessionStorage.setItem('keypress', 0);
         });
     });
 

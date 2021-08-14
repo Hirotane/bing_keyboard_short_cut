@@ -3,7 +3,7 @@
 
     var searchbox = document.querySelector(".b_searchbox");
 
-    shortcuts.initAll(function(options) {
+    shortcuts.initWork(function(options) {
         window.addEventListener('keydown', function(e) {
             // console.log(e.key);
             // console.log(location.href);
@@ -49,7 +49,7 @@
                 // console.log("j or k");
                 e.preventDefault();
                 e.stopPropagation();
-                shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.all_selector);
+                shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.work_selector);
             }
             // search page transition
             if (moveNextSearchPage || movePreviousSearchPage) {
@@ -87,7 +87,6 @@
             if (unfocusWithESC) {
                 searchbox.blur();
             }
-            sessionStorage.setItem('keypress', 0);
         });
     });
 
