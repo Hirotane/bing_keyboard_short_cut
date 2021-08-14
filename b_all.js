@@ -56,7 +56,7 @@
                 // console.log("h or l");
                 e.preventDefault();
                 e.stopPropagation();
-                shortcuts.moveSearchPage(moveNextSearchPage ? 1 : -1);
+                shortcuts.moveAllSearchPage(moveNextSearchPage ? 1 : -1);
             }
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
