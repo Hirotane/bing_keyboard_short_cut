@@ -67,6 +67,7 @@ var shortcuts = {
             var scroll_width = rect.top - miniHeaderHeight;
             if (offsetY > 0) {
                 window.scrollBy(0, scroll_width);
+                console.log(scroll_width);
             }
         }
         else {
@@ -75,6 +76,7 @@ var shortcuts = {
             var scroll_width = window.innerHeight - rect.bottom;
             if (offsetY < 0) {
             window.scrollBy(0, -scroll_width);
+            console.log(-scroll_width);
             }
         }
     },
@@ -115,16 +117,21 @@ var shortcuts = {
             }
         }
     },
+    notKeyPress: function(){
+        return Number(sessionStorage.getItem('keypress'))==0;
+    },
     focusResult: function(offset) {
         var results = this.getVisibleResults();
         var storageFocusIndex = Number(sessionStorage.getItem('focusIndex'));
         var focusElemTop = results[storageFocusIndex].closest('li').getBoundingClientRect().top;
-        if (storageFocusIndex==0 && offset==-1){
+        if (storageFocusIndex==0 && offset==-1 && this.notKeyPress()){
             window.scroll({top: 0, behavior: 'smooth'});
+            sessionStorage.setItem('keypress', 1);
             return;
         }
-        else if (window.innerHeight < focusElemTop){
+        else if ((window.innerHeight < focusElemTop) && this.notKeyPress() && offset==1){
             window.scroll({top: focusElemTop, behavior: 'smooth'});
+            sessionStorage.setItem('keypress', 1);
             offset = 0;
         }
 
