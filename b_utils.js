@@ -209,7 +209,7 @@ var shortcuts = {
             nextpage.click();
         } else {
             var previouspage = document.querySelector(".ms-TooltipHost > [data-icon-name='chevronleft']");
-            nextpage.click();
+            previouspage.click();
         }
     },
     movePage: function(offset) {
