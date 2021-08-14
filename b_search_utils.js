@@ -36,14 +36,17 @@ var shortcuts = {
             this.underLine(target);
             scrollTo(0, 0);
             this.grayoutAdds();
-        } else if (here.match(regExpImage)) {
-            this.searchType = "image";
-            console.log("this.searchType: "+this.searchType);
-            this.focusIndexImgVtcl = this.focusIndexImgHrzn = 0;
-            var target = this.getImageRowResults(0)[0];
-            target.focus();
-            this.emphasizeFocus(target);
-        }
+        } 
+    },
+    initImage: function(callback) {
+        chrome.storage.sync.get(this.defaultOptions, callback);
+
+        this.searchType = "image";
+        console.log("this.searchType: "+this.searchType);
+        this.focusIndexImgVtcl = this.focusIndexImgHrzn = 0;
+        var target = this.getImageRowResults(0)[0];
+        target.focus();
+        this.emphasizeFocus(target);
     },
     isInputActive: function () {
         var activeElement = document.activeElement;
