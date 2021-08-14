@@ -194,13 +194,22 @@ var shortcuts = {
         target.focus();
         this.emphasizeFocus(target);
     },
-    moveSearchPage: function(offset) {
+    moveAllSearchPage: function(offset) {
         if (offset == 1){
             var nextpage = document.querySelector(".sb_pagN").getAttribute('href');
             window.location.href = nextpage;
         } else {
             var previouspage = document.querySelector(".sb_pagP").getAttribute('href');
             window.location.href = previouspage;
+        }
+    },
+    moveWorkSearchPage: function(offset) {
+        if (offset == 1){
+            var nextpage = document.querySelector(".ms-TooltipHost > [data-icon-name='chevronright']");
+            nextpage.click();
+        } else {
+            var previouspage = document.querySelector(".ms-TooltipHost > [data-icon-name='chevronleft']");
+            nextpage.click();
         }
     },
     movePage: function(offset) {

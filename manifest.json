@@ -25,15 +25,15 @@
         "*://www.bing.com/search*"
       ],
       "js": [
-        "b_search_utils.js",
-        "b_search.js"
+        "b_utils.js",
+        "b_all.js"
       ]
     },{
       "matches": [
         "*://www.bing.com/work/search*"
       ],
       "js": [
-        "b_search_utils.js",
+        "b_utils.js",
         "b_work.js"
       ]
     },{
@@ -41,7 +41,7 @@
         "*://www.bing.com/images/search*"
       ],
       "js": [
-        "b_search_utils.js",
+        "b_utils.js",
         "b_image.js"
       ]
     },{
