@@ -12,7 +12,7 @@ var shortcuts = {
     },
     searchType: "all",
     all_selector: ".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
-    work_selector: ".ms-search-result-list-item-border > div > div > a, .ac-textBlock > p > a",
+    work_selector: ".ms-search-result-list-item-border > div > div > a, .ac-textBlock > p > a, .ms-search-bookmarkTitle",
     initAll: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
 
@@ -36,8 +36,21 @@ var shortcuts = {
     initWork: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
 
-        this.searchType = "work";
-        console.log("this.searchType: "+this.searchType);
+        // this.searchType = "work";
+        // console.log("this.searchType: "+this.searchType);
+        // if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
+        //     window.performance.getEntriesByType('navigation')[0].type == 'reload') {
+        //     focusIndex = 0;
+        //     sessionStorage.setItem('focusIndex', focusIndex);
+        // }
+        // var results = this.getVisibleResults(this.work_selector);
+        // console.log(this.work_selector);
+        // console.log(results);
+        // var target = results[focusIndex];
+        // console.log(target);
+        // target.focus();
+        // this.underLine(target);
+        // scrollTo(0, 0);
     },
     initImage: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
@@ -122,15 +135,15 @@ var shortcuts = {
     focusResult: function(offset, selector) {
         var results = this.getVisibleResults(selector);
         var storageFocusIndex = Number(sessionStorage.getItem('focusIndex'));
-        var focusElemTop = results[storageFocusIndex].closest('li').getBoundingClientRect().top;
-        if (storageFocusIndex==0 && offset==-1){
-            window.scroll({top: 0, behavior: 'smooth'});
-            return;
-        }
-        else if (window.innerHeight < focusElemTop){
-            window.scroll({top: focusElemTop, behavior: 'smooth'});
-            offset = 0;
-        }
+        // var focusElemTop = results[storageFocusIndex].closest('li').getBoundingClientRect().top;
+        // if (storageFocusIndex==0 && offset==-1){
+        //     window.scroll({top: 0, behavior: 'smooth'});
+        //     return;
+        // }
+        // else if (window.innerHeight < focusElemTop){
+        //     window.scroll({top: focusElemTop, behavior: 'smooth'});
+        //     offset = 0;
+        // }
 
         var focusIndex = this.defineRangeOfIndex(storageFocusIndex + offset, results.length);
         sessionStorage.setItem('focusIndex', focusIndex);

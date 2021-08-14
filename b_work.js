@@ -46,17 +46,21 @@
             }
             
             if (shouldNavigateNext || shouldNavigateBack) {
+                // console.log("j or k");
                 e.preventDefault();
                 e.stopPropagation();
-                shortcuts.verticalImageMove(shouldNavigateNext ? 1 : -1);
+                shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.work_selector);
             }
+            // search page transition
             if (moveNextSearchPage || movePreviousSearchPage) {
+                // console.log("h or l");
                 e.preventDefault();
                 e.stopPropagation();
-                shortcuts.horizontalImageMove(moveNextSearchPage ? 1 : -1);
+                shortcuts.moveSearchPage(moveNextSearchPage ? 1 : -1);
             }
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
+                // console.log("shift key & H, L");
                 e.preventDefault();
                 e.stopPropagation();
                 shortcuts.movePage(goToNextPage ? 1 : -1);

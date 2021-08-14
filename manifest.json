@@ -22,12 +22,19 @@
     ],
     "content_scripts": [{
       "matches": [
-        "*://www.bing.com/search*",
-        "*://www.bing.com/work/search*"
+        "*://www.bing.com/search*"
       ],
       "js": [
         "b_search_utils.js",
         "b_search.js"
+      ]
+    },{
+      "matches": [
+        "*://www.bing.com/work/search*"
+      ],
+      "js": [
+        "b_search_utils.js",
+        "b_work.js"
       ]
     },{
       "matches": [
