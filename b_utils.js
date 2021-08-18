@@ -11,13 +11,13 @@ var shortcuts = {
         unfocusWithBracket: true
     },
     searchType: "all",
-    all_selector: ".b_algo > .b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
+    all_selector: ".b_topTitle > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
     work_selector: ".ms-search-result-list-item-border > div > div > a, .ac-textBlock > p > a, .ms-search-bookmarkTitle",
     initAll: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
 
         this.searchType = "all";
-        console.log("this.searchType: "+this.searchType);
+        // console.log("this.searchType: "+this.searchType);
         // back to the position in focus when returnd to search page from web-sites
         var focusIndex = sessionStorage.getItem('focusIndex');
         // set the focus index to 0 when transition of search pages is occured or page is reloaded
@@ -55,7 +55,7 @@ var shortcuts = {
         chrome.storage.sync.get(this.defaultOptions, callback);
 
         this.searchType = "image";
-        console.log("this.searchType: "+this.searchType);
+        // console.log("this.searchType: "+this.searchType);
         this.focusIndexImgVtcl = this.focusIndexImgHrzn = 0;
         var target = this.getImageRowResults(0)[0];
         target.focus();
@@ -139,8 +139,8 @@ var shortcuts = {
     focusResult: function(offset, selector) {
         var results = this.getVisibleResults(selector);
         var storageFocusIndex = Number(sessionStorage.getItem('focusIndex'));
-        console.log(results);
-        console.log(results[storageFocusIndex]);
+        // console.log(results);
+        // console.log(results[storageFocusIndex]);
         var focusElemTop = results[storageFocusIndex].closest('li').getBoundingClientRect().top;
         if (storageFocusIndex==0 && offset==-1 && this.notKeyPress()){
             window.scroll({top: 0, behavior: 'smooth'});
