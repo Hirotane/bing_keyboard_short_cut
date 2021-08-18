@@ -35,14 +35,13 @@ var shortcuts = {
     },
     initWork: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
+        
 
-        // this.searchType = "work";
-        // console.log("this.searchType: "+this.searchType);
-        // if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
-        //     window.performance.getEntriesByType('navigation')[0].type == 'reload') {
-        //     focusIndex = 0;
-        //     sessionStorage.setItem('focusIndex', focusIndex);
-        // }
+        if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
+            window.performance.getEntriesByType('navigation')[0].type == 'reload') {
+            focusIndex = 0;
+            sessionStorage.setItem('focusIndex', focusIndex);
+        }
         // var results = this.getVisibleResults(this.work_selector);
         // console.log(this.work_selector);
         // console.log(results);
@@ -140,6 +139,8 @@ var shortcuts = {
     focusResult: function(offset, selector) {
         var results = this.getVisibleResults(selector);
         var storageFocusIndex = Number(sessionStorage.getItem('focusIndex'));
+        console.log(results);
+        console.log(results[storageFocusIndex]);
         var focusElemTop = results[storageFocusIndex].closest('li').getBoundingClientRect().top;
         if (storageFocusIndex==0 && offset==-1 && this.notKeyPress()){
             window.scroll({top: 0, behavior: 'smooth'});
