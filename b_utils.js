@@ -11,7 +11,7 @@ var shortcuts = {
         unfocusWithBracket: true
     },
     searchType: "all",
-    all_selector: ".b_topTitle > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
+    all_selector: ".b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
     work_selector: ".ms-search-result-list-item-border > div > div > a, .ac-textBlock > p > a, .ms-search-bookmarkTitle",
     initAll: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
