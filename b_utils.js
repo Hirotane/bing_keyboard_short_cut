@@ -28,7 +28,7 @@ var shortcuts = {
         }
         var results = this.getVisibleResults(this.all_selector);
         var target = results[focusIndex];
-        target.focus();
+        target.focus({preventScroll:true});
         this.underLine(target);
         scrollTo(0, 0);
         this.grayoutAdds();
@@ -58,7 +58,7 @@ var shortcuts = {
         // console.log("this.searchType: "+this.searchType);
         this.focusIndexImgVtcl = this.focusIndexImgHrzn = 0;
         var target = this.getImageRowResults(0)[0];
-        target.focus();
+        target.focus({preventScroll:true});
         this.emphasizeFocus(target);
     },
     isInputActive: function () {
@@ -76,23 +76,26 @@ var shortcuts = {
         } else {
             var miniHeaderHeight = 0;
         }
-
         if (offset == 1){
-            var rect = target.closest('li').getBoundingClientRect();
-            var offsetY = rect.bottom - window.innerHeight;
-            var scroll_width = rect.top - miniHeaderHeight;
-            if (offsetY > 0) {
-                window.scrollBy(0, scroll_width);
-                console.log(scroll_width);
+            var relativePositionTop = target.getBoundingClientRect().top; 
+            var windowTopWidth = window.innerHeight*2/3;
+            var scroll_width = relativePositionTop - windowTopWidth;
+            if (scroll_width > 0) {
+                window.scrollBy({
+                    top: scroll_width,
+                    left: 0
+                });
             }
         }
         else {
-            var rect = target.closest('li').getBoundingClientRect();
-            var offsetY = rect.top - miniHeaderHeight;
-            var scroll_width = window.innerHeight - rect.bottom;
-            if (offsetY < 0) {
-            window.scrollBy(0, -scroll_width);
-            console.log(-scroll_width);
+            var relativePositionTop = target.getBoundingClientRect().top; 
+            var windowTopWidth = window.innerHeight*1/4;
+            var scroll_width = windowTopWidth - relativePositionTop;
+            if (scroll_width > 0) {
+                window.scrollBy({
+                    top: -scroll_width,
+                    left: 0
+                });
             }
         }
     },
@@ -160,7 +163,7 @@ var shortcuts = {
         var target = results[focusIndex];
 
         this.scrollSearchResults(target, offset);
-        target.focus();
+        target.focus({preventScroll:true});
         this.underLine(target);
     },
     getImageRowResults: function(row) {
