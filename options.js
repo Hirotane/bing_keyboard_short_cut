@@ -9,6 +9,7 @@ function save_options() {
     var focusOnInput = document.getElementById('focus-on-input').checked;
     var unfocusWithESC = document.getElementById('unfocus-with-esc').checked;
     var unfocusWithBracket = document.getElementById('unfocus-with-bracket').checked;
+    var hideAds = document.getElementById('hide-ads').checked;
     
     chrome.storage.sync.set({
         navigateSearchResultsWithJKHL: navigateSearchResultsWithJKHL,
@@ -19,7 +20,8 @@ function save_options() {
         selectSearchType: selectSearchType,
         focusOnInput: focusOnInput,
         unfocusWithESC: unfocusWithESC,
-        unfocusWithBracket: unfocusWithBracket
+        unfocusWithBracket: unfocusWithBracket,
+        hideAds: hideAds
     }, function () {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
@@ -44,7 +46,8 @@ function restore_options() {
         selectSearchType: true,
         focusOnInput: true,
         unfocusWithESC: true,
-        unfocusWithBracket: true
+        unfocusWithBracket: true,
+        hideAds: true
     }, function (items) {
         document.getElementById('navigate-search-results-with-jkhl').checked = items.navigateSearchResultsWithJKHL;
         document.getElementById('navigate-search-results-with-arrows').checked = items.navigateSearchResultsWithArrows;
@@ -55,6 +58,7 @@ function restore_options() {
         document.getElementById('focus-on-input').checked = items.focusOnInput;
         document.getElementById('unfocus-with-esc').checked = items.unfocusWithESC;
         document.getElementById('unfocus-with-bracket').checked = items.unfocusWithBracket;
+        document.getElementById('hide-ads').checked = items.hideAds;
     });
 }
 document.addEventListener('DOMContentLoaded', restore_options);

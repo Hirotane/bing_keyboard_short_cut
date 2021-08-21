@@ -8,16 +8,21 @@ var shortcuts = {
         selectSearchType: true,
         focusOnInput: true,
         unfocusWithESC: true,
-        unfocusWithBracket: true
+        unfocusWithBracket: true,
+        hideAds: true
     },
     searchType: "all",
     all_selector: ".b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
     work_selector: ".ms-search-result-list-item-border > div > div > a, .ac-textBlock > p > a, .ms-search-bookmarkTitle",
     initAll: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
+        chrome.storage.sync.get(this.defaultOptions, function(options) {
+            if (options.hideAds) {
+                shortcuts.grayoutAds();
+            }
+        });
 
         this.searchType = "all";
-        // console.log("this.searchType: "+this.searchType);
         // back to the position in focus when returnd to search page from web-sites
         var focusIndex = sessionStorage.getItem('focusIndex');
         // set the focus index to 0 when transition of search pages is occured or page is reloaded
@@ -31,7 +36,6 @@ var shortcuts = {
         target.focus({preventScroll:true});
         this.underLine(target);
         scrollTo(0, 0);
-        this.grayoutAdds();
     },
     initWork: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
@@ -121,7 +125,7 @@ var shortcuts = {
             console.log("blur")
         });
     },
-    grayoutAdds: function() {
+    grayoutAds: function() {
         var adds = Array.from(document.querySelectorAll(".sb_add")); 
         var txtColor = "#aaa";
         for (let i = 0; i < adds.length; i++) {
