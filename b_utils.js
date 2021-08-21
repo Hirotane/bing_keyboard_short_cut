@@ -72,11 +72,6 @@ var shortcuts = {
         return index;
     },
     scrollSearchResults: function(target, offset) {
-        if (this.searchType == 'image') {
-            var miniHeaderHeight = 1.1 * target.closest('#b_content').querySelector('#miniheader').offsetHeight;
-        } else {
-            var miniHeaderHeight = 0;
-        }
         if (offset == 1){
             var relativePositionTop = target.getBoundingClientRect().top; 
             var windowTopWidth = window.innerHeight*2/3;
@@ -154,18 +149,24 @@ var shortcuts = {
     focusResult: function(offset, selector) {
         var results = this.getVisibleResults(selector);
         var storageFocusIndex = Number(sessionStorage.getItem('focusIndex'));
-        // console.log(results);
-        // console.log(results[storageFocusIndex]);
-        var focusElemTop = results[storageFocusIndex].closest('li').getBoundingClientRect().top;
+        var focusElemTop = results[storageFocusIndex].getBoundingClientRect().top;
         if (storageFocusIndex==0 && offset==-1 && this.notKeyPress()){
             window.scroll({top: 0, behavior: 'smooth'});
             sessionStorage.setItem('keypress', 1);
             return;
         }
-        else if ((window.innerHeight < focusElemTop) && this.notKeyPress() && offset==1){
+        else if (storageFocusIndex==results.length-1 && offset==1 && this.notKeyPress()){
+            var elm = document.documentElement;
+            var bottom = elm.scrollHeight - elm.clientHeight;
+            window.scroll({top: bottom, behavior: 'smooth'});
+            sessionStorage.setItem('keypress', 1);
+            return;
+        }
+        else if (((focusElemTop < 0) || (focusElemTop > window.innerHeight)) && this.notKeyPress()){
             window.scroll({top: focusElemTop, behavior: 'smooth'});
             sessionStorage.setItem('keypress', 1);
             offset = 0;
+            return;
         }
 
         var focusIndex = this.defineRangeOfIndex(storageFocusIndex + offset, results.length);
