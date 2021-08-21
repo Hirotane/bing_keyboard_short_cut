@@ -52,6 +52,16 @@ var shortcuts = {
         target.focus();
         this.emphasizeFocus(target);
     },
+    initVideo: function(callback) {
+        chrome.storage.sync.get(this.defaultOptions, callback);
+
+        this.searchType = "video";
+        // console.log("this.searchType: "+this.searchType);
+        this.focusIndexImgVtcl = this.focusIndexImgHrzn = 0;
+        var target = this.getImageRowResults(0)[0];
+        target.focus();
+        this.emphasizeFocus(target);
+    },
     isInputActive: function () {
         var activeElement = document.activeElement;
         return activeElement.nodeName == 'INPUT';
@@ -101,6 +111,17 @@ var shortcuts = {
     emphasizeFocus: function(elt) {
         elt.style.outlineWidth = 'medium';
         elt.style.outlineColor = '#1e90ff';
+    },
+    emphasizeVideoFocus: function(elt) {
+	    elt.style.border = "solid"; 
+        elt.style.borderWidth = "medium"; 
+        elt.style.borderColor = '#1e90ff';
+        elt.addEventListener('blur', (event) => {
+            event.target.style.border = 'none';
+            event.target.style.borderWidth= '';
+            event.target.style.borderColor= '';
+            console.log("blur")
+        });
     },
     grayoutAdds: function() {
         var adds = Array.from(document.querySelectorAll(".sb_add")); 
@@ -185,6 +206,17 @@ var shortcuts = {
         this.nextIndexImgVtcl = imageRows.findIndex(list => list.contains(target));
         target.focus();
         this.emphasizeFocus(target);
+    },
+    videoFocusIndex: 0,
+    VideoMove: function(offset) {
+        results = Array.from(document.querySelectorAll('.mc_vtvc > a'));
+        this.videoFocusIndex = this.defineRangeOfIndex(this.videoFocusIndex + offset, results.length);
+        var target = results[this.videoFocusIndex];
+        target.focus();
+        // this.emphasizeVideoFocus(target.querySelector('div'));
+        this.emphasizeVideoFocus(target);
+        console.log(target.querySelector('div').style);
+        console.log(target.style);
     },
     moveAllSearchPage: function(offset) {
         if (offset == 1){
