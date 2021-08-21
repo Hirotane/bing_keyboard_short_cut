@@ -58,11 +58,8 @@
             }
             // When the button 'ctrl + [' is pressed, the search box is unfocused.
             if (unfocusWithBracket) {
-                // eliminate shadows whitch appears when search box is focused.
-                let elements = document.getElementsByClassName("b_lbShow");
-                elements[0].classList.remove("b_lbShow");
                 searchbox.blur();
-                }
+            }
         });
         window.addEventListener('keyup', function(e) {
             var focusOnInput = options.focusOnInput && e.key == '/' && !shortcuts.isInputActive(),
@@ -70,6 +67,7 @@
             // e = e || window.event;
             // When the button '/' is pressed, the search box is focused.
             if (focusOnInput) {
+                console.log("input")
                 var pos = searchbox.value.length;
                 searchbox.focus();
                 searchbox.setSelectionRange(pos, pos);
