@@ -35,21 +35,12 @@ var shortcuts = {
     },
     initWork: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
-        
 
         if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
             window.performance.getEntriesByType('navigation')[0].type == 'reload') {
             focusIndex = 0;
             sessionStorage.setItem('focusIndex', focusIndex);
         }
-        // var results = this.getVisibleResults(this.work_selector);
-        // console.log(this.work_selector);
-        // console.log(results);
-        // var target = results[focusIndex];
-        // console.log(target);
-        // target.focus();
-        // this.underLine(target);
-        // scrollTo(0, 0);
     },
     initImage: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
@@ -208,9 +199,11 @@ var shortcuts = {
         if (offset == 1){
             var nextpage = document.querySelector(".ms-TooltipHost > [data-icon-name='chevronright']");
             nextpage.click();
+            sessionStorage.setItem('focusIndex', 0);
         } else {
             var previouspage = document.querySelector(".ms-TooltipHost > [data-icon-name='chevronleft']");
             previouspage.click();
+            sessionStorage.setItem('focusIndex', 0);
         }
     },
     movePage: function(offset) {
