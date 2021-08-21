@@ -45,10 +45,19 @@
         "b_image.js"
       ]
     },{
+      "matches": [
+        "*://www.bing.com/videos/search*"
+      ],
+      "js": [
+        "b_utils.js",
+        "b_video.js"
+      ]
+    },{
       "exclude_matches": [
         "*://www.bing.com/search*",
         "*://www.bing.com/images/search*",
-        "*://www.bing.com/work/search*"
+        "*://www.bing.com/work/search*",
+        "*://www.bing.com/videos/search*"
       ],
       "matches": ["<all_urls>"],
       "js": [
