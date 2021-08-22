@@ -53,11 +53,20 @@
         "b_video.js"
       ]
     },{
+      "matches": [
+        "*://www.bing.com/news/search*"
+      ],
+      "js": [
+        "b_utils.js",
+        "b_news.js"
+      ]
+    },{
       "exclude_matches": [
         "*://www.bing.com/search*",
         "*://www.bing.com/images/search*",
         "*://www.bing.com/work/search*",
-        "*://www.bing.com/videos/search*"
+        "*://www.bing.com/videos/search*",
+        "*://www.bing.com/news/search*"
       ],
       "matches": ["<all_urls>"],
       "js": [
