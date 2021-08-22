@@ -14,6 +14,7 @@ var shortcuts = {
     searchType: "all",
     all_selector: ".b_title > h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, .b_algo > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
     work_selector: ".ms-search-result-list-item-border > div > div > a, .ac-textBlock > p > a, .ms-search-bookmarkTitle",
+    news_selector: ".t_t > a",
     initAll: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);
         chrome.storage.sync.get(this.defaultOptions, function(options) {
@@ -33,7 +34,7 @@ var shortcuts = {
         }
         var results = this.getVisibleResults(this.all_selector);
         var target = results[focusIndex];
-        target.focus({preventScroll:true});
+        target.focus();
         this.underLine(target);
         scrollTo(0, 0);
     },
@@ -65,6 +66,18 @@ var shortcuts = {
         var target = this.getImageRowResults(0)[0];
         target.focus();
         this.emphasizeFocus(target);
+    },
+    initNews: function(callback) {
+        chrome.storage.sync.get(this.defaultOptions, callback);
+
+        if (window.performance.getEntriesByType('navigation')[0].type == 'reload') {
+            focusIndex = 0;
+            sessionStorage.setItem('focusIndex', focusIndex);
+        }
+        var results = this.getVisibleResults(this.news_selector);
+        var target = results[0];
+        target.focus();
+        this.underLine(target);
     },
     isInputActive: function () {
         var activeElement = document.activeElement;
