@@ -154,6 +154,7 @@ var shortcuts = {
         var results = this.getVisibleResults(selector);
         var storageFocusIndex = Number(sessionStorage.getItem('focusIndex'));
         var focusElemTop = results[storageFocusIndex].getBoundingClientRect().top;
+        var absolutePositionTop = focusElemTop + window.pageYOffset;
         if (storageFocusIndex==0 && offset==-1 && this.notKeyPress()){
             window.scroll({top: 0, behavior: 'smooth'});
             sessionStorage.setItem('keypress', 1);
@@ -167,7 +168,7 @@ var shortcuts = {
             return;
         }
         else if (((focusElemTop < 0) || (focusElemTop > window.innerHeight)) && this.notKeyPress()){
-            window.scroll({top: focusElemTop, behavior: 'smooth'});
+            window.scroll({top: absolutePositionTop - window.innerHeight*1/4, behavior: 'smooth'});
             sessionStorage.setItem('keypress', 1);
             offset = 0;
             return;
