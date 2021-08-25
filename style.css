@@ -1,3 +1,13 @@
+body{
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    margin: 0;
+    width: 380px;
+}
+section{
+    width: 90%;
+    margin: 0px auto 30px auto;
+}
+
 .key{
     display: inline-block;
     padding:1px 2px;
@@ -6,20 +16,10 @@
     border: solid 1px #777;
 	border-radius:1px;
 }
-.btn {
+#save {
     border: 1px solid transparent;
     border-radius: 3px;
-    display: inline-block;
     font-size: 13px;
-    /* height: 24px; */
-    height: 100%;
     padding: 1px 7px;
-    /* -webkit-user-select: none; */
+    margin: 0 auto;
 }
-.btn-primary {
-    background-color: #48e;
-    border-color: #37d;
-    color: #fff;
-}
-
-section{margin-bottom: 30px;}
