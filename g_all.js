@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var searchbox = document.querySelector(".gLFyf");
+    var searchbox = document.querySelector('input[role="combobox"]');
 
     shortcuts.initAll(function(options) {
         window.addEventListener('keydown', function(e) {
@@ -20,19 +20,18 @@
                 goToNextPage = options.movePagesWithHL && e.key == 'L' && e.shiftKey && !shortcuts.isInputActive() ||
                     (options.movePagesWithArrows && e.key == 'ArrowRight' && e.shiftKey && !shortcuts.isInputActive()),
                 searchTypeA = options.selectSearchType && e.key == 'A' && e.shiftKey && !shortcuts.isInputActive(),
-                searchTypeW = options.selectSearchType && e.key == 'W' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeI = options.selectSearchType && e.key == 'I' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeN = options.selectSearchType && e.key == 'N' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeV = options.selectSearchType && e.key == 'V' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeM = options.selectSearchType && e.key == 'M' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeS = options.selectSearchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive(),
+                searchTypeB = options.selectSearchType && e.key == 'B' && e.shiftKey && !shortcuts.isInputActive(),
+                searchTypeF = options.selectSearchType && e.key == 'F' && e.shiftKey && !shortcuts.isInputActive(),
                 unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive();
             
             // select search type
             if (searchTypeA) {
                 shortcuts.changeSearchType('all');
-            } else if (searchTypeW) {
-                shortcuts.changeSearchType('work');
             } else if (searchTypeI) {
                 shortcuts.changeSearchType('image');
             } else if (searchTypeN) {
@@ -43,6 +42,10 @@
                 shortcuts.changeSearchType('map');
             } else if (searchTypeS) {
                 shortcuts.changeSearchType('shop');
+            } else if (searchTypeB) {
+                shortcuts.changeSearchType('book');
+            } else if (searchTypeF) {
+                shortcuts.changeSearchType('finance');
             }
             
             if (shouldNavigateNext || shouldNavigateBack) {

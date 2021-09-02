@@ -275,31 +275,35 @@ var shortcuts = {
     changeSearchType: function(type) {
         switch (type){
             case 'all':
-                var ref = document.querySelector("#b-scopeListItem-web").firstElementChild.getAttribute('href');
-                window.location.href = ref;
-                break;
-            case 'work':
-                var ref = document.querySelector("#b-scopeListItem-bingatwork").firstElementChild.getAttribute('href');
+                var ref = document.querySelector( 'a[href*="/search?q="]:not([href*="&tbm="]):not([href*="maps.google."])');
                 window.location.href = ref;
                 break;
             case 'image':
-                var ref = document.querySelector("#b-scopeListItem-images").firstElementChild.getAttribute('href');
+                var ref = document.querySelector('a[href*="&tbm=isch"]');
                 window.location.href = ref;
                 break;
             case 'video':
-                var ref = document.querySelector("#b-scopeListItem-video").firstElementChild.getAttribute('href');
+                var ref = document.querySelector('a[href*="&tbm=vid"]');
                 window.location.href = ref;
                 break;
             case 'map':
-                var ref = document.querySelector("#b-scopeListItem-local").firstElementChild.getAttribute('href');
+                var ref = document.querySelector('a[href*="maps.google."]');
                 window.location.href = ref;
                 break;
             case 'news':
-                var ref = document.querySelector("#b-scopeListItem-news").firstElementChild.getAttribute('href');
+                var ref = document.querySelector('a[href*="&tbm=nws"]');
                 window.location.href = ref;
                 break;
             case 'shop':
-                var ref = document.querySelector("#b-scopeListItem-shop").firstElementChild.getAttribute('href');
+                var ref = document.querySelector('a[href*="&tbm=shop"]');
+                window.location.href = ref;
+                break;
+            case 'book':
+                var ref = document.querySelector('a[href*="&tbm=bks"]');
+                window.location.href = ref;
+                break;
+            case 'finance':
+                var ref = document.querySelector('a[href*="&tbm=fin"]');
                 window.location.href = ref;
                 break;
         }
