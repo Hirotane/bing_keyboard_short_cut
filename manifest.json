@@ -61,12 +61,21 @@
         "b_news.js"
       ]
     },{
+      "matches": [
+        "*://www.google.com/search*"
+      ],
+      "js": [
+        "g_utils.js",
+        "g_all.js"
+      ]
+    },{
       "exclude_matches": [
         "*://www.bing.com/search*",
         "*://www.bing.com/images/search*",
         "*://www.bing.com/work/search*",
         "*://www.bing.com/videos/search*",
-        "*://www.bing.com/news/search*"
+        "*://www.bing.com/news/search*",
+        "*://www.google.com/search*"
       ],
       "matches": ["<all_urls>"],
       "js": [
