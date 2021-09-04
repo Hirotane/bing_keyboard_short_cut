@@ -13,9 +13,9 @@ var shortcuts = {
     },
     searchType: "all",
     // all_selector: ".b_algo h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
-    all_selector: "#search [data-hveid] a > h3, [data-hveid] a > div[role='heading'], #bres [data-hveid] a > div:last-child",
+    all_selector: "#search [data-hveid] a > h3, [data-hveid] a > div[role='heading'], [data-abe] [data-hveid] a > div:last-child",
     all_title_selector: "h3, div[role='heading'], div:last-child",
-    news_selector: ".t_t > a",
+    news_selector: "#search [data-hveid] a > h3",
     initAll: function(callback) {
         console.log("initAll");
         chrome.storage.sync.get(this.defaultOptions, callback);
