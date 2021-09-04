@@ -310,6 +310,10 @@ var shortcuts = {
         } else {
             window.location.href = refLocal;
         }
+         window.location.href = ref;
+    },
+    changeLang: function() {
+        var ref = 'https://www.bing.com' + document.querySelector("#mkt_swc_v2").getAttribute('href');
         window.location.href = ref;
     }
 };

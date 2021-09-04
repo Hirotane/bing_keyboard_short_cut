@@ -27,7 +27,9 @@
                 searchTypeS = options.selectSearchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeF = options.selectSearchType && e.key == 'F' && e.shiftKey && !shortcuts.isInputActive(),
                 unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive(),
-                searchOnEdge = e.key == 'B' && e.shiftKey && !shortcuts.isInputActive();;
+                searchOnEdge = e.key == 'B' && e.shiftKey && !shortcuts.isInputActive(),
+                changeLangEn = e.key == 'e' && e.ctrlKey && !shortcuts.isInputActive(),
+                changeLangNa = e.key == 'n' && e.ctrlKey && !shortcuts.isInputActive();
             
             // select search type
             if (searchTypeA) {
@@ -76,6 +78,12 @@
             // Serch on Edge
             if (searchOnEdge) {
                 shortcuts.changeSearchEdge();
+            }
+            // change Language
+            if (changeLangEn) {
+                shortcuts.changeLang('english');
+            } else if (changeLangNa) {
+                shortcuts.changeLang('native');
             }
         });
         window.addEventListener('keyup', function(e) {
