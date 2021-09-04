@@ -305,8 +305,21 @@ var shortcuts = {
         }
     },
     changeSearchEdge: function() {
-        var searchWrod = document.querySelector('input[role="combobox"]').getAttribute('value')
+        var searchWrod = document.querySelector('input[role="combobox"]').getAttribute('value');
         var ref = 'https://www.bing.com/search?q=' + searchWrod;
         window.location.href = ref;
-    }
+    },
+    changeLang: function(language) {
+        var searchWrod = document.querySelector('input[role="combobox"]').getAttribute('value');
+        switch (language){
+            case 'english':
+                var ref = 'https://www.google.com/search?q=' + searchWrod + '&gl=us&hl=en&pws=0';
+                window.location.href = ref;
+                break;
+            case 'native':
+                var ref = 'https://www.google.com/search?q=' + searchWrod;
+                window.location.href = ref;
+                break;
+        }
+    },
 }
