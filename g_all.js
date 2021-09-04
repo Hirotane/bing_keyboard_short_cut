@@ -25,9 +25,9 @@
                 searchTypeV = options.selectSearchType && e.key == 'V' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeM = options.selectSearchType && e.key == 'M' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeS = options.selectSearchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive(),
-                searchTypeB = options.selectSearchType && e.key == 'B' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeF = options.selectSearchType && e.key == 'F' && e.shiftKey && !shortcuts.isInputActive(),
-                unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive();
+                unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive(),
+                searchOnEdge = e.key == 'B' && e.shiftKey && !shortcuts.isInputActive();;
             
             // select search type
             if (searchTypeA) {
@@ -42,8 +42,6 @@
                 shortcuts.changeSearchType('map');
             } else if (searchTypeS) {
                 shortcuts.changeSearchType('shop');
-            } else if (searchTypeB) {
-                shortcuts.changeSearchType('book');
             } else if (searchTypeF) {
                 shortcuts.changeSearchType('finance');
             }
@@ -75,6 +73,10 @@
                 elements[0].classList.remove("b_lbShow");
                 searchbox.blur();
                 }
+            // Serch on Edge
+            if (searchOnEdge) {
+                shortcuts.changeSearchEdge();
+            }
         });
         window.addEventListener('keyup', function(e) {
             var focusOnInput = options.focusOnInput && e.key == '/' && !shortcuts.isInputActive(),
