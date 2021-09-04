@@ -27,7 +27,7 @@
                 searchTypeM = options.selectSearchType && e.key == 'M' && e.shiftKey && !shortcuts.isInputActive(),
                 searchTypeS = options.selectSearchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive(),
                 unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive(),
-                searchOnGoogle = e.key == 'G' && e.shiftKey && !shortcuts.isInputActive(),
+                searchOnGoogle = e.key == 'g' && e.ctrlKey && !shortcuts.isInputActive(),
                 changeLangEn = e.key == 'e' && e.ctrlKey && !shortcuts.isInputActive(),
                 changeLangNa = e.key == 'n' && e.ctrlKey && !shortcuts.isInputActive();
             
