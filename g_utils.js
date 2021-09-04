@@ -298,14 +298,15 @@ var shortcuts = {
                 var ref = document.querySelector('a[href*="&tbm=shop"]');
                 window.location.href = ref;
                 break;
-            case 'book':
-                var ref = document.querySelector('a[href*="&tbm=bks"]');
-                window.location.href = ref;
-                break;
             case 'finance':
                 var ref = document.querySelector('a[href*="&tbm=fin"]');
                 window.location.href = ref;
                 break;
         }
+    },
+    changeSearchEdge: function() {
+        var searchWrod = document.querySelector('input[role="combobox"]').getAttribute('value')
+        var ref = 'https://www.bing.com/search?q=' + searchWrod;
+        window.location.href = ref;
     }
 }
