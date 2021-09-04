@@ -302,7 +302,14 @@ var shortcuts = {
     },
     changeSearchGoogle: function() {
         var searchWrod = document.querySelector(".b_searchbox").getAttribute('value')
-        var ref = 'https://www.google.com/search?q=' + searchWrod;
+        var refLocal = 'https://www.google.com/search?q=' + searchWrod;
+        var refEng = 'https://www.google.com/search?q=' + searchWrod + '&gl=us&hl=en&pws=0';
+        var isEng = document.querySelector("html").getAttribute('lang') == "en";
+        if (isEng) {
+            window.location.href = refEng;
+        } else {
+            window.location.href = refLocal;
+        }
         window.location.href = ref;
     }
 };
