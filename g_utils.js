@@ -312,8 +312,15 @@ var shortcuts = {
     },
     changeSearchEdge: function() {
         var searchWrod = document.querySelector('input[role="combobox"]').getAttribute('value');
-        var ref = 'https://www.bing.com/search?q=' + searchWrod;
-        window.location.href = ref;
+        var refLocal =  'https://www.bing.com/search?q=' + searchWrod;
+        var refEng =  'https://www.bing.com/search?q=' + searchWrod + '&cc=us&setlang=en';
+        var isEng = document.querySelector("html").getAttribute('lang') == "en";
+        if (isEng) {
+            window.location.href = refEng;
+        } else {
+            window.location.href = refLocal;
+        }
+         window.location.href = ref;
     },
     changeLang: function(language) {
         var searchWrod = document.querySelector('input[role="combobox"]').getAttribute('value');
