@@ -13,11 +13,11 @@ var shortcuts = {
     },
     searchType: "all",
     // all_selector: ".b_algo h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
-    all_selector: "#search [data-hveid] a > h3, [data-hveid] a > div[role='heading'], #bres [data-hveid] a > div:last-child",
+    all_selector: "#search [data-hveid] a > h3, [data-hveid] a > div[role='heading'], [data-abe] [data-hveid] a > div:last-child",
     all_title_selector: "h3, div[role='heading'], div:last-child",
-    work_selector: ".ms-search-result-list-item-border > div > div > a, .ac-textBlock > p > a, .ms-search-bookmarkTitle",
-    news_selector: ".t_t > a",
+    news_selector: "#search [data-hveid] a > h3",
     initAll: function(callback) {
+        console.log("initAll");
         chrome.storage.sync.get(this.defaultOptions, callback);
         chrome.storage.sync.get(this.defaultOptions, function(options) {
             if (options.hideAds) {
@@ -34,6 +34,7 @@ var shortcuts = {
             focusIndex = 0;
             sessionStorage.setItem('focusIndex', focusIndex);
         }
+        this.isInputActive()
         var results = this.getVisibleResults(this.all_selector);
         var target = results[focusIndex];
         target.parentElement.focus();
@@ -50,26 +51,34 @@ var shortcuts = {
         }
     },
     initImage: function(callback) {
+        console.log("initImage");
         chrome.storage.sync.get(this.defaultOptions, callback);
 
         this.searchType = "image";
-        // console.log("this.searchType: "+this.searchType);
         this.focusIndexImgVtcl = this.focusIndexImgHrzn = 0;
         var target = this.getImageRowResults(0)[0];
         target.focus({preventScroll:true});
         this.emphasizeFocus(target);
     },
     initVideo: function(callback) {
+        console.log("initVideo");
         chrome.storage.sync.get(this.defaultOptions, callback);
 
         this.searchType = "video";
-        // console.log("this.searchType: "+this.searchType);
-        this.focusIndexImgVtcl = this.focusIndexImgHrzn = 0;
-        var target = this.getImageRowResults(0)[0];
-        target.focus();
-        this.emphasizeFocus(target);
+        var focusIndex = sessionStorage.getItem('focusIndex');
+        // set the focus index to 0 when transition of search pages is occured or page is reloaded
+        if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
+            window.performance.getEntriesByType('navigation')[0].type == 'reload') {
+            focusIndex = 0;
+            sessionStorage.setItem('focusIndex', focusIndex);
+        }
+        var results = this.getVisibleResults(this.all_selector);
+        var target = results[focusIndex];
+        target.parentElement.focus();
+        this.underLine(target);
     },
     initNews: function(callback) {
+        console.log("initNews");
         chrome.storage.sync.get(this.defaultOptions, callback);
 
         if (window.performance.getEntriesByType('navigation')[0].type == 'reload') {
@@ -125,7 +134,6 @@ var shortcuts = {
         // console.log(target_txt);
         target_txt.parentElement.addEventListener('blur', (event) => {
             // console.log("blured");
-            console.log(event.target.querySelector(this.all_title_selector));
             event.target.querySelector(this.all_title_selector).style.textDecoration = '';
         });
     },
@@ -242,8 +250,6 @@ var shortcuts = {
         target.focus();
         // this.emphasizeVideoFocus(target.querySelector('div'));
         this.emphasizeVideoFocus(target);
-        console.log(target.querySelector('div').style);
-        console.log(target.style);
     },
     moveAllSearchPage: function(offset) {
         if (offset == 1){

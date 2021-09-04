@@ -3,7 +3,7 @@
 
     var searchbox = document.querySelector('input[role="combobox"]');
 
-    shortcuts.initAll(function(options) {
+    var func = function(options) {
         window.addEventListener('keydown', function(e) {
             // console.log(e.key);
             // console.log(location.href);
@@ -48,22 +48,21 @@
                 shortcuts.changeSearchType('finance');
             }
             
-            if (shouldNavigateNext || shouldNavigateBack) {
-                // console.log("j or k");
-                e.preventDefault();
-                e.stopPropagation();
-                shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.all_selector);
+            if (shortcuts.searchType == "all" || shortcuts.searchType == "video") {
+                if (shouldNavigateNext || shouldNavigateBack) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.all_selector);
+                }
             }
             // search page transition
             if (moveNextSearchPage || movePreviousSearchPage) {
-                // console.log("h or l");
                 e.preventDefault();
                 e.stopPropagation();
                 shortcuts.moveAllSearchPage(moveNextSearchPage ? 1 : -1);
             }
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
-                // console.log("shift key & H, L");
                 e.preventDefault();
                 e.stopPropagation();
                 shortcuts.movePage(goToNextPage ? 1 : -1);
@@ -102,6 +101,22 @@
             }
             sessionStorage.setItem('keypress', 0);
         });
-    });
+    };
 
+    var url = location.href;
+    if (location.href.indexOf('&tbm=isch') > -1) {
+        shortcuts.initImage(func);
+    } else if (url.indexOf('&tbm=vid') > -1) {
+        shortcuts.initVideo(func);
+    } else if (url.indexOf('maps.google.') > -1) {
+        shortcuts.initAll(func);
+    } else if (url.indexOf('&tbm=nws') > -1) {
+        shortcuts.initAll(func);
+    } else if (url.indexOf('&tbm=shop') > -1) {
+        shortcuts.initAll(func);
+    } else if (url.indexOf('&tbm=fin') > -1) {
+        shortcuts.initAll(func);
+    } else {
+        shortcuts.initAll(func);
+    }
 })();

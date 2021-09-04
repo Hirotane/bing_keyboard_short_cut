@@ -272,7 +272,8 @@
         "*://www.bing.com/work/search*",
         "*://www.bing.com/videos/search*",
         "*://www.bing.com/news/search*",
-        "*://www.google.com/search*"
+        "*://www.google.com/search*",
+        "*://www.google.co.jp/search*"
       ],
       "matches": ["<all_urls>"],
       "js": [
