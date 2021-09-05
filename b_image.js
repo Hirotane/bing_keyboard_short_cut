@@ -7,25 +7,25 @@
         window.addEventListener('keydown', function(e) {
             // console.log(e.key);
             // console.log(location.href);
-            var shouldNavigateNext = (options.navigateSearchResultsWithJKHL && e.key == 'j' && !shortcuts.isInputActive()) ||
-                    (options.navigateSearchResultsWithArrows && e.key == 'ArrowDown' && !shortcuts.isInputActive()),
-                shouldNavigateBack = (options.navigateSearchResultsWithJKHL && e.key == 'k' && !shortcuts.isInputActive()) ||
-                    (options.navigateSearchResultsWithArrows && e.key == 'ArrowUp' && !shortcuts.isInputActive()),
-                movePreviousSearchPage = (options.navigateSearchResultsWithJKHL && e.key == 'h' && !e.shiftKey && !shortcuts.isInputActive()) ||
-                    (options.navigateSearchResultsWithArrows && e.key == 'ArrowLeft' && !e.shiftKey && !shortcuts.isInputActive()),
-                moveNextSearchPage = (options.navigateSearchResultsWithJKHL && e.key == 'l' && !e.shiftKey && !shortcuts.isInputActive()) ||
-                    (options.navigateSearchResultsWithArrows && e.key == 'ArrowRight' && !e.shiftKey && !shortcuts.isInputActive()),
-                goToPreviousPage = options.movePagesWithHL && e.key == 'H' && e.shiftKey && !shortcuts.isInputActive() ||
-                    (options.movePagesWithArrows && e.key == 'ArrowLeft' && e.shiftKey && !shortcuts.isInputActive()),
-                goToNextPage = options.movePagesWithHL && e.key == 'L' && e.shiftKey && !shortcuts.isInputActive() ||
-                    (options.movePagesWithArrows && e.key == 'ArrowRight' && e.shiftKey && !shortcuts.isInputActive()),
-                searchTypeA = options.selectSearchType && e.key == 'A' && e.shiftKey && !shortcuts.isInputActive(),
-                searchTypeW = options.selectSearchType && e.key == 'W' && e.shiftKey && !shortcuts.isInputActive(),
-                searchTypeI = options.selectSearchType && e.key == 'I' && e.shiftKey && !shortcuts.isInputActive(),
-                searchTypeN = options.selectSearchType && e.key == 'N' && e.shiftKey && !shortcuts.isInputActive(),
-                searchTypeV = options.selectSearchType && e.key == 'V' && e.shiftKey && !shortcuts.isInputActive(),
-                searchTypeM = options.selectSearchType && e.key == 'M' && e.shiftKey && !shortcuts.isInputActive(),
-                searchTypeS = options.selectSearchType && e.key == 'S' && e.shiftKey && !shortcuts.isInputActive(),
+            var shouldNavigateNext = (options.navigateSearchResultsWithJKHL && e.key == 'j' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) ||
+                    (options.navigateSearchResultsWithArrows && e.key == 'ArrowDown' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
+                shouldNavigateBack = (options.navigateSearchResultsWithJKHL && e.key == 'k' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) ||
+                    (options.navigateSearchResultsWithArrows && e.key == 'ArrowUp' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
+                movePreviousSearchPage = (options.navigateSearchResultsWithJKHL && e.key == 'h' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) ||
+                    (options.navigateSearchResultsWithArrows && e.key == 'ArrowLeft' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
+                moveNextSearchPage = (options.navigateSearchResultsWithJKHL && e.key == 'l' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) ||
+                    (options.navigateSearchResultsWithArrows && e.key == 'ArrowRight' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
+                goToPreviousPage = options.movePagesWithHL && e.key == 'H' && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive() ||
+                    (options.movePagesWithArrows && e.key == 'ArrowLeft' && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
+                goToNextPage = options.movePagesWithHL && e.key == 'L' && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive() ||
+                    (options.movePagesWithArrows && e.key == 'ArrowRight' && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
+                searchTypeA = options.selectSearchType && e.key == 'a' && !shortcuts.isInputActive(),
+                searchTypeW = options.selectSearchType && e.key == 'w' && !shortcuts.isInputActive(),
+                searchTypeI = options.selectSearchType && e.key == 'i' && !shortcuts.isInputActive(),
+                searchTypeN = options.selectSearchType && e.key == 'n' && !shortcuts.isInputActive(),
+                searchTypeV = options.selectSearchType && e.key == 'v' && !shortcuts.isInputActive(),
+                searchTypeM = options.selectSearchType && e.key == 'm' && !shortcuts.isInputActive(),
+                searchTypeS = options.selectSearchType && e.key == 's' && !shortcuts.isInputActive(),
                 unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive();
 
             // select search type

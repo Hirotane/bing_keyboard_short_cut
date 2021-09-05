@@ -8,7 +8,8 @@
                     (options.movePagesWithArrows && e.key == 'ArrowLeft' && e.shiftKey && !shortcuts.isInputActive()),
                 goToNextPage = (options.movePagesWithHL && e.key == 'L' && e.shiftKey && !shortcuts.isInputActive()) ||
                     (options.movePagesWithArrows && e.key == 'ArrowRight' && e.shiftKey && !shortcuts.isInputActive()),
-                unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive();
+                unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive(),
+                moveToButtom = options.scrollWithG && e.key == 'G' && e.shiftKey && !shortcuts.isInputActive();
 
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
@@ -20,7 +21,11 @@
             if (unfocusWithBracket) {
                 var focusedElement = document.activeElement;
                 focusedElement.blur();
-                }
+            }
+            if (moveToButtom) {
+                var focusedElement = document.activeElement;
+                focusedElement.blur();
+            }
         });
         window.addEventListener('keyup', function(e) {
 
