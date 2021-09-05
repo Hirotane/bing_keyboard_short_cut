@@ -7,7 +7,8 @@ var shortcuts = {
         scrollInSiteWithJKDU: true,
         focusOnInput: true,
         unfocusWithESC: true,
-        unfocusWithBracket: true
+        unfocusWithBracket: true,
+        scrollWithG: true
     },
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);

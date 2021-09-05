@@ -4,12 +4,13 @@
     shortcuts.loadOptions(function(options) {
         window.addEventListener('keydown', function(e) {
  
-            var goToPreviousPage = (options.movePagesWithHL && e.key == 'H' && e.shiftKey && !shortcuts.isInputActive()) ||
-                    (options.movePagesWithArrows && e.key == 'ArrowLeft' && e.shiftKey && !shortcuts.isInputActive()),
-                goToNextPage = (options.movePagesWithHL && e.key == 'L' && e.shiftKey && !shortcuts.isInputActive()) ||
-                    (options.movePagesWithArrows && e.key == 'ArrowRight' && e.shiftKey && !shortcuts.isInputActive()),
+            var goToPreviousPage = options.movePagesWithHL && e.key == 'H' && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive() ||
+                    (options.movePagesWithArrows && e.key == 'ArrowLeft' && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
+                goToNextPage = options.movePagesWithHL && e.key == 'L' && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive() ||
+                    (options.movePagesWithArrows && e.key == 'ArrowRight' && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
                 unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive(),
-                moveToButtom = options.scrollWithG && e.key == 'G' && e.shiftKey && !shortcuts.isInputActive();
+                moveToButtom = options.scrollWithG && e.key == 'G' && e.shiftKey && !shortcuts.isInputActive(),
+                operatorG = options.scrollWithG && e.key == 'g' && !e.shiftKey && !shortcuts.isInputActive();
 
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
@@ -23,14 +24,26 @@
                 focusedElement.blur();
             }
             if (moveToButtom) {
-                var focusedElement = document.activeElement;
-                focusedElement.blur();
+                var elm = document.documentElement;
+                var bottom = elm.scrollHeight - elm.clientHeight;
+                window.scroll({top: bottom, behavior: 'smooth'});
+            }
+            if (operatorG) {
+                window.addEventListener('keydown', function moveTop(e) {
+                    var moveToTop = options.scrollWithG && e.key == 'g' && !e.shiftKey && !shortcuts.isInputActive();
+                    if (moveToTop) {
+                        window.scroll({top: 0, behavior: 'smooth'});
+                    }
+                    console.log("move top")
+                    this.removeEventListener('keydown', moveTop);
+                });
             }
         });
         window.addEventListener('keyup', function(e) {
 
             var focusOnInput = (options.focusOnInput && e.key == '/' && !shortcuts.isInputActive()),
-                unfocusWithESC = options.unfocusWithESC && e.key == 'Escape' && shortcuts.isInputActive();
+                unfocusWithESC = options.unfocusWithESC && e.key == 'Escape' && shortcuts.isInputActive(),
+                operatorG = options.scrollWithG && e.key == 'g' && !e.shiftKey && !shortcuts.isInputActive();
             // e = e || window.event;
             // When the button '/' is pressed, the search box is focused.
             if (focusOnInput) {
@@ -38,6 +51,19 @@
                 var pos = searchbox.value.length;
                 searchbox.focus();
                 searchbox.setSelectionRange(pos, pos);
+            }
+            if (operatorG) {
+                window.addEventListener('keyup', function motionI(e) {
+                    var focusOnInputWithGI = options.scrollWithG && e.key == 'i' && !e.shiftKey && !shortcuts.isInputActive();
+                    if (focusOnInputWithGI) {
+                        var searchbox = shortcuts.focusOnSearchBox();
+                        var pos = searchbox.value.length;
+                        searchbox.focus();
+                        searchbox.setSelectionRange(pos, pos);
+                    }
+                    this.removeEventListener('keyup', motionI);
+                });
+                operatorG = false;
             }
             // When the button 'esc' is pressed, the search box is unfocused.
             if (unfocusWithESC) {

@@ -1,8 +1,8 @@
 {
     "Name": {
-        "message": "Bing ショートカット"
+        "message": "Bingoogle ショートカット"
     },
     "Description": {
-        "message": "Microsoftの検索エンジン “Bing” で使えるキーボードショットカットです。キーボード操作だけで検索・ブラウジングできるようになります。" 
+        "message": "検索エンジン “Bing” および “Google” で使えるキーボードショットカットです。キーボード操作だけで検索・ブラウジングできるようになります。" 
     }
 }
