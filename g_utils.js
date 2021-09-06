@@ -153,7 +153,7 @@ var shortcuts = {
         });
     },
     grayoutAds: function() {
-        var adds = Array.from(document.querySelectorAll(".sb_add")); 
+        var adds = Array.from(document.querySelectorAll("#bottomads, #tads")); 
         var txtColor = "#aaa";
         for (let i = 0; i < adds.length; i++) {
             var addsA = adds[i].querySelectorAll("a");
