@@ -140,24 +140,24 @@ var shortcuts = {
         });
     },
     grayoutAds: function() {
-        var adds = Array.from(document.querySelectorAll(".sb_add")); 
+        var ads = Array.from(document.querySelectorAll(".sb_add")); 
         var txtColor = "#aaa";
-        for (let i = 0; i < adds.length; i++) {
-            var addsA = adds[i].querySelectorAll("a");
-            var addsCite = adds[i].querySelectorAll("cite");
-            var addsDiv = adds[i].querySelectorAll("div");
-            var addsStrong = adds[i].querySelectorAll("strong");
-            for (let j = 0; j < addsA.length; j++){
-                addsA[j].style.color = txtColor;
+        for (let i = 0; i < ads.length; i++) {
+            var adsA = ads[i].querySelectorAll("a");
+            var adsCite = ads[i].querySelectorAll("cite");
+            var adsDiv = ads[i].querySelectorAll("div");
+            var adsStrong = ads[i].querySelectorAll("strong");
+            for (let j = 0; j < adsA.length; j++){
+                adsA[j].style.color = txtColor;
             }
-            for (let j = 0; j < addsCite.length; j++){
-                addsCite[j].style.color = txtColor;
+            for (let j = 0; j < adsCite.length; j++){
+                adsCite[j].style.color = txtColor;
             }
-            for (let j = 0; j < addsDiv.length; j++){
-                addsDiv[j].style.color = txtColor;
+            for (let j = 0; j < adsDiv.length; j++){
+                adsDiv[j].style.color = txtColor;
             }
-            for (let j = 0; j < addsStrong.length; j++){
-                addsStrong[j].style.color = txtColor;
+            for (let j = 0; j < adsStrong.length; j++){
+                adsStrong[j].style.color = txtColor;
             }
         }
     },
