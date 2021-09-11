@@ -54,13 +54,22 @@
                     e.stopPropagation();
                     shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.all_selector);
                 }
+            } else if (shortcuts.searchType == "image") {
+                if (shouldNavigateNext || shouldNavigateBack) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    shortcuts.navigateImage(shouldNavigateNext ? 1 : -1, shortcuts.image_selector);
+                }
             }
             // search page transition
-            if (moveNextSearchPage || movePreviousSearchPage) {
-                e.preventDefault();
-                e.stopPropagation();
-                shortcuts.moveAllSearchPage(moveNextSearchPage ? 1 : -1);
+            if (shortcuts.searchType == "all" || shortcuts.searchType == "video") {
+                if (moveNextSearchPage || movePreviousSearchPage) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    shortcuts.moveAllSearchPage(moveNextSearchPage ? 1 : -1);
+                }
             }
+
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
                 e.preventDefault();
