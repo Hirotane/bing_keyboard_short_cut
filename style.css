@@ -1,7 +1,7 @@
 body{
     font-family: Verdana, Helvetica, Arial, sans-serif;
     margin: 0;
-    width: 380px;
+    width: 450px;
 }
 section{
     width: 90%;
@@ -23,3 +23,11 @@ section{
     padding: 1px 7px;
     margin: 0 auto;
 }
+table {
+    border-collapse: collapse;
+    text-align: center;
+  }
+  th, td {
+    padding: 5px;
+    border: 1px solid #333;
+  }
