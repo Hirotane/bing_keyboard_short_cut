@@ -1,13 +1,25 @@
 body{
     font-family: Verdana, Helvetica, Arial, sans-serif;
     margin: 0;
-    width: 450px;
+    width: 430px;
 }
 section{
     width: 90%;
-    margin: 0px auto 30px auto;
+    margin: 10px auto;
 }
-
+h1{
+    font-size: 15px;
+    font-weight: bolder;
+}
+table {
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto;
+}
+th, td {
+padding: 5px;
+border: 1px solid #333;
+}
 .key{
     display: inline-block;
     padding:1px 2px;
@@ -23,11 +35,3 @@ section{
     padding: 1px 7px;
     margin: 0 auto;
 }
-table {
-    border-collapse: collapse;
-    text-align: center;
-  }
-  th, td {
-    padding: 5px;
-    border: 1px solid #333;
-  }
