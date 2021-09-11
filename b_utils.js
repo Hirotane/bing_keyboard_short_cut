@@ -319,7 +319,6 @@ var shortcuts = {
                 window.location.href = 'https://www.google.com/maps/search/' + searchWord + '?hl=en';
             }
             else if (currRef.match(/https:\/\/www.bing.com\/news/)) {
-            // else if (currRef.match(/news/)) {
                 console.log('news');
                 window.location.href = origin + searchWord + '&tbm=nws' + refEng;
             }

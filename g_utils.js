@@ -318,8 +318,6 @@ var shortcuts = {
                 window.location.href = origin + '/maps' + searchQ + searchWord;
             } else if (currRef.match(/&tbm=nws/)) {
                 window.location.href = origin + '/news' + searchQ + searchWord;
-            } else if (currRef.match(/&tbm=shop/)) {
-                window.location.href = origin + '/shop' + searchQ + searchWord;
             } else {
                 window.location.href = origin + searchQ + searchWord;
             }
