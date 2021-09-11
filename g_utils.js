@@ -327,15 +327,15 @@ var shortcuts = {
             }
         } else {
             if (currRef.match(/&tbm=isch/)) {
-                window.location.href = origin + 'images' + searchQ + searchWord;
+                window.location.href = origin + '/images' + searchQ + searchWord;
             } else if (currRef.match(/&tbm=vid/)) {
-                window.location.href = origin + 'videos' + searchQ + searchWord;
+                window.location.href = origin + '/videos' + searchQ + searchWord;
             } else if (currRef.match(/maps.google/)) {
-                window.location.href = origin + 'maps' + searchQ + searchWord;
+                window.location.href = origin + '/maps' + searchQ + searchWord;
             } else if (currRef.match(/&tbm=nws/)) {
-                window.location.href = origin + 'news' + searchQ + searchWord;
+                window.location.href = origin + '/news' + searchQ + searchWord;
             } else if (currRef.match(/&tbm=shop/)) {
-                window.location.href = origin + 'shop' + searchQ + searchWord;
+                window.location.href = origin + '/shop' + searchQ + searchWord;
             } else {
                 window.location.href = origin + searchQ + searchWord;
             }
