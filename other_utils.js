@@ -8,7 +8,7 @@ var shortcuts = {
         focusOnInput: true,
         unfocusWithESC: true,
         unfocusWithBracket: true,
-        scrollWithG: true
+        scrollToTopOrBottom: true
     },
     loadOptions: function(callback) {
         chrome.storage.sync.get(this.defaultOptions, callback);

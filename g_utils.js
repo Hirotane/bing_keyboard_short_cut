@@ -9,7 +9,9 @@ var shortcuts = {
         focusOnInput: true,
         unfocusWithESC: true,
         unfocusWithBracket: true,
-        hideAds: true
+        hideAds: true,
+        switchSearchEngine: true,
+        changeLanguage: true
     },
     searchType: "all",
     // all_selector: ".b_algo h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",

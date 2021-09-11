@@ -9,8 +9,8 @@
                 goToNextPage = options.movePagesWithHL && e.key == 'L' && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive() ||
                     (options.movePagesWithArrows && e.key == 'ArrowRight' && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
                 unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive(),
-                moveToButtom = options.scrollWithG && e.key == 'G' && e.shiftKey && !shortcuts.isInputActive(),
-                operatorG = options.scrollWithG && e.key == 'g' && !e.shiftKey && !shortcuts.isInputActive();
+                moveToButtom = options.scrollToTopOrBottom && e.key == 'G' && e.shiftKey && !shortcuts.isInputActive(),
+                operatorG = options.scrollToTopOrBottom && e.key == 'g' && !e.shiftKey && !shortcuts.isInputActive();
 
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
@@ -30,11 +30,10 @@
             }
             if (operatorG) {
                 window.addEventListener('keydown', function moveTop(e) {
-                    var moveToTop = options.scrollWithG && e.key == 'g' && !e.shiftKey && !shortcuts.isInputActive();
+                    var moveToTop = options.scrollToTopOrBottom && e.key == 'g' && !e.shiftKey && !shortcuts.isInputActive();
                     if (moveToTop) {
                         window.scroll({top: 0, behavior: 'smooth'});
                     }
-                    console.log("move top")
                     this.removeEventListener('keydown', moveTop);
                 });
             }
