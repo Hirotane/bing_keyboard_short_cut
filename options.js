@@ -10,6 +10,9 @@ function save_options() {
     var unfocusWithESC = document.getElementById('unfocus-with-esc').checked;
     var unfocusWithBracket = document.getElementById('unfocus-with-bracket').checked;
     var hideAds = document.getElementById('hide-ads').checked;
+    var switchSearchEngine = document.getElementById('switch-search-engine').checked;
+    var changeLanguage = document.getElementById('change-language').checked;
+    var scrollToTopOrBottom = document.getElementById('scroll-to-top-or-bottom').checked;
     
     chrome.storage.sync.set({
         navigateSearchResultsWithJKHL: navigateSearchResultsWithJKHL,
@@ -21,7 +24,10 @@ function save_options() {
         focusOnInput: focusOnInput,
         unfocusWithESC: unfocusWithESC,
         unfocusWithBracket: unfocusWithBracket,
-        hideAds: hideAds
+        hideAds: hideAds,
+        switchSearchEngine: switchSearchEngine,
+        changeLanguage: changeLanguage,
+        scrollToTopOrBottom: scrollToTopOrBottom
     }, function () {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
@@ -47,7 +53,10 @@ function restore_options() {
         focusOnInput: true,
         unfocusWithESC: true,
         unfocusWithBracket: true,
-        hideAds: true
+        hideAds: true,
+        switchSearchEngine: true,
+        changeLanguage: true,
+        scrollToTopOrBottom: true
     }, function (items) {
         document.getElementById('navigate-search-results-with-jkhl').checked = items.navigateSearchResultsWithJKHL;
         document.getElementById('navigate-search-results-with-arrows').checked = items.navigateSearchResultsWithArrows;
@@ -59,6 +68,10 @@ function restore_options() {
         document.getElementById('unfocus-with-esc').checked = items.unfocusWithESC;
         document.getElementById('unfocus-with-bracket').checked = items.unfocusWithBracket;
         document.getElementById('hide-ads').checked = items.hideAds;
+        document.getElementById('switch-search-engine').checked = items.switchSearchEngine;
+        document.getElementById('switch-search-engine').checked = items.switchSearchEngine;
+        document.getElementById('change-language').checked = items.changeLanguage;
+        document.getElementById('scroll-to-top-or-bottom').checked = items.scrollToTopOrBottom;
     });
 }
 document.addEventListener('DOMContentLoaded', restore_options);

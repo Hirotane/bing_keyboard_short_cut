@@ -10,7 +10,8 @@ var shortcuts = {
         unfocusWithESC: true,
         unfocusWithBracket: true,
         hideAds: true,
-        
+        switchSearchEngine: true,
+        changeLanguage: true
     },
     searchType: "all",
     all_selector: ".b_algo h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
@@ -33,7 +34,7 @@ var shortcuts = {
             focusIndex = 0;
             sessionStorage.setItem('focusIndex', focusIndex);
         }
-        var results = this.getVisibleResults(this.all_selector);
+        var results = this.getResults(this.all_selector);
         var target = results[focusIndex];
         target.focus();
         this.underLine(target);
@@ -63,8 +64,8 @@ var shortcuts = {
 
         this.searchType = "video";
         // console.log("this.searchType: "+this.searchType);
-        this.focusIndexImgVtcl = this.focusIndexImgHrzn = 0;
-        var target = this.getImageRowResults(0)[0];
+        results = Array.from(document.querySelectorAll('.mc_vtvc > a'));
+        var target = results[0];
         target.focus();
         this.emphasizeFocus(target);
     },
@@ -75,7 +76,7 @@ var shortcuts = {
             focusIndex = 0;
             sessionStorage.setItem('focusIndex', focusIndex);
         }
-        var results = this.getVisibleResults(this.news_selector);
+        var results = this.getResults(this.news_selector);
         var target = results[0];
         target.focus();
         this.underLine(target);
@@ -113,7 +114,7 @@ var shortcuts = {
             }
         }
     },
-    getVisibleResults: function(selector) {
+    getResults: function(selector) {
         var containers = Array.from(document.querySelectorAll(selector));
         return containers;
     },
@@ -165,7 +166,7 @@ var shortcuts = {
         return Number(sessionStorage.getItem('keypress'))==0;
     },
     focusResult: function(offset, selector) {
-        var results = this.getVisibleResults(selector);
+        var results = this.getResults(selector);
         var storageFocusIndex = Number(sessionStorage.getItem('focusIndex'));
         var focusElemTop = results[storageFocusIndex].getBoundingClientRect().top;
         var absolutePositionTop = focusElemTop + window.pageYOffset;

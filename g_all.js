@@ -27,9 +27,9 @@
                 searchTypeS = options.selectSearchType && e.key == 's' && !shortcuts.isInputActive(),
                 searchTypeF = options.selectSearchType && e.key == 'f' && !shortcuts.isInputActive(),
                 unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive(),
-                searchOnEdge = e.key == 'b' && e.ctrlKey && !shortcuts.isInputActive(),
-                changeLangEn = e.key == 'e' && e.ctrlKey && !shortcuts.isInputActive(),
-                changeLangNa = e.key == 'd' && e.ctrlKey && !shortcuts.isInputActive();
+                searchOnEdge = options.switchSearchEngine && e.key == 'b' && e.ctrlKey && !shortcuts.isInputActive(),
+                changeLangEn = options.changeLanguage && e.key == 'e' && e.ctrlKey && !shortcuts.isInputActive(),
+                changeLangNa = options.changeLanguage && e.key == 'd' && e.ctrlKey && !shortcuts.isInputActive();
             
             // select search type
             if (searchTypeA) {

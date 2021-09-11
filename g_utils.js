@@ -9,7 +9,9 @@ var shortcuts = {
         focusOnInput: true,
         unfocusWithESC: true,
         unfocusWithBracket: true,
-        hideAds: true
+        hideAds: true,
+        switchSearchEngine: true,
+        changeLanguage: true
     },
     searchType: "all",
     // all_selector: ".b_algo h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
@@ -28,68 +30,51 @@ var shortcuts = {
             }
         });
 
-        // back to the position in focus when returnd to search page from web-sites
-        var focusIndex = sessionStorage.getItem('focusIndex');
-        // set the focus index to 0 when transition of search pages is occured or page is reloaded
-        if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
-            window.performance.getEntriesByType('navigation')[0].type == 'reload') {
-            focusIndex = 0;
-            sessionStorage.setItem('focusIndex', focusIndex);
-        }
-        this.isInputActive()
-        var results = this.getResults(this.all_selector);
-        var target = results[focusIndex];
-        target.closest('a').focus();
-        this.underLine(target);
-        scrollTo(0, 0);
+        var focusIndex = this.initializeIndex(sessionStorage.getItem('focusIndex'));
+        this.focusOnIndexedElement(this.all_selector, focusIndex);
     },
     initImage: function(callback) {
         console.log("initImage");
         this.searchType = "image";
         chrome.storage.sync.get(this.defaultOptions, callback);
 
-        // if (window.performance.getEntriesByType('navigation')[0].type == 'reload') {
-        //     focusIndex = 0;
-        //     sessionStorage.setItem('focusIndex', focusIndex);
-        // }
         sessionStorage.setItem('focusIndex', 0);
-        var target = this.getResults(this.image_selector)[0];
-        console.log(target);
-        target.focus({preventScroll:true});
-        this.emphasizeFocus(target);
+        this.focusOnIndexedElement(this.image_selector, 0)
     },
     initVideo: function(callback) {
         console.log("initVideo");
         this.searchType = "video";
         chrome.storage.sync.get(this.defaultOptions, callback);
 
-        var focusIndex = sessionStorage.getItem('focusIndex');
-        // set the focus index to 0 when transition of search pages is occured or page is reloaded
-        if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
-            window.performance.getEntriesByType('navigation')[0].type == 'reload') {
-            focusIndex = 0;
-            sessionStorage.setItem('focusIndex', focusIndex);
-        }
-        var results = this.getResults(this.all_selector);
-        var target = results[focusIndex];
-        target.closest('a').focus();
-        this.underLine(target);
+        var focusIndex = this.initializeIndex(sessionStorage.getItem('focusIndex'));
+        this.focusOnIndexedElement(this.all_selector, focusIndex);
     },
     initNews: function(callback) {
         console.log("initNews");
         this.searchType = "news";
         chrome.storage.sync.get(this.defaultOptions, callback);
 
-        var focusIndex = sessionStorage.getItem('focusIndex');
+        var focusIndex = this.initializeIndex(sessionStorage.getItem('focusIndex'));
+        this.focusOnIndexedElement(this.news_selector, focusIndex);
+    },
+    initializeIndex: function(index) {
+        // back to the position in focus when returnd to search page from web-sites
+        // set the focus index to 0 when transition of search pages is occured or page is reloaded
         if (window.location.href != sessionStorage.getItem('lastQueryUrl') ||
             window.performance.getEntriesByType('navigation')[0].type == 'reload') {
-            focusIndex = 0;
-            sessionStorage.setItem('focusIndex', focusIndex);
+            index = 0;
+            sessionStorage.setItem('focusIndex', index);
         }
-        var results = this.getResults(this.news_selector);
-        var target = results[focusIndex];
+        return index;
+    },
+    focusOnIndexedElement: function(selector, index) {
+        var target = this.getResults(selector)[index];
         target.closest('a').focus();
-        this.underLine(target);
+        if (this.searchType == 'image') {
+            this.emphasizeFocus(target);
+        } else {
+            this.underLine(target);
+        }
     },
     isInputActive: function () {
         var activeElement = document.activeElement;
@@ -130,7 +115,6 @@ var shortcuts = {
     },
     underLine: function(target_txt) {
         // console.log(target_txt);
-        console.log(target_txt)
         target_txt.style.outline = 'none';
         target_txt.style.textDecoration = 'underline';
         target_txt.closest('a').addEventListener('blur', (event) => {
