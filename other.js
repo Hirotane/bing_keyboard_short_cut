@@ -63,19 +63,6 @@
                 searchbox.focus();
                 searchbox.setSelectionRange(pos, pos);
             }
-            if (operatorG) {
-                window.addEventListener('keyup', function motionI(e) {
-                    var focusOnInputWithGI = options.scrollWithG && e.key == 'i' && !e.shiftKey && !shortcuts.isInputActive();
-                    if (focusOnInputWithGI) {
-                        var searchbox = shortcuts.focusOnSearchBox();
-                        var pos = searchbox.value.length;
-                        searchbox.focus();
-                        searchbox.setSelectionRange(pos, pos);
-                    }
-                    this.removeEventListener('keyup', motionI);
-                });
-                operatorG = false;
-            }
             // When the button 'esc' is pressed, the search box is unfocused.
             if (unfocusWithESC) {
                 var focusedElement = document.activeElement;

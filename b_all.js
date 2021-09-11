@@ -48,8 +48,6 @@
                 shortcuts.changeSearchType('shop');
             }
             
-            console.log(options.changeLanguage);
-
             if (shouldNavigateNext || shouldNavigateBack) {
                 // console.log("j or k");
                 e.preventDefault();
