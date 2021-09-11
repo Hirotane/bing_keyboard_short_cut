@@ -54,6 +54,12 @@
                     e.stopPropagation();
                     shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.all_selector);
                 }
+            } else if (shortcuts.searchType == "news") {
+                if (shouldNavigateNext || shouldNavigateBack) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.news_selector);
+                }
             } else if (shortcuts.searchType == "image") {
                 if (shouldNavigateNext || shouldNavigateBack) {
                     e.preventDefault();
@@ -120,7 +126,7 @@
     } else if (url.indexOf('maps.google.') > -1) {
         shortcuts.initAll(func);
     } else if (url.indexOf('&tbm=nws') > -1) {
-        shortcuts.initAll(func);
+        shortcuts.initNews(func);
     } else if (url.indexOf('&tbm=shop') > -1) {
         shortcuts.initAll(func);
     } else if (url.indexOf('&tbm=fin') > -1) {
