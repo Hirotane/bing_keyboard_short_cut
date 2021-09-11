@@ -10,7 +10,11 @@
                     (options.movePagesWithArrows && e.key == 'ArrowRight' && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
                 unfocusWithBracket = options.unfocusWithBracket && e.key == '[' && e.ctrlKey && shortcuts.isInputActive(),
                 moveToButtom = options.scrollToTopOrBottom && e.key == 'G' && e.shiftKey && !shortcuts.isInputActive(),
-                operatorG = options.scrollToTopOrBottom && e.key == 'g' && !e.shiftKey && !shortcuts.isInputActive();
+                operatorG = options.scrollToTopOrBottom && e.key == 'g' && !e.shiftKey && !shortcuts.isInputActive(),
+                searchOnGoogle = options.switchSearchEngine && e.key == 'g' && e.ctrlKey && !shortcuts.isInputActive(),
+                searchOnEdge = options.switchSearchEngine && e.key == 'b' && e.ctrlKey && !shortcuts.isInputActive(),
+                changeLangEn = options.changeLanguage && e.key == 'e' && e.ctrlKey && !shortcuts.isInputActive(),
+                changeLangNa = options.changeLanguage && e.key == 'd' && e.ctrlKey && !shortcuts.isInputActive();
 
             // page transition for all url
             if (goToPreviousPage || goToNextPage) {
@@ -36,6 +40,14 @@
                     }
                     this.removeEventListener('keydown', moveTop);
                 });
+            }
+            // serch on Google
+            if (searchOnGoogle) {
+                shortcuts.changeSearchGoogle();
+            }
+            // serch on Edge
+            if (searchOnEdge) {
+                shortcuts.changeSearchEdge();
             }
         });
         window.addEventListener('keyup', function(e) {

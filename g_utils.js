@@ -300,7 +300,9 @@ var shortcuts = {
                 window.location.href = origin + '/images' + searchQ + searchWord + refEng;
             } else if (currRef.match(/&tbm=vid/)) {
                 window.location.href = origin + '/videos' + searchQ + searchWord + refEng;
-            } else if (currRef.match(/maps.google/)) {
+            } else if (currRef.match(/https:\/\/www.google.com\/maps/)) {
+                console.log('map');
+                searchWord = document.getElementById('searchboxinput').getAttribute('value');
                 window.location.href = origin + '/maps' + searchQ + searchWord + refEng;
             } else if (currRef.match(/&tbm=nws/)) {
                 window.location.href = origin + '/news' + searchQ + searchWord + refEng;
@@ -314,12 +316,12 @@ var shortcuts = {
                 window.location.href = origin + '/images' + searchQ + searchWord;
             } else if (currRef.match(/&tbm=vid/)) {
                 window.location.href = origin + '/videos' + searchQ + searchWord;
-            } else if (currRef.match(/maps.google/)) {
+            } else if (currRef.match(/https:\/\/www.google.com\/maps/)) {
+                console.log('map');
+                searchWord = document.getElementById('searchboxinput').getAttribute('value');
                 window.location.href = origin + '/maps' + searchQ + searchWord;
             } else if (currRef.match(/&tbm=nws/)) {
                 window.location.href = origin + '/news' + searchQ + searchWord;
-            } else if (currRef.match(/&tbm=shop/)) {
-                window.location.href = origin + '/shop' + searchQ + searchWord;
             } else {
                 window.location.href = origin + searchQ + searchWord;
             }
