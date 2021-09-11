@@ -301,16 +301,53 @@ var shortcuts = {
         }
     },
     changeSearchGoogle: function() {
-        var searchWrod = document.querySelector(".b_searchbox").getAttribute('value')
-        var refLocal = 'https://www.google.com/search?q=' + searchWrod;
-        var refEng = 'https://www.google.com/search?q=' + searchWrod + '&gl=us&hl=en&pws=0';
+        var searchWord = document.querySelector(".b_searchbox").getAttribute('value')
+        var origin = 'https://www.google.com/search?q=';
+        var refEng =  '&gl=us&hl=en&pws=0';
+        var currRef = window.location.href;
+        console.log(currRef);
         var isEng = document.querySelector("html").getAttribute('lang') == "en";
         if (isEng) {
-            window.location.href = refEng;
+            if (currRef.match(/https:\/\/www.bing.com\/images/)) {
+                window.location.href = origin + searchWord + '&tbm=isch' + refEng;
+            }
+            else if (currRef.match(/https:\/\/www.bing.com\/videos/)) {
+                window.location.href = origin + searchWord + '&tbm=vid' + refEng;
+            }
+            else if (currRef.match(/https:\/\/www.bing.com\/maps/)) {
+                window.location.href = 'https://www.google.com/maps/search/' + searchWord + '?hl=en';
+            }
+            else if (currRef.match(/https:\/\/www.bing.com\/news/)) {
+            // else if (currRef.match(/news/)) {
+                console.log('news');
+                window.location.href = origin + searchWord + '&tbm=nws' + refEng;
+            }
+            else if (currRef.match(/https:\/\/www.bing.com\/shop/)) {
+                window.location.href = origin + searchWord + '&tbm=shop' + refEng;
+            }
+            else {
+                window.location.href = origin + searchWord + refEng;
+            }
         } else {
-            window.location.href = refLocal;
+            if (currRef.match(/https:\/\/www.bing.com\/images/)) {
+                window.location.href = origin + searchWord + '&tbm=isch';
+            }
+            else if (currRef.match(/https:\/\/www.bing.com\/videos/)) {
+                window.location.href = origin + searchWord + '&tbm=vid';
+            }
+            else if (currRef.match(/https:\/\/www.bing.com\/maps/)) {
+                window.location.href = 'https://www.google.com/maps/search/' + searchWord + '?hl=en';
+            }
+            else if (currRef.match(/https:\/\/www.bing.com\/news/)) {
+                window.location.href = origin + searchWord + '&tbm=nws';
+            }
+            else if (currRef.match(/https:\/\/www.bing.com\/shop/)) {
+                window.location.href = origin + searchWord + '&tbm=shop';
+            }
+            else {
+                window.location.href = origin + searchWord;
+            }
         }
-         window.location.href = ref;
     },
     changeLang: function() {
         var ref = 'https://www.bing.com' + document.querySelector("#mkt_swc_v2").getAttribute('href');

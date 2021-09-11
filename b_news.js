@@ -61,6 +61,10 @@
                 elements[0].classList.remove("b_lbShow");
                 searchbox.blur();
                 }
+            // serch on Google
+            if (searchOnGoogle) {
+                shortcuts.changeSearchGoogle();
+            }
         });
         window.addEventListener('keyup', function(e) {
             var focusOnInput = options.focusOnInput && e.key == '/' && !shortcuts.isInputActive(),
