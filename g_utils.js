@@ -55,8 +55,14 @@ var shortcuts = {
         console.log("initImage");
         chrome.storage.sync.get(this.defaultOptions, callback);
 
+        // if (window.performance.getEntriesByType('navigation')[0].type == 'reload') {
+        //     focusIndex = 0;
+        //     sessionStorage.setItem('focusIndex', focusIndex);
+        // }
         this.searchType = "image";
-        var target = this.navigateImage(0, this.image_selector);
+        sessionStorage.setItem('focusIndex', 0);
+        var target = this.getVisibleResults(this.image_selector)[0];
+        console.log(target);
         target.focus({preventScroll:true});
         this.emphasizeFocus(target);
     },
@@ -244,16 +250,20 @@ var shortcuts = {
         var target = results[focusIndex];
         this.scrollSearchResults(target, offset);
         target.focus({preventScroll:true});
-        this.emphasizeFocus(target.parentElement);
+        this.emphasizeFocus(target);
 
     },
     moveAllSearchPage: function(offset) {
         if (offset == 1){
             var nextpage = document.querySelector("#pnnext");
-            window.location.href = nextpage;
+            if (nextpage) {
+                window.location.href = nextpage;
+            }
         } else {
             var previouspage = document.querySelector("#pnprev");
-            window.location.href = previouspage;
+            if (previouspage) {
+                window.location.href = previouspage;
+            }
         }
     },
     moveWorkSearchPage: function(offset) {
