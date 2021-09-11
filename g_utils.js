@@ -307,26 +307,52 @@ var shortcuts = {
         }
     },
     changeSearchEdge: function() {
-        var searchWrod = document.querySelector('input[role="combobox"]').getAttribute('value');
-        var refLocal =  'https://www.bing.com/search?q=' + searchWrod;
-        var refEng =  'https://www.bing.com/search?q=' + searchWrod + '&cc=us&setlang=en';
+        var searchWord = document.querySelector('input[role="combobox"]').getAttribute('value');
+        var origin = 'https://www.bing.com';
+        var searchQ = '/search?q=';
+        var refEng =  '&cc=us&setlang=en';
         var isEng = document.querySelector("html").getAttribute('lang') == "en";
+        var currRef = window.location.href;
+        console.log(currRef);
         if (isEng) {
-            window.location.href = refEng;
+            if (currRef.match(/&tbm=isch/)) {
+                window.location.href = origin + '/images' + searchQ + searchWord + refEng;
+            } else if (currRef.match(/&tbm=vid/)) {
+                window.location.href = origin + '/videos' + searchQ + searchWord + refEng;
+            } else if (currRef.match(/maps.google/)) {
+                window.location.href = origin + '/maps' + searchQ + searchWord + refEng;
+            } else if (currRef.match(/&tbm=nws/)) {
+                window.location.href = origin + '/news' + searchQ + searchWord + refEng;
+            } else if (currRef.match(/&tbm=shop/)) {
+                window.location.href = origin + '/shop' + searchQ + searchWord + refEng;
+            } else {
+                window.location.href = origin + searchQ + searchWord + refEng;
+            }
         } else {
-            window.location.href = refLocal;
+            if (currRef.match(/&tbm=isch/)) {
+                window.location.href = origin + 'images' + searchQ + searchWord;
+            } else if (currRef.match(/&tbm=vid/)) {
+                window.location.href = origin + 'videos' + searchQ + searchWord;
+            } else if (currRef.match(/maps.google/)) {
+                window.location.href = origin + 'maps' + searchQ + searchWord;
+            } else if (currRef.match(/&tbm=nws/)) {
+                window.location.href = origin + 'news' + searchQ + searchWord;
+            } else if (currRef.match(/&tbm=shop/)) {
+                window.location.href = origin + 'shop' + searchQ + searchWord;
+            } else {
+                window.location.href = origin + searchQ + searchWord;
+            }
         }
-         window.location.href = ref;
     },
     changeLang: function(language) {
-        var searchWrod = document.querySelector('input[role="combobox"]').getAttribute('value');
+        var searchWord = document.querySelector('input[role="combobox"]').getAttribute('value');
         switch (language){
             case 'english':
-                var ref = 'https://www.google.com/search?q=' + searchWrod + '&gl=us&hl=en&pws=0';
+                var ref = 'https://www.google.com/search?q=' + searchWord + '&gl=us&hl=en&pws=0';
                 window.location.href = ref;
                 break;
             case 'native':
-                var ref = 'https://www.google.com/search?q=' + searchWrod;
+                var ref = 'https://www.google.com/search?q=' + searchWord;
                 window.location.href = ref;
                 break;
         }
