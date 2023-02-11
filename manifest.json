@@ -1,66 +1,45 @@
 {
-    "name": "__MSG_Name__",
-    "version": "2.1.0",
-    "manifest_version": 2,
-    "default_locale": "en",
-    "description": "__MSG_Description__",
-    "options_ui": {
-      "page": "options.html",
-      "chrome_style": true
+  "name": "__MSG_Name__",
+  "version": "3.0.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "__MSG_Description__",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
   },
-    "icons": {
-      "16": "icons/Bingoogle_shortcuts_16x16.png",
-      "32": "icons/Bingoogle_shortcuts_32x32.png",
-      "48": "icons/Bingoogle_shortcuts_48x48.png",
-      "128": "icons/Bingoogle_shortcuts_128x128.png"
+  "icons": {
+    "16": "icons/Bingoogle_shortcuts_16x16.png",
+    "32": "icons/Bingoogle_shortcuts_32x32.png",
+    "48": "icons/Bingoogle_shortcuts_48x48.png",
+    "128": "icons/Bingoogle_shortcuts_128x128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["*://www.bing.com/search*"],
+      "js": ["b_utils.js", "b_all.js"]
     },
-    "browser_action": {
-        "default_popup": "popup.html"
+    {
+      "matches": ["*://www.bing.com/work/search*"],
+      "js": ["b_utils.js", "b_work.js"]
     },
-    "permissions": [
-        "storage"
-    ],
-    "content_scripts": [{
-      "matches": [
-        "*://www.bing.com/search*"
-      ],
-      "js": [
-        "b_utils.js",
-        "b_all.js"
-      ]
-    },{
-      "matches": [
-        "*://www.bing.com/work/search*"
-      ],
-      "js": [
-        "b_utils.js",
-        "b_work.js"
-      ]
-    },{
-      "matches": [
-        "*://www.bing.com/images/search*"
-      ],
-      "js": [
-        "b_utils.js",
-        "b_image.js"
-      ]
-    },{
-      "matches": [
-        "*://www.bing.com/videos/search*"
-      ],
-      "js": [
-        "b_utils.js",
-        "b_video.js"
-      ]
-    },{
-      "matches": [
-        "*://www.bing.com/news/search*"
-      ],
-      "js": [
-        "b_utils.js",
-        "b_news.js"
-      ]
-    },{
+    {
+      "matches": ["*://www.bing.com/images/search*"],
+      "js": ["b_utils.js", "b_image.js"]
+    },
+    {
+      "matches": ["*://www.bing.com/videos/search*"],
+      "js": ["b_utils.js", "b_video.js"]
+    },
+    {
+      "matches": ["*://www.bing.com/news/search*"],
+      "js": ["b_utils.js", "b_news.js"]
+    },
+    {
       "matches": [
         "*://*.google.ac/search?*",
         "*://*.google.ad/search?*",
@@ -261,11 +240,9 @@
         "*://*.google.vu/search?*",
         "*://*.google.ws/search?*"
       ],
-      "js": [
-        "g_utils.js",
-        "g_all.js"
-      ]
-    },{
+      "js": ["g_utils.js", "g_all.js"]
+    },
+    {
       "exclude_matches": [
         "*://www.bing.com/search*",
         "*://www.bing.com/images/search*",
@@ -472,9 +449,7 @@
         "*://*.google.ws/search?*"
       ],
       "matches": ["<all_urls>"],
-      "js": [
-        "other_utils.js",
-        "other.js"
-      ]
-    }]
-  }
+      "js": ["other_utils.js", "other.js"]
+    }
+  ]
+}
