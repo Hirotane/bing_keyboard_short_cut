@@ -166,7 +166,6 @@
         // eliminate shadows whitch appears when search box is focused.
         // let elements = document.getElementsByClassName("b_lbShow");
         let elements = document.querySelector(".b_lbShow");
-        console.log(elements);
         if (elements) {
           elements.classList.remove("b_lbShow");
         }

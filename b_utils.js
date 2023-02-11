@@ -253,11 +253,17 @@ var shortcuts = {
   moveAllSearchPage: function (offset) {
     if (offset == 1) {
       var nextpage = document.querySelector(".sb_pagN").getAttribute("href");
-      window.location.href = nextpage;
+      window.location.href = this.deleteShowconvPram(nextpage);
     } else {
       var previouspage = document.querySelector(".sb_pagP").getAttribute("href");
-      window.location.href = previouspage;
+      window.location.href = this.deleteShowconvPram(previouspage);
     }
+  },
+  deleteShowconvPram: function (url) {
+    const base = new URL(window.location.href);
+    const urlParams = new URL(url, base);
+    urlParams.searchParams.delete("showconv");
+    return urlParams.toString();
   },
   moveWorkSearchPage: function (offset) {
     if (offset == 1) {
