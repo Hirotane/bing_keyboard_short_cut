@@ -1,12 +1,7 @@
 (function () {
   "use strict";
 
-  var searchbox;
-  searchbox = document.querySelector("textarea.b_searchbox");
-  if (!searchbox) {
-    // old type of input
-    searchbox = document.querySelector(".b_searchbox");
-  }
+  let searchbox = document.querySelector("textarea.b_searchbox") || document.querySelector(".b_searchbox");
 
   shortcuts.initAll(function (options) {
     window.addEventListener("keydown", function (e) {
@@ -90,14 +85,14 @@
             !e.ctrlKey &&
             !e.metaKey &&
             !shortcuts.isInputActive()),
-        searchTypeA = options.selectSearchType && e.key == "a" && !shortcuts.isInputActive(),
-        searchTypeC = options.selectSearchType && e.key == "c" && !shortcuts.isInputActive(),
-        searchTypeW = options.selectSearchType && e.key == "w" && !shortcuts.isInputActive(),
-        searchTypeI = options.selectSearchType && e.key == "i" && !shortcuts.isInputActive(),
-        searchTypeN = options.selectSearchType && e.key == "n" && !shortcuts.isInputActive(),
-        searchTypeV = options.selectSearchType && e.key == "v" && !shortcuts.isInputActive(),
-        searchTypeM = options.selectSearchType && e.key == "m" && !shortcuts.isInputActive(),
-        searchTypeS = options.selectSearchType && e.key == "s" && !shortcuts.isInputActive(),
+        searchTypeA = options.selectSearchType && e.key == "A" && e.shiftKey && !shortcuts.isInputActive(),
+        searchTypeC = options.selectSearchType && e.key == "C" && e.shiftKey && !shortcuts.isInputActive(),
+        searchTypeW = options.selectSearchType && e.key == "W" && e.shiftKey && !shortcuts.isInputActive(),
+        searchTypeI = options.selectSearchType && e.key == "I" && e.shiftKey && !shortcuts.isInputActive(),
+        searchTypeN = options.selectSearchType && e.key == "N" && e.shiftKey && !shortcuts.isInputActive(),
+        searchTypeV = options.selectSearchType && e.key == "V" && e.shiftKey && !shortcuts.isInputActive(),
+        searchTypeM = options.selectSearchType && e.key == "M" && e.shiftKey && !shortcuts.isInputActive(),
+        searchTypeS = options.selectSearchType && e.key == "S" && e.shiftKey && !shortcuts.isInputActive(),
         unfocusWithBracket = options.unfocusWithBracket && e.key == "[" && e.ctrlKey && shortcuts.isInputActive(),
         searchOnGoogle = options.switchSearchEngine && e.key == "g" && e.ctrlKey && !shortcuts.isInputActive(),
         changeLangEn = options.changeLanguage && e.key == "e" && e.ctrlKey && !shortcuts.isInputActive(),
@@ -169,6 +164,9 @@
       // e = e || window.event;
       // When the button '/' is pressed, the search box is focused.
       if (focusOnInput) {
+        var searchbox_chat = document.getElementById("searchbox");
+        console.log(searchbox_chat);
+
         var pos = searchbox.value.length;
         searchbox.focus();
         searchbox.setSelectionRange(pos, pos);

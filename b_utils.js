@@ -88,7 +88,9 @@ var shortcuts = {
   },
   isInputActive: function () {
     var activeElement = document.activeElement;
-    return activeElement.nodeName == "INPUT" || activeElement.nodeName == "TEXTAREA";
+    return (
+      activeElement.nodeName == "INPUT" || activeElement.nodeName == "TEXTAREA" || activeElement.nodeName == "CIB-SERP"
+    );
   },
   defineRangeOfIndex: function (index, length) {
     index = Math.min(index, length - 1);
