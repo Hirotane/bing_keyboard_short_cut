@@ -96,16 +96,18 @@
         unfocusWithBracket = options.unfocusWithBracket && e.key == "[" && e.ctrlKey && shortcuts.isInputActive(),
         searchOnGoogle = options.switchSearchEngine && e.key == "g" && e.ctrlKey && !shortcuts.isInputActive(),
         changeLangEn = options.changeLanguage && e.key == "e" && e.ctrlKey && !shortcuts.isInputActive(),
-        changeLangNa = options.changeLanguage && e.key == "d" && e.ctrlKey && !shortcuts.isInputActive();
+        changeLangNa = options.changeLanguage && e.key == "d" && e.ctrlKey && !shortcuts.isInputActive(),
+        stopChatGeneration = e.key == "Q" && e.shiftKey && e.ctrlKey;
 
       // get input box for normal or conversational search
       let mode =
         document.querySelector(".cib-serp-main") && document.querySelector(".cib-serp-main").getAttribute("mode");
       let chatMode = mode === "conversation";
+      let chatShadowRoot_2nd;
 
       if (chatMode) {
         let chatShadowRoot_1st = document.querySelector("#b_sydConvCont .cib-serp-main").shadowRoot;
-        let chatShadowRoot_2nd = chatShadowRoot_1st.querySelector("#cib-action-bar-main").shadowRoot;
+        chatShadowRoot_2nd = chatShadowRoot_1st.querySelector("#cib-action-bar-main").shadowRoot;
         searchbox = chatShadowRoot_2nd.querySelector(".root .main-container textarea");
       } else {
         searchbox = document.querySelector("textarea.b_searchbox") || document.querySelector(".b_searchbox");
@@ -130,6 +132,13 @@
         shortcuts.changeSearchType("map");
       } else if (searchTypeS) {
         shortcuts.changeSearchType("shop");
+      }
+
+      // stop answer
+      if (stopChatGeneration && chatMode) {
+        let chatShadowRoot_3rd = chatShadowRoot_2nd.querySelector("cib-typing-indicator").shadowRoot;
+        let stopButton = chatShadowRoot_3rd.querySelector("button");
+        stopButton.click();
       }
 
       if ((shouldNavigateNext && !chatMode) || (shouldNavigateBack && !chatMode)) {
