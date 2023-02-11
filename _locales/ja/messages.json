@@ -1,8 +1,8 @@
 {
-    "Name": {
-        "message": "Bingoogle ショートカット"
-    },
-    "Description": {
-        "message": "検索エンジン “Bing” および “Google” で使えるキーボードショットカットです。キーボード操作だけで検索・ブラウジングできるようになります。" 
-    }
+  "Name": {
+    "message": "Bingoogle ショートカット - ChatGPT後継のBingチャットに対応したキーボードショートカット"
+  },
+  "Description": {
+    "message": "検索エンジン “Bing” および “Google” で使えるキーボードショットカットです。キーボード操作だけで検索・ブラウジングできるようになります。"
+  }
 }

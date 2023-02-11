@@ -1,8 +1,8 @@
 {
-    "Name": {
-        "message": "Bingoogle shortcuts"
-    },
-    "Description": {
-        "message": "“Bingoogle shortcuts” provides keyboard shortcuts for “Bing” and “Google“. You will be able to search and browse without mouse."
-    }
+  "Name": {
+    "message": "Bingoogle Shortcut: A Powerful Keyboard Shortcut supported for GPT-4 Chat Bot Interface"
+  },
+  "Description": {
+    "message": "“Bingoogle shortcuts” provides keyboard shortcuts for “Bing” and “Google“. You will be able to search and browse without mouse."
+  }
 }
