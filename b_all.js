@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  let searchbox = document.querySelector("textarea.b_searchbox") || document.querySelector(".b_searchbox");
+  let searchbox;
 
   shortcuts.initAll(function (options) {
     window.addEventListener("keydown", function (e) {
@@ -98,9 +98,24 @@
         changeLangEn = options.changeLanguage && e.key == "e" && e.ctrlKey && !shortcuts.isInputActive(),
         changeLangNa = options.changeLanguage && e.key == "d" && e.ctrlKey && !shortcuts.isInputActive();
 
+      // get input box for normal or conversational search
+      let mode =
+        document.querySelector(".cib-serp-main") && document.querySelector(".cib-serp-main").getAttribute("mode");
+      let chatMode = mode === "conversation";
+
+      if (chatMode) {
+        let chatShadowRoot_1st = document.querySelector("#b_sydConvCont .cib-serp-main").shadowRoot;
+        let chatShadowRoot_2nd = chatShadowRoot_1st.querySelector("#cib-action-bar-main").shadowRoot;
+        searchbox = chatShadowRoot_2nd.querySelector(".root .main-container textarea");
+      } else {
+        searchbox = document.querySelector("textarea.b_searchbox") || document.querySelector(".b_searchbox");
+      }
+
       // select search type
-      if (searchTypeA) {
+      if (searchTypeA && !chatMode) {
         shortcuts.changeSearchType("all");
+      } else if (searchTypeA && chatMode) {
+        shortcuts.changeSearchType("all_chat");
       } else if (searchTypeC) {
         shortcuts.changeSearchType("chat");
       } else if (searchTypeW) {
@@ -117,14 +132,14 @@
         shortcuts.changeSearchType("shop");
       }
 
-      if (shouldNavigateNext || shouldNavigateBack) {
+      if ((shouldNavigateNext && !chatMode) || (shouldNavigateBack && !chatMode)) {
         // console.log("j or k");
         e.preventDefault();
         e.stopPropagation();
         shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.all_selector);
       }
       // search page transition
-      if (moveNextSearchPage || movePreviousSearchPage) {
+      if ((moveNextSearchPage && !chatMode) || (movePreviousSearchPage && !chatMode)) {
         // console.log("h or l");
         e.preventDefault();
         e.stopPropagation();
@@ -163,12 +178,22 @@
           (options.focusOnInput && e.key == "/" && !shortcuts.isInputActive()) ||
           (options.focusOnInput && e.key == "i" && !shortcuts.isInputActive()),
         unfocusWithESC = options.unfocusWithESC && e.key == "Escape" && shortcuts.isInputActive();
+
+      // get input box for normal or conversational search
+      let mode =
+        document.querySelector(".cib-serp-main") && document.querySelector(".cib-serp-main").getAttribute("mode");
+      let chatMode = mode === "conversation";
+      if (chatMode) {
+        let chatShadowRoot_1st = document.querySelector("#b_sydConvCont .cib-serp-main").shadowRoot;
+        let chatShadowRoot_2nd = chatShadowRoot_1st.querySelector("#cib-action-bar-main").shadowRoot;
+        searchbox = chatShadowRoot_2nd.querySelector(".root .main-container textarea");
+      } else {
+        searchbox = document.querySelector("textarea.b_searchbox") || document.querySelector(".b_searchbox");
+      }
+
       // e = e || window.event;
       // When the button '/' is pressed, the search box is focused.
       if (focusOnInput) {
-        var searchbox_chat = document.getElementById("searchbox");
-        console.log(searchbox_chat);
-
         var pos = searchbox.value.length;
         searchbox.focus();
         searchbox.setSelectionRange(pos, pos);
@@ -176,7 +201,8 @@
       // When the button 'esc' is pressed, the search box is unfocused.
       if (unfocusWithESC) {
         e.preventDefault();
-        let elements = document.querySelector(".b_lbShow");
+        let elements = docuiiijjkkiiiiiment.querySelector(".b_lbShow");
+        // let elements = document.querySelector(".sa_as");
         if (elements) {
           elements.classList.remove("b_lbShow");
         }

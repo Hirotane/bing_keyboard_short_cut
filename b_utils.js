@@ -283,6 +283,10 @@ var shortcuts = {
         var ref = document.querySelector("#b-scopeListItem-web").firstElementChild.getAttribute("href");
         window.location.href = ref;
         break;
+      case "all_chat":
+        var elm = document.querySelector("#b-scopeListItem-web").firstElementChild;
+        elm.click();
+        break;
       case "chat":
         var elm = document.querySelector("#b-scopeListItem-conv").firstElementChild;
         elm.click();
