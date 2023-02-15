@@ -294,8 +294,13 @@ var shortcuts = {
         elm.click();
         break;
       case "chat":
-        var elm = document.querySelector("#b-scopeListItem-conv").firstElementChild;
-        elm.click();
+        var elm = document.querySelector("#b-scopeListItem-conv") || document.querySelector("#b-scopeListItem-convups");
+        var ref = elm.firstElementChild.getAttribute("href");
+        if (ref === "javascript:void(0)") {
+          elm.firstElementChild.click();
+        } else {
+          window.location.href = ref;
+        }
         break;
       case "work":
         var ref = document.querySelector("#b-scopeListItem-bingatwork").firstElementChild.getAttribute("href");
