@@ -283,6 +283,22 @@ var shortcuts = {
       window.history.back();
     }
   },
+  unfocusElement: function (searchbox) {
+    // eliminate autocompletes and shadows whitch appears when search box is focused.
+    let elements_lbShow = document.querySelector(".b_lbShow");
+    let elements_swas = document.querySelector("#sw_as");
+    if (elements_lbShow) {
+      // old type
+      elements.classList.remove("b_lbShow");
+    } else if (elements_swas) {
+      // new type
+      elements_swas.querySelector(".sa_as") ? (elements_swas.querySelector(".sa_as").style.display = "none") : null;
+      elements_swas.querySelector("#sb_fdb") ? (elements_swas.querySelector("#sb_fdb").style.display = "none") : null;
+      let headerElm = document.getElementById("b_header");
+      headerElm ? headerElm.classList.remove("b_focus") : null;
+    }
+    searchbox.blur();
+  },
   changeSearchType: function (type) {
     switch (type) {
       case "all":

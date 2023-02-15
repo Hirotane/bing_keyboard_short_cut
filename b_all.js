@@ -163,13 +163,7 @@
       }
       // When the button 'ctrl + [' is pressed, the search box is unfocused.
       if (unfocusWithBracket) {
-        // eliminate shadows whitch appears when search box is focused.
-        // let elements = document.getElementsByClassName("b_lbShow");
-        let elements = document.querySelector(".b_lbShow");
-        if (elements) {
-          elements.classList.remove("b_lbShow");
-        }
-        searchbox.blur();
+        shortcuts.unfocusElement(searchbox);
       }
       // serch on Google
       if (searchOnGoogle) {
@@ -209,12 +203,7 @@
       // When the button 'esc' is pressed, the search box is unfocused.
       if (unfocusWithESC) {
         e.preventDefault();
-        let elements = docuiiijjkkiiiiiment.querySelector(".b_lbShow");
-        // let elements = document.querySelector(".sa_as");
-        if (elements) {
-          elements.classList.remove("b_lbShow");
-        }
-        searchbox.blur();
+        shortcuts.unfocusElement(searchbox);
       }
       sessionStorage.setItem("keypress", 0);
     });

@@ -144,10 +144,7 @@
       }
       // When the button 'ctrl + [' is pressed, the search box is unfocused.
       if (unfocusWithBracket) {
-        // eliminate shadows whitch appears when search box is focused.
-        let elements = document.getElementsByClassName("b_lbShow");
-        elements[0].classList.remove("b_lbShow");
-        searchbox.blur();
+        shortcuts.unfocusElement(searchbox);
       }
       // serch on Google
       if (searchOnGoogle) {
@@ -168,7 +165,7 @@
       }
       // When the button 'esc' is pressed, the search box is unfocused.
       if (unfocusWithESC) {
-        searchbox.blur();
+        shortcuts.unfocusElement(searchbox);
       }
     });
   });
