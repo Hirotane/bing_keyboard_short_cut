@@ -285,7 +285,7 @@ var shortcuts = {
         window.location.href = ref;
         break;
       case "finance":
-        var ref = document.querySelector('a[href*="&tbm=fin"]');
+        var ref = document.querySelector('a[href*="/finance"]');
         window.location.href = ref;
         break;
     }
