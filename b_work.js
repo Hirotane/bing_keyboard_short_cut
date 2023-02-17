@@ -100,8 +100,8 @@
         searchTypeS = options.selectSearchType && e.key == "S" && e.shiftKey && !shortcuts.isInputActive(),
         unfocusWithBracket = options.unfocusWithBracket && e.key == "[" && e.ctrlKey && shortcuts.isInputActive(),
         searchOnGoogle = options.switchSearchEngine && e.key == "g" && e.ctrlKey && !shortcuts.isInputActive(),
-        changeLangEn = options.changeLanguage && e.key == "e" && e.ctrlKey && !shortcuts.isInputActive(),
-        changeLangNa = options.changeLanguage && e.key == "d" && e.ctrlKey && !shortcuts.isInputActive();
+        changeLangEn = options.changeLanguage && e.key == "e" && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive(),
+        changeLangNa = options.changeLanguage && e.key == "d" && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive();
 
       // select search type
       if (searchTypeA) {
@@ -153,8 +153,8 @@
     });
     window.addEventListener("keyup", function (e) {
       var focusOnInput =
-          (options.focusOnInput && e.key == "/" && !shortcuts.isInputActive()) ||
-          (options.focusOnInput && e.key == "i" && !shortcuts.isInputActive()),
+          (options.focusOnInputWithSlash && e.key == "/" && !shortcuts.isInputActive()) ||
+          (options.focusOnInputWithI && e.key == "i" && !shortcuts.isInputActive()),
         unfocusWithESC = options.unfocusWithESC && e.key == "Escape" && shortcuts.isInputActive();
       // e = e || window.event;
       // When the button '/' is pressed, the search box is focused.

@@ -6,7 +6,8 @@ var shortcuts = {
     movePagesWithHL: true,
     movePagesWithArrows: true,
     selectSearchType: true,
-    focusOnInput: true,
+    focusOnInputWithSlash: true,
+    focusOnInputWithI: true,
     unfocusWithESC: true,
     unfocusWithBracket: true,
     hideAds: true,
@@ -284,7 +285,7 @@ var shortcuts = {
       window.history.back();
     }
   },
-  unfocusElement: function (searchbox, type = "all") {
+  unfocusElement: function (searchbox, type) {
     searchbox.blur();
     // close window for autocomplete
     document.body.click();

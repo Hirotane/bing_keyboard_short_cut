@@ -120,8 +120,8 @@
     });
     window.addEventListener("keyup", function (e) {
       var focusOnInput =
-          (options.focusOnInput && e.key == "/" && !shortcuts.isInputActive()) ||
-          (options.focusOnInput && e.key == "i" && !shortcuts.isInputActive()),
+          (options.focusOnInputWithSlash && e.key == "/" && !shortcuts.isInputActive()) ||
+          (options.focusOnInputWithI && e.key == "i" && !shortcuts.isInputActive()),
         unfocusWithESC = options.unfocusWithESC && e.key == "Escape" && shortcuts.isInputActive();
       // e = e || window.event;
       // When the button '/' is pressed, the search box is focused.

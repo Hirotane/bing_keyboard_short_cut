@@ -134,10 +134,12 @@
           !e.ctrlKey &&
           !e.metaKey &&
           !shortcuts.isInputActive(),
-        unfocusWithBracket = options.unfocusWithBracket && e.key == "[" && e.ctrlKey && shortcuts.isInputActive(),
-        searchOnEdge = options.switchSearchEngine && e.key == "b" && e.ctrlKey && !shortcuts.isInputActive(),
-        changeLangEn = options.changeLanguage && e.key == "e" && e.ctrlKey && !shortcuts.isInputActive(),
-        changeLangNa = options.changeLanguage && e.key == "d" && e.ctrlKey && !shortcuts.isInputActive();
+        unfocusWithBracket =
+          options.unfocusWithBracket && e.key == "[" && e.ctrlKey && !e.metaKey && shortcuts.isInputActive(),
+        searchOnEdge =
+          options.switchSearchEngine && e.key == "b" && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive(),
+        changeLangEn = options.changeLanguage && e.key == "e" && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive(),
+        changeLangNa = options.changeLanguage && e.key == "d" && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive();
 
       // select search type
       if (searchTypeA) {
@@ -192,7 +194,7 @@
       }
       // When the button 'ctrl + [' is pressed, the search box is unfocused.
       if (unfocusWithBracket) {
-        shortcuts.unfocusElement(searchbox);
+        shortcuts.unfocusElement(searchbox, "all");
       }
       // Serch on Edge
       if (searchOnEdge) {
@@ -207,8 +209,8 @@
     });
     window.addEventListener("keyup", function (e) {
       var focusOnInput =
-          (options.focusOnInput && e.key == "/" && !shortcuts.isInputActive()) ||
-          (options.focusOnInput && e.key == "i" && !shortcuts.isInputActive()),
+          (options.focusOnInputWithSlash && e.key == "/" && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) ||
+          (options.focusOnInputWithI && e.key == "i" && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
         unfocusWithESC = options.unfocusWithESC && e.key == "Escape" && shortcuts.isInputActive();
       // e = e || window.event;
       // When the button '/' is pressed, the search box is focused.
@@ -219,7 +221,7 @@
       }
       // When the button 'esc' is pressed, the search box is unfocused.
       if (unfocusWithESC) {
-        shortcuts.unfocusElement(searchbox);
+        shortcuts.unfocusElement(searchbox, "all");
       }
       sessionStorage.setItem("keypress", 0);
     });

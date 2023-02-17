@@ -6,7 +6,8 @@ var shortcuts = {
     movePagesWithHL: true,
     movePagesWithArrows: true,
     selectSearchType: true,
-    focusOnInput: true,
+    focusOnInputWithSlash: true,
+    focusOnInputWithI: true,
     unfocusWithESC: true,
     unfocusWithBracket: true,
     hideAds: true,
@@ -252,11 +253,21 @@ var shortcuts = {
       window.history.back();
     }
   },
-  unfocusElement: function (searchbox) {
+  unfocusElement: function (searchbox, type) {
     searchbox.blur();
     // close window for autocomplete
     document.body.click();
-    this.focusResult(0, this.all_selector);
+    switch (type) {
+      case "all":
+        this.focusResult(0, this.all_selector);
+        break;
+      case "work":
+        this.focusResult(0, this.work_selector);
+        break;
+      case "news":
+        this.focusResult(0, this.news_selector);
+        break;
+    }
   },
   changeSearchType: function (type) {
     switch (type) {
