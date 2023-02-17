@@ -90,14 +90,62 @@
             !e.ctrlKey &&
             !e.metaKey &&
             !shortcuts.isInputActive()),
-        searchTypeA = options.selectSearchType && e.key == "A" && e.shiftKey && !shortcuts.isInputActive(),
-        searchTypeC = options.selectSearchType && e.key == "C" && e.shiftKey && !shortcuts.isInputActive(),
-        searchTypeW = options.selectSearchType && e.key == "W" && e.shiftKey && !shortcuts.isInputActive(),
-        searchTypeI = options.selectSearchType && e.key == "I" && e.shiftKey && !shortcuts.isInputActive(),
-        searchTypeN = options.selectSearchType && e.key == "N" && e.shiftKey && !shortcuts.isInputActive(),
-        searchTypeV = options.selectSearchType && e.key == "V" && e.shiftKey && !shortcuts.isInputActive(),
-        searchTypeM = options.selectSearchType && e.key == "M" && e.shiftKey && !shortcuts.isInputActive(),
-        searchTypeS = options.selectSearchType && e.key == "S" && e.shiftKey && !shortcuts.isInputActive(),
+        searchTypeA =
+          options.selectSearchType &&
+          e.key == "A" &&
+          e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !shortcuts.isInputActive(),
+        searchTypeC =
+          options.selectSearchType &&
+          e.key == "C" &&
+          e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !shortcuts.isInputActive(),
+        searchTypeW =
+          options.selectSearchType &&
+          e.key == "W" &&
+          e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !shortcuts.isInputActive(),
+        searchTypeI =
+          options.selectSearchType &&
+          e.key == "I" &&
+          e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !shortcuts.isInputActive(),
+        searchTypeN =
+          options.selectSearchType &&
+          e.key == "N" &&
+          e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !shortcuts.isInputActive(),
+        searchTypeV =
+          options.selectSearchType &&
+          e.key == "V" &&
+          e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !shortcuts.isInputActive(),
+        searchTypeM =
+          options.selectSearchType &&
+          e.key == "M" &&
+          e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !shortcuts.isInputActive(),
+        searchTypeS =
+          options.selectSearchType &&
+          e.key == "S" &&
+          e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !shortcuts.isInputActive(),
         unfocusWithBracket = options.unfocusWithBracket && e.key == "[" && e.ctrlKey && shortcuts.isInputActive(),
         searchOnGoogle = options.switchSearchEngine && e.key == "g" && e.ctrlKey && !shortcuts.isInputActive(),
         changeLangEn = options.changeLanguage && e.key == "e" && e.ctrlKey && !shortcuts.isInputActive(),
