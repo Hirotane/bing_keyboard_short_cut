@@ -347,7 +347,10 @@ var shortcuts = {
     }
   },
   changeSearchGoogle: function () {
-    var searchWord = document.querySelector(".b_searchbox").getAttribute("value");
+    var searchWord =
+      document.querySelector(".b_searchbox").getAttribute("value") ||
+      document.querySelector("textarea.b_searchbox").value;
+    console.log(searchWord);
     var origin = "https://www.google.com/search?q=";
     var refEng = "&gl=us&hl=en&pws=0";
     var currRef = window.location.href;
