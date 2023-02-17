@@ -16,7 +16,8 @@ var shortcuts = {
   searchType: "all",
   all_selector:
     ".b_algo h2 > a, .b_rs > ul > li > a, h2 > .b_ads1line, .btitle > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
-  work_selector: ".ms-search-result-list-item-border > div > div > a, .ac-textBlock > p > a, .ms-search-bookmarkTitle",
+  work_selector:
+    ".ms-search-result-list-item-border > div > div > div > a, .ms-search-result-list-item > article h3 > a, .ac-textBlock > p > a, .ms-search-bookmarkTitle",
   news_selector: ".t_t > a",
   initAll: function (callback) {
     chrome.storage.sync.get(this.defaultOptions, callback);
@@ -267,11 +268,11 @@ var shortcuts = {
   },
   moveWorkSearchPage: function (offset) {
     if (offset == 1) {
-      var nextpage = document.querySelector(".ms-TooltipHost > [data-icon-name='chevronright']");
+      let nextpage = document.querySelector("button[aria-label='Next page']");
       nextpage.click();
       sessionStorage.setItem("focusIndex", 0);
     } else {
-      var previouspage = document.querySelector(".ms-TooltipHost > [data-icon-name='chevronleft']");
+      let previouspage = document.querySelector("button[aria-label='Previous page']");
       previouspage.click();
       sessionStorage.setItem("focusIndex", 0);
     }
@@ -283,21 +284,21 @@ var shortcuts = {
       window.history.back();
     }
   },
-  unfocusElement: function (searchbox) {
-    // eliminate autocompletes and shadows whitch appears when search box is focused.
-    let elements_lbShow = document.querySelector(".b_lbShow");
-    let elements_swas = document.querySelector("#sw_as");
-    if (elements_lbShow) {
-      // old type
-      elements.classList.remove("b_lbShow");
-    } else if (elements_swas) {
-      // new type
-      elements_swas.querySelector(".sa_as") ? (elements_swas.querySelector(".sa_as").style.display = "none") : null;
-      elements_swas.querySelector("#sb_fdb") ? (elements_swas.querySelector("#sb_fdb").style.display = "none") : null;
-      let headerElm = document.getElementById("b_header");
-      headerElm ? headerElm.classList.remove("b_focus") : null;
-    }
+  unfocusElement: function (searchbox, type = "all") {
     searchbox.blur();
+    // close window for autocomplete
+    document.body.click();
+    switch (type) {
+      case "all":
+        this.focusResult(0, this.all_selector);
+        break;
+      case "work":
+        this.focusResult(0, this.work_selector);
+        break;
+      case "news":
+        this.focusResult(0, this.news_selector);
+        break;
+    }
   },
   changeSearchType: function (type) {
     switch (type) {

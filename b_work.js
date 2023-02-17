@@ -144,7 +144,7 @@
       }
       // When the button 'ctrl + [' is pressed, the search box is unfocused.
       if (unfocusWithBracket) {
-        shortcuts.unfocusElement(searchbox);
+        shortcuts.unfocusElement(searchbox, "work");
       }
       // serch on Google
       if (searchOnGoogle) {
@@ -165,7 +165,7 @@
       }
       // When the button 'esc' is pressed, the search box is unfocused.
       if (unfocusWithESC) {
-        shortcuts.unfocusElement(searchbox);
+        shortcuts.unfocusElement(searchbox, "work");
       }
     });
   });
