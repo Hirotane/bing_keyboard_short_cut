@@ -71,7 +71,6 @@ var shortcuts = {
     chrome.storage.sync.get(this.defaultOptions, callback);
 
     this.searchType = "video";
-    // console.log("this.searchType: "+this.searchType);
     results = Array.from(document.querySelectorAll(".mc_vtvc > a"));
     var target = results[0];
     target.focus();
@@ -231,7 +230,7 @@ var shortcuts = {
         }
         break;
       case "Q":
-        if (options.stopChatGeneration && e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+        if (options.stopChatGeneration && e.shiftKey && e.ctrlKey && !e.metaKey) {
           keyType = "stopChatGeneration";
         }
         break;
@@ -452,9 +451,6 @@ var shortcuts = {
     // close window for autocomplete
     document.body.click();
     switch (type) {
-      case "all":
-        this.focusResult(0, this.all_selector);
-        break;
       case "work":
         this.focusResult(0, this.work_selector);
         break;

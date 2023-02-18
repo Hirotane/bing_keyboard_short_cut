@@ -100,7 +100,7 @@
 
         // When the button 'ctrl + [' is pressed, the search box is unfocused.
         case "unfocusWithBracket":
-          shortcuts.unfocusElement(searchbox, "all");
+          shortcuts.unfocusElement(searchbox);
           break;
 
         // serch on Google
@@ -141,7 +141,7 @@
         // When the button 'esc' is pressed, the search box is unfocused.
         case "unfocusWithESC":
           e.preventDefault();
-          shortcuts.unfocusElement(searchbox, "all");
+          shortcuts.unfocusElement(searchbox);
           break;
       }
       sessionStorage.setItem("keypress", 0);
