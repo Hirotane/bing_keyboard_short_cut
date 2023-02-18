@@ -5,153 +5,7 @@
 
   shortcuts.initAll(function (options) {
     window.addEventListener("keydown", function (e) {
-      // console.log(e.key);
-      // console.log(location.href);
       let keyType = shortcuts.getKeyType(e, options);
-      if (keyType == "shouldNavigateNext") {
-        console.log("down");
-      }
-      var shouldNavigateNext =
-          (options.navigateSearchResultsWithJKHL &&
-            e.key == "j" &&
-            !e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()) ||
-          (options.navigateSearchResultsWithArrows &&
-            e.key == "ArrowDown" &&
-            !e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()),
-        shouldNavigateBack =
-          (options.navigateSearchResultsWithJKHL &&
-            e.key == "k" &&
-            !e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()) ||
-          (options.navigateSearchResultsWithArrows &&
-            e.key == "ArrowUp" &&
-            !e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()),
-        movePreviousSearchPage =
-          (options.navigateSearchResultsWithJKHL &&
-            e.key == "h" &&
-            !e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()) ||
-          (options.navigateSearchResultsWithArrows &&
-            e.key == "ArrowLeft" &&
-            !e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()),
-        moveNextSearchPage =
-          (options.navigateSearchResultsWithJKHL &&
-            e.key == "l" &&
-            !e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()) ||
-          (options.navigateSearchResultsWithArrows &&
-            e.key == "ArrowRight" &&
-            !e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()),
-        goToPreviousPage =
-          (options.movePagesWithHL &&
-            e.key == "H" &&
-            e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()) ||
-          (options.movePagesWithArrows &&
-            e.key == "ArrowLeft" &&
-            e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()),
-        goToNextPage =
-          (options.movePagesWithHL &&
-            e.key == "L" &&
-            e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()) ||
-          (options.movePagesWithArrows &&
-            e.key == "ArrowRight" &&
-            e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()),
-        searchTypeA =
-          options.selectSearchType &&
-          e.key == "A" &&
-          e.shiftKey &&
-          !e.ctrlKey &&
-          !e.metaKey &&
-          !shortcuts.isInputActive(),
-        searchTypeC =
-          options.selectSearchType &&
-          e.key == "C" &&
-          e.shiftKey &&
-          !e.ctrlKey &&
-          !e.metaKey &&
-          !shortcuts.isInputActive(),
-        searchTypeW =
-          options.selectSearchType &&
-          e.key == "W" &&
-          e.shiftKey &&
-          !e.ctrlKey &&
-          !e.metaKey &&
-          !shortcuts.isInputActive(),
-        searchTypeI =
-          options.selectSearchType &&
-          e.key == "I" &&
-          e.shiftKey &&
-          !e.ctrlKey &&
-          !e.metaKey &&
-          !shortcuts.isInputActive(),
-        searchTypeN =
-          options.selectSearchType &&
-          e.key == "N" &&
-          e.shiftKey &&
-          !e.ctrlKey &&
-          !e.metaKey &&
-          !shortcuts.isInputActive(),
-        searchTypeV =
-          options.selectSearchType &&
-          e.key == "V" &&
-          e.shiftKey &&
-          !e.ctrlKey &&
-          !e.metaKey &&
-          !shortcuts.isInputActive(),
-        searchTypeM =
-          options.selectSearchType &&
-          e.key == "M" &&
-          e.shiftKey &&
-          !e.ctrlKey &&
-          !e.metaKey &&
-          !shortcuts.isInputActive(),
-        searchTypeS =
-          options.selectSearchType &&
-          e.key == "S" &&
-          e.shiftKey &&
-          !e.ctrlKey &&
-          !e.metaKey &&
-          !shortcuts.isInputActive(),
-        unfocusWithBracket =
-          options.unfocusWithBracket && e.key == "[" && e.ctrlKey && !e.metaKey && shortcuts.isInputActive(),
-        searchOnGoogle =
-          options.switchSearchEngine && e.key == "g" && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive(),
-        changeLangEn = options.changeLanguage && e.key == "e" && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive(),
-        changeLangNa = options.changeLanguage && e.key == "d" && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive(),
-        stopChatGeneration = e.key == "Q" && e.shiftKey && e.ctrlKey;
 
       // get input box for normal or conversational search
       let mode =
@@ -168,65 +22,98 @@
       }
 
       // select search type
-      if (searchTypeA && !chatMode) {
-        shortcuts.changeSearchType("all");
-      } else if (searchTypeA && chatMode) {
-        shortcuts.changeSearchType("all_chat");
-      } else if (searchTypeC) {
-        shortcuts.changeSearchType("chat");
-      } else if (searchTypeW) {
-        shortcuts.changeSearchType("work");
-      } else if (searchTypeI) {
-        shortcuts.changeSearchType("image");
-      } else if (searchTypeN) {
-        shortcuts.changeSearchType("news");
-      } else if (searchTypeV) {
-        shortcuts.changeSearchType("video");
-      } else if (searchTypeM) {
-        shortcuts.changeSearchType("map");
-      } else if (searchTypeS) {
-        shortcuts.changeSearchType("shop");
-      }
+      switch (keyType) {
+        case "searchAll":
+          if (chatMode) {
+            shortcuts.changeSearchType("all_chat");
+          } else {
+            shortcuts.changeSearchType("all");
+          }
+          break;
 
-      // stop answer
-      if (stopChatGeneration && chatMode) {
-        let chatShadowRoot_3rd = chatShadowRoot_2nd.querySelector("cib-typing-indicator").shadowRoot;
-        let stopButton = chatShadowRoot_3rd.querySelector("button");
-        stopButton.click();
-      }
+        case "searchChat":
+          shortcuts.changeSearchType("chat");
+          break;
 
-      if ((shouldNavigateNext && !chatMode) || (shouldNavigateBack && !chatMode)) {
-        // console.log("j or k");
-        e.preventDefault();
-        e.stopPropagation();
-        shortcuts.focusResult(shouldNavigateNext ? 1 : -1, shortcuts.all_selector);
-      }
-      // search page transition
-      if ((moveNextSearchPage && !chatMode) || (movePreviousSearchPage && !chatMode)) {
-        // console.log("h or l");
-        e.preventDefault();
-        e.stopPropagation();
-        shortcuts.moveAllSearchPage(moveNextSearchPage ? 1 : -1);
-      }
-      // page transition for all url
-      if (goToPreviousPage || goToNextPage) {
-        // console.log("shift key & H, L");
-        e.preventDefault();
-        e.stopPropagation();
-        shortcuts.movePage(goToNextPage ? 1 : -1);
-      }
-      // When the button 'ctrl + [' is pressed, the search box is unfocused.
-      if (unfocusWithBracket) {
-        shortcuts.unfocusElement(searchbox, "all");
-      }
-      // serch on Google
-      if (searchOnGoogle) {
-        shortcuts.changeSearchGoogle();
-      }
-      // change Language
-      if (changeLangEn || changeLangNa) {
-        console.log("lang");
-        shortcuts.changeLang();
+        case "searchWork":
+          shortcuts.changeSearchType("work");
+          break;
+
+        case "searchImage":
+          shortcuts.changeSearchType("image");
+          break;
+
+        case "searchNews":
+          shortcuts.changeSearchType("news");
+          break;
+
+        case "searchVideo":
+          shortcuts.changeSearchType("video");
+          break;
+
+        case "searchMap":
+          shortcuts.changeSearchType("map");
+          break;
+
+        case "searchShop":
+          shortcuts.changeSearchType("shop");
+          break;
+
+        // stop answer
+        case "stopChatGeneration":
+          if (chatMode) {
+            let chatShadowRoot_3rd = chatShadowRoot_2nd.querySelector("cib-typing-indicator").shadowRoot;
+            let stopButton = chatShadowRoot_3rd.querySelector("button");
+            stopButton.click();
+          }
+          break;
+
+        // move search results
+        case "shouldNavigateNext":
+        case "shouldNavigateBack":
+          if (!chatMode) {
+            // console.log("j or k");
+            e.preventDefault();
+            e.stopPropagation();
+            shortcuts.focusResult(keyType == "shouldNavigateNext" ? 1 : -1, shortcuts.all_selector);
+          }
+          break;
+
+        // page transition for search results
+        case "moveNextSearchPage":
+        case "movePreviousSearchPage":
+          if (!chatMode) {
+            // console.log("h or l");
+            e.preventDefault();
+            e.stopPropagation();
+            shortcuts.moveAllSearchPage(keyType == "moveNextSearchPage" ? 1 : -1);
+          }
+          break;
+
+        // page transition for all url
+        case "goToPreviousPage":
+        case "goToNextPage":
+          // console.log("shift key & H, L");
+          e.preventDefault();
+          e.stopPropagation();
+          shortcuts.movePage(keyType == "goToNextPage" ? 1 : -1);
+          break;
+
+        // When the button 'ctrl + [' is pressed, the search box is unfocused.
+        case "unfocusWithBracket":
+          shortcuts.unfocusElement(searchbox, "all");
+          break;
+
+        // serch on Google
+        case "searchOnGoogle":
+          shortcuts.changeSearchGoogle();
+          break;
+
+        // change Language
+        case "changeLangEn":
+        case "changeLangNa":
+          shortcuts.changeLang();
+          break;
       }
     });
     window.addEventListener("keyup", function (e) {

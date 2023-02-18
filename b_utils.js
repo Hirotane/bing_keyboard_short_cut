@@ -96,6 +96,7 @@ var shortcuts = {
         if (options.navigateSearchResultsWithJKHL && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "shouldNavigateNext";
         }
+        break;
       case "ArrowDown":
         if (
           options.navigateSearchResultsWithArrows &&
@@ -106,10 +107,12 @@ var shortcuts = {
         ) {
           keyType = "shouldNavigateNext";
         }
+        break;
       case "k":
         if (options.navigateSearchResultsWithJKHL && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "shouldNavigateBack";
         }
+        break;
       case "ArrowUp":
         if (
           options.navigateSearchResultsWithArrows &&
@@ -120,14 +123,17 @@ var shortcuts = {
         ) {
           keyType = "shouldNavigateBack";
         }
+        break;
       case "h":
         if (options.navigateSearchResultsWithJKHL && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "movePreviousSearchPage";
         }
+        break;
       case "H":
         if (options.movePagesWithHL && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "goToPreviousPage";
         }
+        break;
       case "ArrowLeft":
         if (
           options.navigateSearchResultsWithArrows &&
@@ -140,14 +146,17 @@ var shortcuts = {
         } else if (options.movePagesWithArrows && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "goToPreviousPage";
         }
+        break;
       case "l":
         if (options.navigateSearchResultsWithJKHL && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "moveNextSearchPage";
         }
+        break;
       case "L":
         if (options.movePagesWithHL && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "goToNextPage";
         }
+        break;
       case "ArrowRight":
         if (
           options.navigateSearchResultsWithArrows &&
@@ -160,66 +169,87 @@ var shortcuts = {
         } else if (options.movePagesWithArrows && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "goToNextPage";
         }
+        break;
       case "A":
         if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "searchAll";
         }
+        break;
+      case "C":
+        if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "searchChat";
+        }
+        break;
       case "W":
         if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "searchWork";
         }
+        break;
       case "I":
         if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "searchImage";
         }
+        break;
       case "N":
         if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "searchNews";
         }
+        break;
       case "V":
         if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "searchVideo";
         }
+        break;
       case "M":
         if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "searchMap";
         }
+        break;
       case "S":
         if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
-          keyType = "searchShopping";
+          keyType = "searchShop";
         }
+        break;
       case "[":
         if (options.unfocusWithBracket && !e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "unfocusWithBracket";
         }
+        break;
       case "g":
         if (options.switchSearchEngine && !e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "searchOnGoogle";
         }
+        break;
       case "e":
         if (options.changeLanguage && !e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "changeLangEn";
         }
+        break;
       case "d":
         if (options.changeLanguage && !e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "changeLangNa";
         }
+        break;
       case "Q":
         if (options.stopChatGeneration && e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "stopChatGeneration";
         }
+        break;
       case "i":
         if (options.focusOnInputWithI && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "focusOnInput";
         }
+        break;
       case "/":
         if (options.focusOnInputWithSlash && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "focusOnInput";
         }
+        break;
       case "Escape":
         if (options.unfocusWithESC && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
           keyType = "unfocusWithESC";
         }
+        break;
     }
     return keyType;
   },
