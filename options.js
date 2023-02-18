@@ -61,6 +61,7 @@ function restore_options() {
       hideAds: true,
       switchSearchEngine: true,
       changeLanguage: true,
+      stopChatGeneration: true,
       scrollToTopOrBottom: true,
     },
     function (items) {
@@ -78,6 +79,7 @@ function restore_options() {
       document.getElementById("switch-search-engine").checked = items.switchSearchEngine;
       document.getElementById("switch-search-engine").checked = items.switchSearchEngine;
       document.getElementById("change-language").checked = items.changeLanguage;
+      document.getElementById("stop-chat-generation").checked = items.stopChatGeneration;
       document.getElementById("scroll-to-top-or-bottom").checked = items.scrollToTopOrBottom;
     }
   );

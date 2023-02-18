@@ -13,6 +13,7 @@ var shortcuts = {
     hideAds: true,
     switchSearchEngine: true,
     changeLanguage: true,
+    stopChatGeneration: true,
   },
   searchType: "all",
   all_selector:
@@ -87,6 +88,140 @@ var shortcuts = {
     var target = results[0];
     target.focus();
     this.underLine(target);
+  },
+  getKeyType: function (e, options) {
+    let keyType;
+    switch (e.key) {
+      case "j":
+        if (options.navigateSearchResultsWithJKHL && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "shouldNavigateNext";
+        }
+      case "ArrowDown":
+        if (
+          options.navigateSearchResultsWithArrows &&
+          !e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !this.isInputActive()
+        ) {
+          keyType = "shouldNavigateNext";
+        }
+      case "k":
+        if (options.navigateSearchResultsWithJKHL && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "shouldNavigateBack";
+        }
+      case "ArrowUp":
+        if (
+          options.navigateSearchResultsWithArrows &&
+          !e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !this.isInputActive()
+        ) {
+          keyType = "shouldNavigateBack";
+        }
+      case "h":
+        if (options.navigateSearchResultsWithJKHL && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "movePreviousSearchPage";
+        }
+      case "H":
+        if (options.movePagesWithHL && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "goToPreviousPage";
+        }
+      case "ArrowLeft":
+        if (
+          options.navigateSearchResultsWithArrows &&
+          !e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !this.isInputActive()
+        ) {
+          keyType = "movePreviousSearchPage";
+        } else if (options.movePagesWithArrows && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "goToPreviousPage";
+        }
+      case "l":
+        if (options.navigateSearchResultsWithJKHL && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "moveNextSearchPage";
+        }
+      case "L":
+        if (options.movePagesWithHL && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "goToNextPage";
+        }
+      case "ArrowRight":
+        if (
+          options.navigateSearchResultsWithArrows &&
+          !e.shiftKey &&
+          !e.ctrlKey &&
+          !e.metaKey &&
+          !this.isInputActive()
+        ) {
+          keyType = "moveNextSearchPage";
+        } else if (options.movePagesWithArrows && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "goToNextPage";
+        }
+      case "A":
+        if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "searchAll";
+        }
+      case "W":
+        if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "searchWork";
+        }
+      case "I":
+        if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "searchImage";
+        }
+      case "N":
+        if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "searchNews";
+        }
+      case "V":
+        if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "searchVideo";
+        }
+      case "M":
+        if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "searchMap";
+        }
+      case "S":
+        if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "searchShopping";
+        }
+      case "[":
+        if (options.unfocusWithBracket && !e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "unfocusWithBracket";
+        }
+      case "g":
+        if (options.switchSearchEngine && !e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "searchOnGoogle";
+        }
+      case "e":
+        if (options.changeLanguage && !e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "changeLangEn";
+        }
+      case "d":
+        if (options.changeLanguage && !e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "changeLangNa";
+        }
+      case "Q":
+        if (options.stopChatGeneration && e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "stopChatGeneration";
+        }
+      case "i":
+        if (options.focusOnInputWithI && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "focusOnInput";
+        }
+      case "/":
+        if (options.focusOnInputWithSlash && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "focusOnInput";
+        }
+      case "Escape":
+        if (options.unfocusWithESC && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+          keyType = "unfocusWithESC";
+        }
+    }
+    return keyType;
   },
   isInputActive: function () {
     var activeElement = document.activeElement;

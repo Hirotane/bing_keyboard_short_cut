@@ -7,6 +7,10 @@
     window.addEventListener("keydown", function (e) {
       // console.log(e.key);
       // console.log(location.href);
+      let keyType = shortcuts.getKeyType(e, options);
+      if (keyType == "shouldNavigateNext") {
+        console.log("down");
+      }
       var shouldNavigateNext =
           (options.navigateSearchResultsWithJKHL &&
             e.key == "j" &&
