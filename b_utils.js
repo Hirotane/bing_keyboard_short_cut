@@ -211,7 +211,7 @@ var shortcuts = {
         }
         break;
       case "[":
-        if (options.unfocusWithBracket && !e.shiftKey && e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+        if (options.unfocusWithBracket && !e.shiftKey && e.ctrlKey && !e.metaKey && this.isInputActive()) {
           keyType = "unfocusWithBracket";
         }
         break;
@@ -246,7 +246,7 @@ var shortcuts = {
         }
         break;
       case "Escape":
-        if (options.unfocusWithESC && !e.shiftKey && !e.ctrlKey && !e.metaKey && !this.isInputActive()) {
+        if (options.unfocusWithESC && !e.shiftKey && !e.ctrlKey && !e.metaKey && this.isInputActive()) {
           keyType = "unfocusWithESC";
         }
         break;
@@ -310,7 +310,6 @@ var shortcuts = {
       event.target.style.border = "none";
       event.target.style.borderWidth = "";
       event.target.style.borderColor = "";
-      console.log("blur");
     });
   },
   grayoutAds: function () {
@@ -414,8 +413,6 @@ var shortcuts = {
     target.focus();
     // this.emphasizeVideoFocus(target.querySelector('div'));
     this.emphasizeVideoFocus(target);
-    console.log(target.querySelector("div").style);
-    console.log(target.style);
   },
   moveAllSearchPage: function (offset) {
     if (offset == 1) {

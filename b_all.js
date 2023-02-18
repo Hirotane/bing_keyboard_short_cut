@@ -5,8 +5,6 @@
 
   shortcuts.initAll(function (options) {
     window.addEventListener("keydown", function (e) {
-      let keyType = shortcuts.getKeyType(e, options);
-
       // get input box for normal or conversational search
       let mode =
         document.querySelector(".cib-serp-main") && document.querySelector(".cib-serp-main").getAttribute("mode");
@@ -21,7 +19,8 @@
         searchbox = document.querySelector("textarea.b_searchbox") || document.querySelector(".b_searchbox");
       }
 
-      // select search type
+      let keyType = shortcuts.getKeyType(e, options);
+
       switch (keyType) {
         case "searchAll":
           if (chatMode) {
@@ -117,11 +116,6 @@
       }
     });
     window.addEventListener("keyup", function (e) {
-      var focusOnInput =
-          (options.focusOnInputWithSlash && e.key == "/" && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) ||
-          (options.focusOnInputWithI && e.key == "i" && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()),
-        unfocusWithESC = options.unfocusWithESC && e.key == "Escape" && shortcuts.isInputActive();
-
       // get input box for normal or conversational search
       let mode =
         document.querySelector(".cib-serp-main") && document.querySelector(".cib-serp-main").getAttribute("mode");
@@ -134,17 +128,21 @@
         searchbox = document.querySelector("textarea.b_searchbox") || document.querySelector(".b_searchbox");
       }
 
-      // e = e || window.event;
-      // When the button '/' is pressed, the search box is focused.
-      if (focusOnInput) {
-        var pos = searchbox.value.length;
-        searchbox.focus();
-        searchbox.setSelectionRange(pos, pos);
-      }
-      // When the button 'esc' is pressed, the search box is unfocused.
-      if (unfocusWithESC) {
-        e.preventDefault();
-        shortcuts.unfocusElement(searchbox, "all");
+      let keyType = shortcuts.getKeyType(e, options);
+
+      switch (keyType) {
+        // When the button '/' is pressed, the search box is focused.
+        case "focusOnInput":
+          var pos = searchbox.value.length;
+          searchbox.focus();
+          searchbox.setSelectionRange(pos, pos);
+          break;
+
+        // When the button 'esc' is pressed, the search box is unfocused.
+        case "unfocusWithESC":
+          e.preventDefault();
+          shortcuts.unfocusElement(searchbox, "all");
+          break;
       }
       sessionStorage.setItem("keypress", 0);
     });
