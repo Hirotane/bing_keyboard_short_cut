@@ -1,87 +1,104 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>My Test Extension Options</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <section>
-        <h1>Select Keyboad Shortcuts</h1>
+      <h1>Select Keyboad Shortcuts</h1>
     </section>
     <section>
-        <table>
-            <tr>
-                <th></th> <th>keybind</th> <th>description</th>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="navigate-search-results-with-jkhl"></td> 
-                <td><span class="key">j</span>/<span class="key">k</span>/<span class="key">h</span>/<span class="key">l</span></td>
-                <td rowspan="2" class="">Navigation in search pages</td> 
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="navigate-search-results-with-arrows"></td> 
-                <td><span class="key">&darr;</span>/<span class="key">&uarr;</span>/<span class="key">&larr;</span>/<span class="key">&rarr;</span></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="focus-on-input"></td> 
-                <td><span class="key">/</span></td>
-                <td >Focus on search box or text area</td> 
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="unfocus-with-esc"></td> 
-                <td><span class="key">ESC</span></td>
-                <td rowspan="2">Exit from search box or text area</td> 
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="unfocus-with-bracket"></td> 
-                <td><span class="key">Ctrl-[</span></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="select-search-type"></td> 
-                <td><span class="key">a</span>/<span class="key">w</span>
-                    <span class="key">i</span>/<span class="key">v</span>
-                    <span class="key">m</span>/<span class="key">s</span></td>
-                <td>Select serch type</td> 
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="move-pages-with-hl"></td> 
-                <td><span class="key">Shift-h</span>/<span class="key">Shift-l</span></td>
-                <td rowspan="2">Page transition</td> 
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="move-pages-with-arrows"></td> 
-                <td><span class="key">Shift-&larr;</span>/<span class="key">Shift-&rarr;</span></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="switch-search-engine"></td> 
-                <td><span class="key">Ctrl-g</span>/<span class="key">Ctrl-b</span></td>
-                <td >Switch search engine</td> 
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="change-language"></td> 
-                <td><span class="key">Ctrl-e</span>/<span class="key">Ctrl-d</span></td>
-                <td >Change language</td> 
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="scroll-in-site-with-jkdu"></td> 
-                <td><span class="key">j</span>/<span class="key">k</span>/<span class="key">u</span>/<span class="key">d</span></td>
-                <td rowspan="2">Scroll operations in all websites</td> 
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="scroll-to-top-or-bottom"></td> 
-                <td><span class="key">gg</span>/<span class="key">Shift-g</span></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="hide-ads"></td>
-                <td></td>
-                <td >Gray out ads</td> 
-            </tr>
-        </table>
+      <table>
+        <tr>
+          <th></th>
+          <th>keybind</th>
+          <th>description</th>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="navigate-search-results-with-jkhl" /></td>
+          <td>
+            <span class="key">j</span>/<span class="key">k</span>/<span class="key">h</span>/<span class="key">l</span>
+          </td>
+          <td rowspan="2" class="">Navigation in search pages</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="navigate-search-results-with-arrows" /></td>
+          <td>
+            <span class="key">&darr;</span>/<span class="key">&uarr;</span>/<span class="key">&larr;</span>/<span
+              class="key"
+              >&rarr;</span
+            >
+          </td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="focus-on-input-with-slash" /></td>
+          <td><span class="key">/</span></td>
+          <td>Focus on search box or text area</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="focus-on-input-with-i" /></td>
+          <td><span class="key">i</span></td>
+          <td>Focus on search box or text area</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="unfocus-with-esc" /></td>
+          <td><span class="key">ESC</span></td>
+          <td rowspan="2">Exit from search box or text area</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="unfocus-with-bracket" /></td>
+          <td><span class="key">Ctrl-[</span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="select-search-type" /></td>
+          <td>
+            <span class="key">A</span>/<span class="key">C</span>/<span class="key">W</span>/<span class="key">I</span
+            >/<span class="key">V</span>/<span class="key">M</span>
+          </td>
+          <td>Select serch type</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="move-pages-with-hl" /></td>
+          <td><span class="key">Shift-h</span>/<span class="key">Shift-l</span></td>
+          <td rowspan="2">Page transition</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="move-pages-with-arrows" /></td>
+          <td><span class="key">Shift-&larr;</span>/<span class="key">Shift-&rarr;</span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="switch-search-engine" /></td>
+          <td><span class="key">Ctrl-g</span>/<span class="key">Ctrl-b</span></td>
+          <td>Switch search engine</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="change-language" /></td>
+          <td><span class="key">Ctrl-e</span>/<span class="key">Ctrl-d</span></td>
+          <td>Change language</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="scroll-in-site-with-jkdu" /></td>
+          <td>
+            <span class="key">j</span>/<span class="key">k</span>/<span class="key">u</span>/<span class="key">d</span>
+          </td>
+          <td rowspan="2">Scroll operations in all websites</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="scroll-to-top-or-bottom" /></td>
+          <td><span class="key">gg</span>/<span class="key">Shift-g</span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="hide-ads" /></td>
+          <td></td>
+          <td>Gray out ads</td>
+        </tr>
+      </table>
     </section>
     <section>
-        <div id="status"></div>
-        <button id="save">Save</button>
-        <script src="options.js"></script>
+      <div id="status"></div>
+      <button id="save">Save</button>
+      <script src="options.js"></script>
     </section>
-</body>
+  </body>
 </html>

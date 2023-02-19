@@ -1,8 +1,8 @@
 {
-    "Name": {
-        "message": "Bingoogle shortcuts"
-    },
-    "Description": {
-        "message": "“Bingoogle shortcuts” provides keyboard shortcuts for “Bing” and “Google“. You will be able to search and browse without mouse."
-    }
+  "Name": {
+    "message": "Bingoogle Shortcuts - Browse with Keyboard"
+  },
+  "Description": {
+    "message": "“Bingoogle shortcuts” provides keyboard shortcuts for “Bing” and “Google“. You will be able to search and browse without mouse."
+  }
 }

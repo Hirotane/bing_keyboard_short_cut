@@ -1,107 +1,168 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>My Test Extension Options</title>
-    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="popup.css">
-</head>
-<body>
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
     <section>
-        <h1>Keyboad Shortcut</h1>
-        <p>If you want to enable/disable, please go to <a href="options.html" >option page</a>.</p>
+      <h1>Keyboad Shortcut</h1>
+      <p>If you want to enable/disable, please go to <a href="options.html">option page</a>.</p>
     </section>
     <table>
-        <caption>Navigation on search results</caption>
-        <tr>
-          <td class="left"><span class="key">j</span>/<span class="key">&darr;</span>:</td> <td class="right">move to next search result</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">k</span>/<span class="key">&uarr;</span>:</td> <td class="right">move to previous search result</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">l</span>/<span class="key">&rarr;</span>:</td> <td class="right">move to next search result page</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">h</span>/<span class="key">&larr;</span>:</td> <td class="right">move to previous search result page</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">/</span>:</td> <td class="right">focus on search box</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">ESC</span>/<span class="key">Ctrl-[</span>:</td> <td class="right">unfocus on search box</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">Enter</span>:</td> <td class="right">open selected result</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">a</span>:</td> <td class="right">go to all tab</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">w</span>:</td> <td class="right">go to work tab</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">i</span>:</td> <td class="right">go to image tab</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">n</span>:</td> <td class="right">go to news tab</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">v</span>:</td> <td class="right">go to video tab</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">m</span>:</td> <td class="right">go to map tab</td>
-        </tr>
-        <tr>
-          <td class="left"><span class="key">s</span>:</td> <td class="right">go to shopping tab</td>
-        </tr>
-    </table>
-    <table>
-      <caption>Page transition</caption>
+      <caption>
+        Navigation on search results
+      </caption>
       <tr>
-        <td class="left"><span class="key">Shift-h</span>:</td> <td class="right">go back</td>
+        <td class="left"><span class="key">j</span>/<span class="key">&darr;</span>:</td>
+        <td class="right">move to next search result</td>
       </tr>
       <tr>
-        <td class="left"><span class="key">Shift-l</span>:</td> <td class="right">go forward</td>
-      </tr>
-    </table>
-    <table>
-      <caption>Switch search engine</caption>
-      <tr>
-        <td class="left"><span class="key">Ctrl-g</span>:</td> <td class="right">search on Google</td>
+        <td class="left"><span class="key">k</span>/<span class="key">&uarr;</span>:</td>
+        <td class="right">move to previous search result</td>
       </tr>
       <tr>
-        <td class="left"><span class="key">Ctrl-b</span>:</td> <td class="right">search on Bing</td>
-      </tr>
-    </table>
-    <table>
-      <caption>Change language</caption>
-      <tr>
-        <td class="left"><span class="key">Ctrl-e</span>:</td> <td class="right">show search results in english</td>
+        <td class="left"><span class="key">l</span>/<span class="key">&rarr;</span>:</td>
+        <td class="right">move to next search result page</td>
       </tr>
       <tr>
-        <td class="left"><span class="key">Ctrl-d</span>:</td> <td class="right">show search results in default language</td>
+        <td class="left"><span class="key">h</span>/<span class="key">&larr;</span>:</td>
+        <td class="right">move to previous search result page</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">/</span>/<span class="key">i</span>:</td>
+        <td class="right">focus on search box</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">ESC</span>/<span class="key">Ctrl-[</span>:</td>
+        <td class="right">unfocus on search box</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Enter</span>:</td>
+        <td class="right">open selected result</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Shift-a</span>:</td>
+        <td class="right">go to all tab</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Shift-c</span>:</td>
+        <td class="right">go to chat bot</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Shift-w</span>:</td>
+        <td class="right">go to work tab</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Shift-i</span>:</td>
+        <td class="right">go to image tab</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Shift-n</span>:</td>
+        <td class="right">go to news tab</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Shift-v</span>:</td>
+        <td class="right">go to video tab</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Shift-m</span>:</td>
+        <td class="right">go to map tab</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Shift-s</span>:</td>
+        <td class="right">go to shopping tab</td>
       </tr>
     </table>
     <table>
-      <caption>Scroll operations in all web sites</caption>
+      <caption>
+        Control for AI chatbot
+      </caption>
       <tr>
-        <td class="left"><span class="key">j</span>/<span class="key">&darr;</span>:</td> <td class="right">scroll down</td>
+        <td class="left"><span class="key">/</span>/<span class="key">i</span>:</td>
+        <td class="right">focus on the input field</td>
       </tr>
       <tr>
-        <td class="left"><span class="key">k</span>/<span class="key">&uarr;</span>:</td> <td class="right">scroll up</td>
+        <td class="left"><span class="key">Enter</span>:</td>
+        <td class="right">confirm and send the input sentence</td>
       </tr>
       <tr>
-        <td class="left"><span class="key">d</span>:</td> <td class="right">scroll down (Large)</td>
+        <td class="left"><span class="key">ESC</span>/<span class="key">Ctrl-[</span>:</td>
+        <td class="right">remove focus from the input field</td>
       </tr>
       <tr>
-        <td class="left"><span class="key">u</span>:</td> <td class="right">scroll up (Large)</td>
-      </tr>
-      <tr>
-        <td class="left"><span class="key">gg</span>:</td> <td class="right">scroll to top</td>
-      </tr>
-      <tr>
-        <td class="left"><span class="key">Shift-g</span>:</td> <td class="right">scroll to bottom</td>
+        <td class="left"><span class="key">Ctrl-Shift-q</span>:</td>
+        <td class="right">stop response during generation</td>
       </tr>
     </table>
-</body>
+    <table>
+      <caption>
+        Page transition
+      </caption>
+      <tr>
+        <td class="left"><span class="key">Shift-h</span>:</td>
+        <td class="right">go back</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Shift-l</span>:</td>
+        <td class="right">go forward</td>
+      </tr>
+    </table>
+    <table>
+      <caption>
+        Switch search engine
+      </caption>
+      <tr>
+        <td class="left"><span class="key">Ctrl-g</span>:</td>
+        <td class="right">search on Google</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Ctrl-b</span>:</td>
+        <td class="right">search on Bing</td>
+      </tr>
+    </table>
+    <table>
+      <caption>
+        Change language
+      </caption>
+      <tr>
+        <td class="left"><span class="key">Ctrl-e</span>:</td>
+        <td class="right">show search results in english</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Ctrl-d</span>:</td>
+        <td class="right">show search results in default language</td>
+      </tr>
+    </table>
+    <table>
+      <caption>
+        Scroll operations in all web sites
+      </caption>
+      <tr>
+        <td class="left"><span class="key">j</span>/<span class="key">&darr;</span>:</td>
+        <td class="right">scroll down</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">k</span>/<span class="key">&uarr;</span>:</td>
+        <td class="right">scroll up</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">d</span>:</td>
+        <td class="right">scroll down (Large)</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">u</span>:</td>
+        <td class="right">scroll up (Large)</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">gg</span>:</td>
+        <td class="right">scroll to top</td>
+      </tr>
+      <tr>
+        <td class="left"><span class="key">Shift-g</span>:</td>
+        <td class="right">scroll to bottom</td>
+      </tr>
+    </table>
+  </body>
 </html>
