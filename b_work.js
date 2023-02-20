@@ -10,7 +10,7 @@
 
   shortcuts.initWork(function (options) {
     window.addEventListener("keydown", function (e) {
-      let keyType = shortcuts.getKeyType(e, options);
+      let keyType = keymap.getKeyType(e, options);
 
       switch (keyType) {
         case "searchAll":
@@ -46,11 +46,11 @@
           break;
 
         // move search results
-        case "shouldNavigateNext":
-        case "shouldNavigateBack":
+        case "navigateNext":
+        case "navigateBack":
           e.preventDefault();
           e.stopPropagation();
-          shortcuts.focusResult(keyType == "shouldNavigateNext" ? 1 : -1, shortcuts.work_selector);
+          shortcuts.focusResult(keyType == "navigateNext" ? 1 : -1, shortcuts.work_selector);
           break;
 
         case "moveNextSearchPage":
@@ -76,7 +76,7 @@
       }
     });
     window.addEventListener("keyup", function (e) {
-      let keyType = shortcuts.getKeyType(e, options);
+      let keyType = keymap.getKeyType(e, options);
 
       switch (keyType) {
         // When the button '/' or 'i' is pressed, the search box is focused.

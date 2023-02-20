@@ -19,7 +19,7 @@
         searchbox = document.querySelector("textarea.b_searchbox") || document.querySelector(".b_searchbox");
       }
 
-      let keyType = shortcuts.getKeyType(e, options);
+      let keyType = keymap.getKeyType(e, options);
 
       switch (keyType) {
         case "searchAll":
@@ -68,13 +68,13 @@
           break;
 
         // move search results
-        case "shouldNavigateNext":
-        case "shouldNavigateBack":
+        case "navigateNext":
+        case "navigateBack":
           if (!chatMode) {
             // console.log("j or k");
             e.preventDefault();
             e.stopPropagation();
-            shortcuts.focusResult(keyType == "shouldNavigateNext" ? 1 : -1, shortcuts.all_selector);
+            shortcuts.focusResult(keyType == "navigateNext" ? 1 : -1, shortcuts.all_selector);
           }
           break;
 
@@ -128,12 +128,12 @@
         searchbox = document.querySelector("textarea.b_searchbox") || document.querySelector(".b_searchbox");
       }
 
-      let keyType = shortcuts.getKeyType(e, options);
+      let keyType = keymap.getKeyType(e, options);
 
       switch (keyType) {
         // When the button '/' is pressed, the search box is focused.
         case "focusOnInput":
-          var pos = searchbox.value.length;
+          let pos = searchbox.value.length;
           searchbox.focus();
           searchbox.setSelectionRange(pos, pos);
           break;
