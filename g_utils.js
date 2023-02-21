@@ -20,13 +20,13 @@ var shortcuts = {
   // #search a > h3:not([data-initq] h3) : search results excluding the section for questions from others
   // #bres a > div:has(b) : the section for related keywords
   // [data-text-ad] a > div[role='heading'] : ad headings
-  all_selector: "#search a > h3:not([data-initq] h3), #bres a div:has(b), [data-text-ad] a > div[role='heading']",
+  all_selector:
+    "#search a > h3:not([data-initq] h3), #botstuff a > h3:not([data-initq] h3), #bres a div:has(b), [data-text-ad] a > div[role='heading']",
   all_title_selector: "h3, div[role='heading'], div:last-child",
   news_title_selector: "div[role='heading']",
   image_selector: "[data-ri] > [data-nav]",
   news_selector: "#search [data-hveid] a div[role='heading']",
   initAll: function (callback) {
-    console.log("initAll");
     this.searchType = "all";
     chrome.storage.sync.get(this.defaultOptions, callback);
     chrome.storage.sync.get(this.defaultOptions, function (options) {
@@ -39,7 +39,6 @@ var shortcuts = {
     this.focusOnIndexedElement(this.all_selector, focusIndex);
   },
   initImage: function (callback) {
-    console.log("initImage");
     this.searchType = "image";
     chrome.storage.sync.get(this.defaultOptions, callback);
 
@@ -47,7 +46,6 @@ var shortcuts = {
     this.focusOnIndexedElement(this.image_selector, 0);
   },
   initVideo: function (callback) {
-    console.log("initVideo");
     this.searchType = "video";
     chrome.storage.sync.get(this.defaultOptions, callback);
 
@@ -55,7 +53,6 @@ var shortcuts = {
     this.focusOnIndexedElement(this.all_selector, focusIndex);
   },
   initNews: function (callback) {
-    console.log("initNews");
     this.searchType = "news";
     chrome.storage.sync.get(this.defaultOptions, callback);
 
@@ -166,7 +163,6 @@ var shortcuts = {
   },
   focusResult: function (offset, selector) {
     var results = this.getResults(selector);
-    console.log(results);
     var storageFocusIndex = Number(sessionStorage.getItem("focusIndex"));
     var focusElemTop = results[storageFocusIndex].getBoundingClientRect().top;
     var absolutePositionTop = focusElemTop + window.pageYOffset;
