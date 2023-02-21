@@ -156,6 +156,10 @@ let keymap = {
           keyType = "searchShop";
         }
         break;
+      case "F":
+        if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) {
+          keyType = "searchFinance";
+        }
       case "[":
         if (options.unfocusWithBracket && !e.shiftKey && e.ctrlKey && !e.metaKey && shortcuts.isInputActive()) {
           keyType = "unfocusWithBracket";
@@ -166,6 +170,10 @@ let keymap = {
           keyType = "searchOnGoogle";
         }
         break;
+      case "b":
+        if (options.switchSearchEngine && !e.shiftKey && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) {
+          keyType = "searchOnEdge";
+        }
       case "e":
         if (options.changeLanguage && !e.shiftKey && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) {
           keyType = "changeLangEn";
