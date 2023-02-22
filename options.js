@@ -1,18 +1,20 @@
 // Saves options to chrome.storage
 function save_options() {
-  var navigateSearchResultsWithJKHL = document.getElementById("navigate-search-results-with-jkhl").checked;
-  var navigateSearchResultsWithArrows = document.getElementById("navigate-search-results-with-arrows").checked;
-  var movePagesWithHL = document.getElementById("move-pages-with-hl").checked;
-  var movePagesWithArrows = document.getElementById("move-pages-with-arrows").checked;
-  var scrollInSiteWithJKDU = document.getElementById("scroll-in-site-with-jkdu").checked;
-  var selectSearchType = document.getElementById("select-search-type").checked;
-  var focusOnInput = document.getElementById("focus-on-input").checked;
-  var unfocusWithESC = document.getElementById("unfocus-with-esc").checked;
-  var unfocusWithBracket = document.getElementById("unfocus-with-bracket").checked;
-  var hideAds = document.getElementById("hide-ads").checked;
-  var switchSearchEngine = document.getElementById("switch-search-engine").checked;
-  var changeLanguage = document.getElementById("change-language").checked;
-  var scrollToTopOrBottom = document.getElementById("scroll-to-top-or-bottom").checked;
+  let navigateSearchResultsWithJKHL = document.getElementById("navigate-search-results-with-jkhl").checked;
+  let navigateSearchResultsWithArrows = document.getElementById("navigate-search-results-with-arrows").checked;
+  let movePagesWithHL = document.getElementById("move-pages-with-hl").checked;
+  let movePagesWithArrows = document.getElementById("move-pages-with-arrows").checked;
+  let scrollInSiteWithJKDU = document.getElementById("scroll-in-site-with-jkdu").checked;
+  let selectSearchType = document.getElementById("select-search-type").checked;
+  let focusOnInputWithSlash = document.getElementById("focus-on-input-with-slash").checked;
+  let focusOnInputWithI = document.getElementById("focus-on-input-with-i").checked;
+  let unfocusWithESC = document.getElementById("unfocus-with-esc").checked;
+  let unfocusWithBracket = document.getElementById("unfocus-with-bracket").checked;
+  let hideAds = document.getElementById("hide-ads").checked;
+  let switchSearchEngine = document.getElementById("switch-search-engine").checked;
+  let changeLanguage = document.getElementById("change-language").checked;
+  let stopChatGeneration = document.getElementById("stop-chat-generation").checked;
+  let scrollToTopOrBottom = document.getElementById("scroll-to-top-or-bottom").checked;
 
   chrome.storage.sync.set(
     {
@@ -22,17 +24,19 @@ function save_options() {
       movePagesWithArrows: movePagesWithArrows,
       scrollInSiteWithJKDU: scrollInSiteWithJKDU,
       selectSearchType: selectSearchType,
-      focusOnInput: focusOnInput,
+      focusOnInputWithSlash: focusOnInputWithSlash,
+      focusOnInputWithI: focusOnInputWithI,
       unfocusWithESC: unfocusWithESC,
       unfocusWithBracket: unfocusWithBracket,
       hideAds: hideAds,
       switchSearchEngine: switchSearchEngine,
       changeLanguage: changeLanguage,
+      stopChatGeneration: stopChatGeneration,
       scrollToTopOrBottom: scrollToTopOrBottom,
     },
     function () {
       // Update status to let user know options were saved.
-      var status = document.getElementById("status");
+      let status = document.getElementById("status");
       status.textContent = "Options saved.";
       setTimeout(function () {
         status.textContent = "";

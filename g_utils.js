@@ -15,9 +15,8 @@ var shortcuts = {
     changeLanguage: true,
   },
   searchType: "all",
-  //   all_selector:
-  // "#search a > h3:not([data-initq] h3), #bres a > b, [data-hveid] a > div[role='heading'], [data-abe] [data-hveid] a > div:last-child",
   // #search a > h3:not([data-initq] h3) : search results excluding the section for questions from others
+  // #botstuff a > h3:not([data-initq] h3) : search results added in continuous scrolling
   // #bres a > div:has(b) : the section for related keywords
   // [data-text-ad] a > div[role='heading'] : ad headings
   all_selector:
@@ -300,7 +299,7 @@ var shortcuts = {
         break;
     }
   },
-  changeSearchEdge: function () {
+  changeSearchBing: function () {
     var searchWord = document.querySelector('input[role="combobox"]').getAttribute("value");
     var origin = "https://www.bing.com";
     var searchQ = "/search?q=";

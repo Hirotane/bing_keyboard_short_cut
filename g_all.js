@@ -83,8 +83,8 @@
           break;
 
         // serch on Google
-        case "searchOnEdge":
-          shortcuts.changeSearchEdge();
+        case "searchOnBing":
+          shortcuts.changeSearchBing();
           break;
 
         // change Language
