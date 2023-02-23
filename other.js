@@ -22,7 +22,6 @@
           break;
 
         case "moveToBottom":
-          console.log("move to bottom");
           let elm = document.documentElement;
           let bottom = elm.scrollHeight - elm.clientHeight;
           window.scroll({ top: bottom, behavior: "smooth" });
