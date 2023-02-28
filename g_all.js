@@ -82,8 +82,9 @@
           shortcuts.unfocusElement(searchbox);
           break;
 
-        // serch on Google
+        // search on Bing
         case "searchOnBing":
+          console.log("bing");
           shortcuts.changeSearchBing();
           break;
 

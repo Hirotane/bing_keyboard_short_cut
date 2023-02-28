@@ -67,7 +67,6 @@
       switch (keyType) {
         // When the button '/' is pressed, the search box is focused.
         case "focusOnInput":
-          console.log("focus");
           let searchbox = shortcuts.focusOnSearchBox();
           let pos = searchbox.value.length;
           searchbox.focus();

@@ -174,8 +174,9 @@ let keymap = {
         break;
       case "b":
         if (options.switchSearchEngine && !e.shiftKey && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) {
-          keyType = "searchOnEdge";
+          keyType = "searchOnBing";
         }
+        break;
       case "e":
         if (options.changeLanguage && !e.shiftKey && e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) {
           keyType = "changeLangEn";
