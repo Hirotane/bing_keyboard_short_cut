@@ -14,7 +14,9 @@ function save_options() {
   let switchSearchEngine = document.getElementById("switch-search-engine").checked;
   let changeLanguage = document.getElementById("change-language").checked;
   let stopChatGeneration = document.getElementById("stop-chat-generation").checked;
+  let startNewChatTopic = document.getElementById("start-new-chat-topic").checked;
   let scrollToTopOrBottom = document.getElementById("scroll-to-top-or-bottom").checked;
+  let disableShortcutsInWebsites = document.getElementById("disable-shortcuts-in-websites").checked;
 
   chrome.storage.sync.set(
     {
@@ -32,7 +34,9 @@ function save_options() {
       switchSearchEngine: switchSearchEngine,
       changeLanguage: changeLanguage,
       stopChatGeneration: stopChatGeneration,
+      startNewChatTopic: startNewChatTopic,
       scrollToTopOrBottom: scrollToTopOrBottom,
+      disableShortcutsInWebsites: disableShortcutsInWebsites,
     },
     function () {
       // Update status to let user know options were saved.
@@ -66,7 +70,9 @@ function restore_options() {
       switchSearchEngine: true,
       changeLanguage: true,
       stopChatGeneration: true,
+      startNewChatTopic: true,
       scrollToTopOrBottom: true,
+      disableShortcutsInWebsites: false,
     },
     function (items) {
       document.getElementById("navigate-search-results-with-jkhl").checked = items.navigateSearchResultsWithJKHL;
@@ -81,10 +87,11 @@ function restore_options() {
       document.getElementById("unfocus-with-bracket").checked = items.unfocusWithBracket;
       document.getElementById("hide-ads").checked = items.hideAds;
       document.getElementById("switch-search-engine").checked = items.switchSearchEngine;
-      document.getElementById("switch-search-engine").checked = items.switchSearchEngine;
       document.getElementById("change-language").checked = items.changeLanguage;
       document.getElementById("stop-chat-generation").checked = items.stopChatGeneration;
+      document.getElementById("start-new-chat-topic").checked = items.startNewChatTopic;
       document.getElementById("scroll-to-top-or-bottom").checked = items.scrollToTopOrBottom;
+      document.getElementById("disable-shortcuts-in-websites").checked = items.disableShortcutsInWebsites;
     }
   );
 }

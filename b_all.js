@@ -58,12 +58,20 @@
           shortcuts.changeSearchType("shop");
           break;
 
-        // stop answer
+        // stop chat answer
         case "stopChatGeneration":
           if (chatMode) {
             let chatShadowRoot_3rd = chatShadowRoot_2nd.querySelector("cib-typing-indicator").shadowRoot;
             let stopButton = chatShadowRoot_3rd.querySelector("button");
             stopButton.click();
+          }
+          break;
+
+        // start new chat topic
+        case "startNewChatTopic":
+          if (chatMode) {
+            let newTopicButton = chatShadowRoot_2nd.querySelector("button.button-compose");
+            newTopicButton.click();
           }
           break;
 

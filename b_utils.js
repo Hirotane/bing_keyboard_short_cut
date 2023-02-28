@@ -14,6 +14,7 @@ var shortcuts = {
     switchSearchEngine: true,
     changeLanguage: true,
     stopChatGeneration: true,
+    startNewChatTopic: true,
   },
   searchType: "all",
   all_selector:

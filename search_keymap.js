@@ -139,6 +139,8 @@ let keymap = {
       case "N":
         if (options.selectSearchType && e.shiftKey && !e.ctrlKey && !e.metaKey && !shortcuts.isInputActive()) {
           keyType = "searchNews";
+        } else if (options.startNewChatTopic && e.shiftKey && e.ctrlKey && !e.metaKey) {
+          keyType = "startNewChatTopic";
         }
         break;
       case "V":
