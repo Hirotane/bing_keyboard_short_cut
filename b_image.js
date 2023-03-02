@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var searchbox;
+  let searchbox;
   searchbox = document.querySelector("textarea.b_searchbox");
   if (!searchbox) {
     // old type of input
@@ -69,11 +69,16 @@
 
         // When the button 'ctrl + [' is pressed, the search box is unfocused.
         case "unfocusWithBracket":
-          shortcuts.unfocusElement(searchbox);
+          e.preventDefault();
+          e.stopPropagation();
+          let focusedElement = document.activeElement;
+          shortcuts.unfocusElement(focusedElement);
           break;
 
         // serch on Google
         case "searchOnGoogle":
+          e.preventDefault();
+          e.stopPropagation();
           shortcuts.changeSearchGoogle();
           break;
       }
@@ -84,6 +89,8 @@
       switch (keyType) {
         // When the button '/' or 'i' is pressed, the search box is focused.
         case "focusOnInput":
+          e.preventDefault();
+          e.stopPropagation();
           let pos = searchbox.value.length;
           searchbox.focus();
           searchbox.setSelectionRange(pos, pos);
@@ -91,7 +98,10 @@
 
         // When the button 'esc' is pressed, the search box is unfocused.
         case "unfocusWithESC":
-          shortcuts.unfocusElement(searchbox);
+          e.preventDefault();
+          e.stopPropagation();
+          let focusedElement = document.activeElement;
+          shortcuts.unfocusElement(focusedElement);
           break;
       }
     });

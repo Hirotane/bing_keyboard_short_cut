@@ -71,7 +71,10 @@
 
         // When the button 'ctrl + [' is pressed, the search box is unfocused.
         case "unfocusWithBracket":
-          shortcuts.unfocusElement(searchbox, "work");
+          e.preventDefault();
+          e.stopPropagation();
+          let focusedElement = document.activeElement;
+          shortcuts.unfocusElement(focusedElement, "work");
           break;
       }
     });
@@ -81,6 +84,8 @@
       switch (keyType) {
         // When the button '/' or 'i' is pressed, the search box is focused.
         case "focusOnInput":
+          e.preventDefault();
+          e.stopPropagation();
           let pos = searchbox.value.length;
           searchbox.focus();
           searchbox.setSelectionRange(pos, pos);
@@ -88,7 +93,10 @@
 
         // When the button 'esc' is pressed, the search box is unfocused.
         case "unfocusWithESC":
-          shortcuts.unfocusElement(searchbox, "work");
+          e.preventDefault();
+          e.stopPropagation();
+          let focusedElement = document.activeElement;
+          shortcuts.unfocusElement(focusedElement, "work");
           break;
       }
     });

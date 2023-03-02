@@ -79,21 +79,29 @@
 
         // When the button 'ctrl + [' is pressed, the search box is unfocused.
         case "unfocusWithBracket":
-          shortcuts.unfocusElement(searchbox);
+          e.preventDefault();
+          e.stopPropagation();
+          let focusedElement = document.activeElement;
+          shortcuts.unfocusElement(focusedElement);
           break;
 
         // search on Bing
         case "searchOnBing":
-          console.log("bing");
+          e.preventDefault();
+          e.stopPropagation();
           shortcuts.changeSearchBing();
           break;
 
         // change Language
         case "changeLangEn":
+          e.preventDefault();
+          e.stopPropagation();
           shortcuts.changeLang("english");
           break;
 
         case "changeLangNa":
+          e.preventDefault();
+          e.stopPropagation();
           shortcuts.changeLang("native");
           break;
       }
@@ -104,6 +112,8 @@
       switch (keyType) {
         // When the button '/' is pressed, the search box is focused.
         case "focusOnInput":
+          e.preventDefault();
+          e.stopPropagation();
           let pos = searchbox.value.length;
           searchbox.focus();
           searchbox.setSelectionRange(pos, pos);
@@ -112,7 +122,9 @@
         // When the button 'esc' is pressed, the search box is unfocused.
         case "unfocusWithESC":
           e.preventDefault();
-          shortcuts.unfocusElement(searchbox);
+          e.stopPropagation();
+          let focusedElement = document.activeElement;
+          shortcuts.unfocusElement(focusedElement);
           break;
       }
       sessionStorage.setItem("keypress", 0);

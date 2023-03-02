@@ -61,6 +61,8 @@
         // stop chat answer
         case "stopChatGeneration":
           if (chatMode) {
+            e.preventDefault();
+            e.stopPropagation();
             let chatShadowRoot_3rd = chatShadowRoot_2nd.querySelector("cib-typing-indicator").shadowRoot;
             let stopButton = chatShadowRoot_3rd.querySelector("button");
             stopButton.click();
@@ -70,6 +72,8 @@
         // start new chat topic
         case "startNewChatTopic":
           if (chatMode) {
+            e.preventDefault();
+            e.stopPropagation();
             let newTopicButton = chatShadowRoot_2nd.querySelector("button.button-compose");
             newTopicButton.click();
           }
@@ -108,17 +112,24 @@
 
         // When the button 'ctrl + [' is pressed, the search box is unfocused.
         case "unfocusWithBracket":
-          shortcuts.unfocusElement(searchbox);
+          e.preventDefault();
+          e.stopPropagation();
+          let focusedElement = document.activeElement;
+          shortcuts.unfocusElement(focusedElement, "all");
           break;
 
         // serch on Google
         case "searchOnGoogle":
+          e.preventDefault();
+          e.stopPropagation();
           shortcuts.changeSearchGoogle();
           break;
 
         // change Language
         case "changeLangEn":
         case "changeLangNa":
+          e.preventDefault();
+          e.stopPropagation();
           shortcuts.changeLang();
           break;
       }
@@ -141,6 +152,8 @@
       switch (keyType) {
         // When the button '/' is pressed, the search box is focused.
         case "focusOnInput":
+          e.preventDefault();
+          e.stopPropagation();
           let pos = searchbox.value.length;
           searchbox.focus();
           searchbox.setSelectionRange(pos, pos);
@@ -149,7 +162,9 @@
         // When the button 'esc' is pressed, the search box is unfocused.
         case "unfocusWithESC":
           e.preventDefault();
-          shortcuts.unfocusElement(searchbox);
+          e.stopPropagation();
+          let focusedElement = document.activeElement;
+          shortcuts.unfocusElement(focusedElement, "all");
           break;
       }
       sessionStorage.setItem("keypress", 0);

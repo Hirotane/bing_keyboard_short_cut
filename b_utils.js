@@ -288,6 +288,9 @@ var shortcuts = {
     // close window for autocomplete
     document.body.click();
     switch (type) {
+      case "all":
+        this.focusResult(0, this.all_selector);
+        break;
       case "work":
         this.focusResult(0, this.work_selector);
         break;
