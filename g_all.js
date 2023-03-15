@@ -4,108 +4,115 @@
   var searchbox = document.querySelector('input[role="combobox"]');
 
   var func = function (options) {
-    window.addEventListener("keydown", function (e) {
-      let keyType = keymap.getKeyType(e, options);
+    // Capture Phase: stopImmediatePropagation stops event listener to propagate from root to target.
+    window.addEventListener(
+      "keydown",
+      function (e) {
+        let keyType = keymap.getKeyType(e, options);
 
-      switch (keyType) {
-        case "searchAll":
-          shortcuts.changeSearchType("all");
-          break;
+        switch (keyType) {
+          case "searchAll":
+            shortcuts.changeSearchType("all");
+            break;
 
-        case "searchWork":
-          shortcuts.changeSearchType("work");
-          break;
+          case "searchWork":
+            shortcuts.changeSearchType("work");
+            break;
 
-        case "searchImage":
-          shortcuts.changeSearchType("image");
-          break;
+          case "searchImage":
+            shortcuts.changeSearchType("image");
+            break;
 
-        case "searchNews":
-          shortcuts.changeSearchType("news");
-          break;
+          case "searchNews":
+            shortcuts.changeSearchType("news");
+            break;
 
-        case "searchVideo":
-          shortcuts.changeSearchType("video");
-          break;
+          case "searchVideo":
+            shortcuts.changeSearchType("video");
+            break;
 
-        case "searchMap":
-          shortcuts.changeSearchType("map");
-          break;
+          case "searchMap":
+            shortcuts.changeSearchType("map");
+            break;
 
-        case "searchShop":
-          shortcuts.changeSearchType("shop");
-          break;
+          case "searchShop":
+            shortcuts.changeSearchType("shop");
+            break;
 
-        case "searchFinance":
-          shortcuts.changeSearchType("finance");
-          break;
+          case "searchFinance":
+            shortcuts.changeSearchType("finance");
+            break;
 
-        // move search results
-        case "navigateNext":
-        case "navigateBack":
-          if (shortcuts.searchType == "all" || shortcuts.searchType == "video") {
+          // move search results
+          case "navigateNext":
+          case "navigateBack":
             e.preventDefault();
-            e.stopPropagation();
-            shortcuts.focusResult(keyType == "navigateNext" ? 1 : -1, shortcuts.all_selector);
-          } else if (shortcuts.searchType == "news") {
+            e.stopImmediatePropagation();
+            if (shortcuts.searchType == "all" || shortcuts.searchType == "video") {
+              shortcuts.focusResult(keyType == "navigateNext" ? 1 : -1, shortcuts.all_selector);
+            } else if (shortcuts.searchType == "news") {
+              shortcuts.focusResult(keyType == "navigateNext" ? 1 : -1, shortcuts.news_selector);
+            } else if (shortcuts.searchType == "image") {
+              shortcuts.navigateImage(keyType == "navigateNext" ? 1 : -1, shortcuts.image_selector);
+            }
+            break;
+
+          // page transition for search results
+          case "moveNextSearchPage":
+          case "movePreviousSearchPage":
             e.preventDefault();
-            e.stopPropagation();
-            shortcuts.focusResult(keyType == "navigateNext" ? 1 : -1, shortcuts.news_selector);
-          } else if (shortcuts.searchType == "image") {
+            e.stopImmediatePropagation();
+            if (shortcuts.searchType == "all" || shortcuts.searchType == "video") {
+              shortcuts.moveAllSearchPage(keyType == "moveNextSearchPage" ? 1 : -1);
+            }
+            break;
+
+          // page transition for all url
+          case "goToPreviousPage":
+          case "goToNextPage":
             e.preventDefault();
-            e.stopPropagation();
-            shortcuts.navigateImage(keyType == "navigateNext" ? 1 : -1, shortcuts.image_selector);
-          }
-          break;
+            e.stopImmediatePropagation();
+            // console.log("shift key & H, L");
+            shortcuts.movePage(keyType == "goToNextPage" ? 1 : -1);
+            break;
 
-        // page transition for search results
-        case "moveNextSearchPage":
-        case "movePreviousSearchPage":
-          if (shortcuts.searchType == "all" || shortcuts.searchType == "video") {
+          // When the button 'ctrl + [' is pressed, the search box is unfocused.
+          case "unfocusWithBracket":
             e.preventDefault();
-            e.stopPropagation();
-            shortcuts.moveAllSearchPage(keyType == "moveNextSearchPage" ? 1 : -1);
-          }
-          break;
+            e.stopImmediatePropagation();
+            let focusedElement = document.activeElement;
+            shortcuts.unfocusElement(focusedElement);
+            break;
 
-        // page transition for all url
-        case "goToPreviousPage":
-        case "goToNextPage":
-          // console.log("shift key & H, L");
-          e.preventDefault();
-          e.stopPropagation();
-          shortcuts.movePage(keyType == "goToNextPage" ? 1 : -1);
-          break;
+          // search on Bing
+          case "searchOnBing":
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            shortcuts.changeSearchBing();
+            break;
 
-        // When the button 'ctrl + [' is pressed, the search box is unfocused.
-        case "unfocusWithBracket":
-          e.preventDefault();
-          e.stopPropagation();
-          let focusedElement = document.activeElement;
-          shortcuts.unfocusElement(focusedElement);
-          break;
+          // change Language
+          case "changeLangEn":
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            shortcuts.changeLang("english");
+            break;
 
-        // search on Bing
-        case "searchOnBing":
-          e.preventDefault();
-          e.stopPropagation();
-          shortcuts.changeSearchBing();
-          break;
+          case "changeLangNa":
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            shortcuts.changeLang("native");
+            break;
 
-        // change Language
-        case "changeLangEn":
-          e.preventDefault();
-          e.stopPropagation();
-          shortcuts.changeLang("english");
-          break;
-
-        case "changeLangNa":
-          e.preventDefault();
-          e.stopPropagation();
-          shortcuts.changeLang("native");
-          break;
-      }
-    });
+          // to prevent triggering event listener when keydown event is occurred
+          case "focusOnInput":
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            break;
+        }
+      },
+      true
+    );
     window.addEventListener("keyup", function (e) {
       let keyType = keymap.getKeyType(e, options);
 
@@ -113,7 +120,6 @@
         // When the button '/' is pressed, the search box is focused.
         case "focusOnInput":
           e.preventDefault();
-          e.stopPropagation();
           let pos = searchbox.value.length;
           searchbox.focus();
           searchbox.setSelectionRange(pos, pos);
@@ -122,7 +128,6 @@
         // When the button 'esc' is pressed, the search box is unfocused.
         case "unfocusWithESC":
           e.preventDefault();
-          e.stopPropagation();
           let focusedElement = document.activeElement;
           shortcuts.unfocusElement(focusedElement);
           break;
