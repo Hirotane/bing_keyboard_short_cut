@@ -2,114 +2,128 @@
   "use strict";
 
   shortcuts.loadOptions(function (options) {
-    window.addEventListener("keydown", function (e) {
-      var goToPreviousPage =
-          (options.movePagesWithHL &&
-            e.key == "H" &&
-            e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()) ||
-          (options.movePagesWithArrows &&
-            e.key == "ArrowLeft" &&
-            e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()),
-        goToNextPage =
-          (options.movePagesWithHL &&
-            e.key == "L" &&
-            e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()) ||
-          (options.movePagesWithArrows &&
-            e.key == "ArrowRight" &&
-            e.shiftKey &&
-            !e.ctrlKey &&
-            !e.metaKey &&
-            !shortcuts.isInputActive()),
-        unfocusWithBracket = options.unfocusWithBracket && e.key == "[" && e.ctrlKey && shortcuts.isInputActive(),
-        moveToButtom = options.scrollToTopOrBottom && e.key == "G" && e.shiftKey && !shortcuts.isInputActive(),
-        operatorG = options.scrollToTopOrBottom && e.key == "g" && !e.shiftKey && !shortcuts.isInputActive(),
-        searchOnGoogle = options.switchSearchEngine && e.key == "g" && e.ctrlKey && !shortcuts.isInputActive(),
-        searchOnEdge = options.switchSearchEngine && e.key == "b" && e.ctrlKey && !shortcuts.isInputActive(),
-        changeLangEn = options.changeLanguage && e.key == "e" && e.ctrlKey && !shortcuts.isInputActive(),
-        changeLangNa = options.changeLanguage && e.key == "d" && e.ctrlKey && !shortcuts.isInputActive();
+    // Capture Phase: stopImmediatePropagation stops event listener to propagate from root to target.
+    window.addEventListener(
+      "keydown",
+      function (e) {
+        let keyType = keymap.getKeyType(e, options);
 
-      // page transition for all url
-      if (goToPreviousPage || goToNextPage) {
-        e.preventDefault();
-        e.stopPropagation();
-        shortcuts.movePage(goToNextPage ? 1 : -1);
-      }
-      // When the button 'ctrl + [' is pressed, the search box is unfocused.
-      if (unfocusWithBracket) {
-        var focusedElement = document.activeElement;
-        focusedElement.blur();
-      }
-      if (moveToButtom) {
-        var elm = document.documentElement;
-        var bottom = elm.scrollHeight - elm.clientHeight;
-        window.scroll({ top: bottom, behavior: "smooth" });
-      }
-      if (operatorG) {
-        window.addEventListener("keydown", function moveTop(e) {
-          var moveToTop = options.scrollToTopOrBottom && e.key == "g" && !e.shiftKey && !shortcuts.isInputActive();
-          if (moveToTop) {
-            window.scroll({ top: 0, behavior: "smooth" });
-          }
-          this.removeEventListener("keydown", moveTop);
-        });
-      }
-      // serch on Google
-      if (searchOnGoogle) {
-        shortcuts.changeSearchGoogle();
-      }
-      // serch on Edge
-      if (searchOnEdge) {
-        shortcuts.changeSearchEdge();
-      }
-    });
+        switch (keyType) {
+          // page transition for all url
+          case "goToPreviousPage":
+          case "goToNextPage":
+            // console.log("shift key & H, L");
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            shortcuts.movePage(keyType == "goToNextPage" ? 1 : -1);
+            break;
+
+          // When the button 'ctrl + [' is pressed, the search box is unfocused.
+          case "unfocusWithBracket":
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            let focusedElement = document.activeElement;
+            focusedElement.blur();
+            break;
+
+          case "moveToBottom":
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            let elm = document.documentElement;
+            let bottom = elm.scrollHeight - elm.clientHeight;
+            window.scroll({ top: bottom, behavior: "smooth" });
+            break;
+
+          // move to top when 'g' is pressed twice
+          case "operatorG":
+            window.addEventListener("keydown", function moveTop(e) {
+              let moveToTop =
+                options.scrollToTopOrBottom &&
+                e.key == "g" &&
+                !e.shiftKey &&
+                !e.ctrlKey &&
+                !e.metaKey &&
+                !shortcuts.isInputActive();
+              e.preventDefault();
+              e.stopImmediatePropagation();
+              if (moveToTop) {
+                window.scroll({ top: 0, behavior: "smooth" });
+              }
+              this.removeEventListener("keydown", moveTop);
+            });
+            break;
+
+          // serch on Google
+          case "searchOnGoogle":
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            shortcuts.changeSearchGoogle();
+            break;
+
+          // serch on Bing
+          case "searchOnGoogle":
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            shortcuts.changeSearchBing();
+            break;
+
+          // change Language
+          case "changeLangEn":
+          case "changeLangNa":
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            shortcuts.changeLang();
+            break;
+        }
+      },
+      true
+    );
     window.addEventListener("keyup", function (e) {
-      var focusOnInput =
-          (options.focusOnInputWithSlash && e.key == "/" && !shortcuts.isInputActive()) ||
-          (options.focusOnInputWithI && e.key == "i" && !shortcuts.isInputActive()),
-        unfocusWithESC = options.unfocusWithESC && e.key == "Escape" && shortcuts.isInputActive();
-      operatorG = options.scrollWithG && e.key == "g" && !e.shiftKey && !shortcuts.isInputActive();
-      // e = e || window.event;
-      // When the button '/' is pressed, the search box is focused.
-      if (focusOnInput) {
-        var searchbox = shortcuts.focusOnSearchBox();
-        var pos = searchbox.value.length;
-        searchbox.focus();
-        searchbox.setSelectionRange(pos, pos);
-      }
-      // When the button 'esc' is pressed, the search box is unfocused.
-      if (unfocusWithESC) {
-        var focusedElement = document.activeElement;
-        focusedElement.blur();
+      let keyType = keymap.getKeyType(e, options);
+
+      switch (keyType) {
+        // When the button '/' is pressed, the search box is focused.
+        case "focusOnInput":
+          e.preventDefault();
+          let searchbox = shortcuts.focusOnSearchBox();
+          let pos = searchbox.value.length;
+          searchbox.focus();
+          searchbox.setSelectionRange(pos, pos);
+          break;
+
+        // When the button 'esc' is pressed, the search box is unfocused.
+        case "unfocusWithESC":
+          e.preventDefault();
+          var focusedElement = document.activeElement;
+          focusedElement.blur();
+          break;
       }
     });
-    window.addEventListener("keypress", function (e) {
-      // console.log(e.key);
+    // Capture Phase: stopImmediatePropagation stops event listener to propagate from root to target.
+    window.addEventListener(
+      "keypress",
+      function (e) {
+        let keyType = keymap.getKeyType(e, options);
 
-      var scrollDown = options.scrollInSiteWithJKDU && e.key == "j" && !shortcuts.isInputActive(),
-        scrollUp = options.scrollInSiteWithJKDU && e.key == "k" && !shortcuts.isInputActive(),
-        scrollPageUp = options.scrollInSiteWithJKDU && e.key == "u" && !shortcuts.isInputActive(),
-        scrollPageDown = options.scrollInSiteWithJKDU && e.key == "d" && !shortcuts.isInputActive();
+        switch (keyType) {
+          // scroll page with 'j', 'k'
+          case "scrollUp":
+          case "scrollDown":
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            shortcuts.scrollPageOneLine(keyType == "scrollUp" ? 1 : -1);
+            break;
 
-      // scroll page with 'j', 'k'
-      if (scrollUp || scrollDown) {
-        e.preventDefault();
-        e.stopPropagation();
-        shortcuts.scrollPageOneLine(scrollUp ? 1 : -1);
-      }
-      if (scrollPageUp || scrollPageDown) {
-        e.preventDefault();
-        e.stopPropagation();
-        shortcuts.scrollHalfPage(scrollPageUp ? 1 : -1);
-      }
-    });
+          // scroll page with 'd', 'u'
+          case "scrollPageUp":
+          case "scrollPageDown":
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            shortcuts.scrollHalfPage(keyType == "scrollPageUp" ? 1 : -1);
+            break;
+        }
+      },
+      true
+    );
   });
 })();

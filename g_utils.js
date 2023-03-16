@@ -15,15 +15,17 @@ var shortcuts = {
     changeLanguage: true,
   },
   searchType: "all",
-  // all_selector: ".b_algo h2 > a, .b_rs > ul > li > a, .b_ads1line, .btitle > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
+  // #search a > h3:not([data-initq] h3) : search results excluding the section for questions from others
+  // #botstuff a > h3:not([data-initq] h3) : search results added in continuous scrolling
+  // #bres a > div:has(b) : the section for related keywords
+  // [data-text-ad] a > div[role='heading'] : ad headings
   all_selector:
-    "#search [data-hveid] a > h3, [data-hveid] a > div[role='heading'], [data-abe] [data-hveid] a > div:last-child",
+    "#search a > h3:not([data-initq] h3), #botstuff a > h3:not([data-initq] h3), #bres a div:has(b), [data-text-ad] a > div[role='heading']",
   all_title_selector: "h3, div[role='heading'], div:last-child",
   news_title_selector: "div[role='heading']",
   image_selector: "[data-ri] > [data-nav]",
   news_selector: "#search [data-hveid] a div[role='heading']",
   initAll: function (callback) {
-    console.log("initAll");
     this.searchType = "all";
     chrome.storage.sync.get(this.defaultOptions, callback);
     chrome.storage.sync.get(this.defaultOptions, function (options) {
@@ -36,7 +38,6 @@ var shortcuts = {
     this.focusOnIndexedElement(this.all_selector, focusIndex);
   },
   initImage: function (callback) {
-    console.log("initImage");
     this.searchType = "image";
     chrome.storage.sync.get(this.defaultOptions, callback);
 
@@ -44,7 +45,6 @@ var shortcuts = {
     this.focusOnIndexedElement(this.image_selector, 0);
   },
   initVideo: function (callback) {
-    console.log("initVideo");
     this.searchType = "video";
     chrome.storage.sync.get(this.defaultOptions, callback);
 
@@ -52,7 +52,6 @@ var shortcuts = {
     this.focusOnIndexedElement(this.all_selector, focusIndex);
   },
   initNews: function (callback) {
-    console.log("initNews");
     this.searchType = "news";
     chrome.storage.sync.get(this.defaultOptions, callback);
 
@@ -117,7 +116,6 @@ var shortcuts = {
     return containers;
   },
   underLine: function (target_txt) {
-    // console.log(target_txt);
     target_txt.style.outline = "none";
     target_txt.style.textDecoration = "underline";
     target_txt.closest("a").addEventListener("blur", (event) => {
@@ -301,7 +299,7 @@ var shortcuts = {
         break;
     }
   },
-  changeSearchEdge: function () {
+  changeSearchBing: function () {
     var searchWord = document.querySelector('input[role="combobox"]').getAttribute("value");
     var origin = "https://www.bing.com";
     var searchQ = "/search?q=";

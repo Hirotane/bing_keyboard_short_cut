@@ -13,10 +13,12 @@ var shortcuts = {
     hideAds: true,
     switchSearchEngine: true,
     changeLanguage: true,
+    stopChatGeneration: true,
+    startNewChatTopic: true,
   },
   searchType: "all",
   all_selector:
-    ".b_algo h2 > a, .b_rs > ul > li > a, h2 > .b_ads1line, .btitle > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
+    "#b_results h2 > a, .b_rs > ul > li > a, h2 > .b_ads1line, .btitle > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a",
   work_selector:
     ".ms-search-result-list-item-border > div > div > div > a, .ms-search-result-list-item > article h3 > a, .ac-textBlock > p > a, .ms-search-bookmarkTitle",
   news_selector: ".t_t > a",
@@ -70,7 +72,6 @@ var shortcuts = {
     chrome.storage.sync.get(this.defaultOptions, callback);
 
     this.searchType = "video";
-    // console.log("this.searchType: "+this.searchType);
     results = Array.from(document.querySelectorAll(".mc_vtvc > a"));
     var target = results[0];
     target.focus();
@@ -145,7 +146,6 @@ var shortcuts = {
       event.target.style.border = "none";
       event.target.style.borderWidth = "";
       event.target.style.borderColor = "";
-      console.log("blur");
     });
   },
   grayoutAds: function () {
@@ -249,8 +249,6 @@ var shortcuts = {
     target.focus();
     // this.emphasizeVideoFocus(target.querySelector('div'));
     this.emphasizeVideoFocus(target);
-    console.log(target.querySelector("div").style);
-    console.log(target.style);
   },
   moveAllSearchPage: function (offset) {
     if (offset == 1) {

@@ -1,6 +1,6 @@
 {
   "name": "__MSG_Name__",
-  "version": "3.0.1",
+  "version": "3.1.2",
   "manifest_version": 3,
   "default_locale": "en",
   "description": "__MSG_Description__",
@@ -20,23 +20,23 @@
   "content_scripts": [
     {
       "matches": ["*://www.bing.com/search*"],
-      "js": ["b_utils.js", "b_all.js"]
+      "js": ["b_utils.js", "search_keymap.js", "b_all.js"]
     },
     {
       "matches": ["*://www.bing.com/work/search*"],
-      "js": ["b_utils.js", "b_work.js"]
+      "js": ["b_utils.js", "search_keymap.js", "b_work.js"]
     },
     {
       "matches": ["*://www.bing.com/images/search*"],
-      "js": ["b_utils.js", "b_image.js"]
+      "js": ["b_utils.js", "search_keymap.js", "b_image.js"]
     },
     {
       "matches": ["*://www.bing.com/videos/search*"],
-      "js": ["b_utils.js", "b_video.js"]
+      "js": ["b_utils.js", "search_keymap.js", "b_video.js"]
     },
     {
       "matches": ["*://www.bing.com/news/search*"],
-      "js": ["b_utils.js", "b_news.js"]
+      "js": ["b_utils.js", "search_keymap.js", "b_news.js"]
     },
     {
       "matches": [
@@ -239,7 +239,7 @@
         "*://*.google.vu/search?*",
         "*://*.google.ws/search?*"
       ],
-      "js": ["g_utils.js", "g_all.js"]
+      "js": ["g_utils.js", "search_keymap.js", "g_all.js"]
     },
     {
       "exclude_matches": [
@@ -448,7 +448,7 @@
         "*://*.google.ws/search?*"
       ],
       "matches": ["<all_urls>"],
-      "js": ["other_utils.js", "other.js"]
+      "js": ["other_utils.js", "other_keymap.js", "other.js"]
     }
   ]
 }
