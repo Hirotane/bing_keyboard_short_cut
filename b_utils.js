@@ -18,7 +18,7 @@ var shortcuts = {
   },
   searchType: "all",
   all_selector:
-    "#b_results .b_algo h2 > a, #b_results .b_ad h2 > a.b_ads1line, .b_rs > ul > li > a, .btitle > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a, a.sb_pagP, a.sb_pagN",
+    "#b_results .b_algo h2 > a, #b_results .b_ad h2 > a.b_ads1line, #b_results .b_ans h2 > a, .b_rs > ul > li > a, .btitle > h2 > a, #nws_ht > h2 > a, .irphead > h2 > a, a.sb_pagP, a.sb_pagN",
   work_selector:
     ".ms-search-result-list-item-border > div > div > div > a, .ms-search-result-list-item > article h3 > a, .ac-textBlock > p > a, .ms-search-bookmarkTitle, button[aria-label='Next page'], button[aria-label='Previous page']",
   news_selector: ".t_t > a",
