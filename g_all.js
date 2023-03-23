@@ -62,7 +62,7 @@
           case "movePreviousSearchPage":
             e.preventDefault();
             e.stopImmediatePropagation();
-            if (shortcuts.searchType == "all" || shortcuts.searchType == "video") {
+            if (shortcuts.searchType == "all" || shortcuts.searchType == "video" || shortcuts.searchType == "news") {
               shortcuts.moveAllSearchPage(keyType == "moveNextSearchPage" ? 1 : -1);
             }
             break;

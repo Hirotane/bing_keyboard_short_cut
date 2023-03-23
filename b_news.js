@@ -87,7 +87,7 @@
             break;
         }
       },
-      ture
+      true
     );
     window.addEventListener("keyup", function (e) {
       let keyType = keymap.getKeyType(e, options);

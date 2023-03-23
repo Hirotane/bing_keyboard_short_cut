@@ -21,8 +21,8 @@ var shortcuts = {
   // [data-text-ad] a > div[role='heading'] : ad headings
   all_selector:
     "#search a > h3:not([data-initq] h3), #botstuff a > h3:not([data-initq] h3), #bres a div:has(b), [data-text-ad] a > div[role='heading']",
-  all_title_selector: "h3, div[role='heading'], div:last-child",
-  news_title_selector: "div[role='heading']",
+  // all_title_selector: "h3, div[role='heading'], div:last-child, span",
+  // news_title_selector: "div[role='heading']",
   image_selector: "[data-ri] > [data-nav]",
   news_selector: "#search [data-hveid] a div[role='heading']",
   initAll: function (callback) {
@@ -120,9 +120,9 @@ var shortcuts = {
     target_txt.style.textDecoration = "underline";
     target_txt.closest("a").addEventListener("blur", (event) => {
       if (this.searchType == "all" || this.searchType == "video") {
-        event.target.querySelector(this.all_title_selector).style.textDecoration = "";
+        event.target.querySelector(this.all_selector).style.textDecoration = "";
       } else if (this.searchType == "news") {
-        event.target.querySelector(this.news_title_selector).style.textDecoration = "";
+        event.target.querySelector(this.news_selector).style.textDecoration = "";
       }
     });
   },
