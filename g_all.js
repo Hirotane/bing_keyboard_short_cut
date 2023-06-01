@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var searchbox = document.querySelector('input[role="combobox"]');
+  var searchbox = document.querySelector('textarea[role="combobox"]');
 
   var func = function (options) {
     // Capture Phase: stopImmediatePropagation stops event listener to propagate from root to target.
