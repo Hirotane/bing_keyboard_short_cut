@@ -81,7 +81,7 @@ var shortcuts = {
   },
   isInputActive: function () {
     var activeElement = document.activeElement;
-    return activeElement.nodeName == "INPUT";
+    return activeElement.nodeName == "INPUT" || activeElement.nodeName == "TEXTAREA";
   },
   defineRangeOfIndex: function (index, length) {
     index = Math.min(index, length - 1);
@@ -300,7 +300,7 @@ var shortcuts = {
     }
   },
   changeSearchBing: function () {
-    var searchWord = document.querySelector('input[role="combobox"]').getAttribute("value");
+    var searchWord = document.querySelector('textarea[role="combobox"]').getAttribute("value");
     var origin = "https://www.bing.com";
     var searchQ = "/search?q=";
     var refEng = "&cc=us&setlang=en";
@@ -340,7 +340,7 @@ var shortcuts = {
     }
   },
   changeLang: function (language) {
-    var searchWord = document.querySelector('input[role="combobox"]').getAttribute("value");
+    var searchWord = document.querySelector('textarea[role="combobox"]').getAttribute("value");
     switch (language) {
       case "english":
         var ref = "https://www.google.com/search?q=" + searchWord + "&gl=us&hl=en&pws=0";
